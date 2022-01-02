@@ -11,10 +11,11 @@ footnote: Hello from London.
 
 exclude: ['.github', 'README.md', 'LICENSE', 'docker-compose.yml', 'Gemfile.lock', 'Gemfile']
 
-theme: minima
-header_pages:
-  - projects/index.md
-  - blog/index.html
+theme: jekyll-bootstrap-theme
+bootstrap:
+  header_pages:
+    - projects/index.md
+    - blog/index.html
 
 paginate: 5
 paginate_path: "/blog/page/:num/"
