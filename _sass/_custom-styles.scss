@@ -1,0 +1,20 @@
+.home-banner {
+	background-size: cover;
+	background-position: 50%;
+	text-align: center;
+	margin-bottom: 15px;
+}
+  
+.showy-banner {
+	font-size: 38px;
+	background-size: cover;
+	background-position: 50%;
+	margin-bottom: 15px;
+	padding-top: 120px;
+	background-color: #0f0000;
+
+	p {
+		padding-left: 10px;
+		background-color: rgba(0, 0, 0, 0.50);
+	}
+}
