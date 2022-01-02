@@ -4,6 +4,9 @@
 	text-align: center;
 	margin-bottom: 15px;
 }
+
+$light: #000;
+$dark: #000;
   
 .showy-banner {
 	font-size: 38px;
@@ -16,5 +19,9 @@
 	p {
 		padding-left: 10px;
 		background-color: rgba(0, 0, 0, 0.50);
+
+		a {
+			color: white;
+		}
 	}
 }

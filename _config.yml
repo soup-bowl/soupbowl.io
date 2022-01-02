@@ -1,7 +1,5 @@
 title: Soupbowl
 subtitle: Ramblings of a DevOps Nerd
-author: soup-bowl
-email: code@soupbowl.io
 description: >-
   Personal blog for Casey - a back-end developer specialising in PHP, primarily for WordPress developments. 
   Primarily a source of niche setup guides, cool Raspberry Pi builds, and general ranting.
@@ -16,6 +14,12 @@ bootstrap:
   header_pages:
     - projects/index.md
     - blog/index.html
+  social_links:
+    twitter: https://twitter.com/TheAlmightyWord
+    github:  https://github.com/soup-bowl
+author:
+  name: soup-bowl
+  email: code@soupbowl.io
 
 paginate: 5
 paginate_path: "/blog/page/:num/"
