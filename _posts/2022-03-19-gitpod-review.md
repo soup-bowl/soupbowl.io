@@ -6,7 +6,7 @@ author: Casey (Soupbowl)
 tags:   [Review, Development]
 ---
 
-I've been on the waiting list for GitHub Codespaces for nearly 2 years now, and I haven't seen anything from GitHub about it. At this point, I'm even wondering if the Codespaces initative was some kind of desert mirage, and actually doesn't exist at all!
+I've been on the waiting list for GitHub Codespaces for nearly 2 years now, and I haven't seen anything from GitHub about it. At this point, I'm even wondering if the Codespaces initiative was some kind of desert mirage, and actually doesn't exist at all!
 
 But bored of waiting for something I'm losing the plot over, I saw what alternatives are available. In comes **[GitPod][gp]** to save the day.
 
@@ -16,13 +16,13 @@ But bored of waiting for something I'm losing the plot over, I saw what alternat
 
 # What's the Point in (GitHub) Codespaces and GitPod Anyway?
 
-We're in the time of the cloud. 15 years ago we were told by the seers of technology it was coming, and we'd soon live in a time where your website would be hosted on a server not in a cabinet... Just in a cabinet thousands of miles away in someone elses' datacentre...
+We're in the time of the cloud. 15 years ago we were told by the seers of technology it was coming, and we'd soon live in a time where your website would be hosted on a server not in a cabinet... Just in a cabinet thousands of miles away in someone else's data centre...
 
 All in that time, we've still been coding on our machines. Our machines whirring and buzzing away writing, compiling and debugging our code in front of us, we've been developing on our local machine... At what point did our development work get shifted into the cloud?
 
-Clearly some engineers have considered this, as there's been multiple iniatives to get **Visual Studio Code** and other web based editors into the browser. You can run [your own server version of Visual Studio Code][cs]) (preferably in a Docker/Kubernetes container), or run a [localStorage-accessible variant for quick edits][vd]. Truely Visual Studio Code is the master of portable code editing (ironic since it's written in JavaScript technically).
+Clearly some engineers have considered this, as there's been multiple initiatives to get **Visual Studio Code** and other web based editors into the browser. You can run [your own server version of Visual Studio Code][cs]) (preferably in a Docker/Kubernetes container), or run a [localStorage-accessible variant for quick edits][vd]. Truly Visual Studio Code is the master of portable code editing (ironic since it's written in JavaScript technically).
 
-This is all well and good, but neither of these avoid the typical issue of **configuration**. If you use Codeserver, you typically will need to setup and configure your own Kubernetes cluster or Docker server to operate with. This then comes with the challenges of the security, and making sure you provision the server enough resources to run. Plus, when you gain contributors to the project, will they have access to your cluster or will you go through the ardious process of getting them to set one up? Argh! Headaches!
+This is all well and good, but neither of these avoid the typical issue of **configuration**. If you use Codeserver, you typically will need to setup and configure your own Kubernetes cluster or Docker server to operate with. This then comes with the challenges of the security, and making sure you provision the server enough resources to run. Plus, when you gain contributors to the project, will they have access to your cluster or will you go through the arduous process of getting them to set one up? Argh! Headaches!
 
 Well, this is just part of what both Codespaces and GitPod solve. Everyone has a cloud-based editing platform that they can use, authenticated by the Git provider, and shares the same environmental configuration for all your contributors. **Everyone** has the same setup, and can work on the same project **regardless** of their machine specifications and knowledge of containers.
 
@@ -42,7 +42,7 @@ But once you've used GitPod, you might not be so quick to leave them for GitHub 
 
 ### Cached builds?
 
-This is definitely one of the prevailiant strengths of GitPod. While these cloud code editors keep your workspace going for a few weeks after you've finished, they mostly operate on the basis of a **new workspace per run**. What this means is that each time you start up GitPod/Codespaces, you'll start with a fresh install. As you can imagine, this gets a little time consuming. You'll find yourself starting up your workspace, then grabbing a cup of coffee as it runs. If you did this 5-6 times a day, you'll be as hyperactive as a beaver in a timber store!
+This is definitely one of the prevalent strengths of GitPod. While these cloud code editors keep your workspace going for a few weeks after you've finished, they mostly operate on the basis of a **new workspace per run**. What this means is that each time you start up GitPod/Codespaces, you'll start with a fresh install. As you can imagine, this gets a little time consuming. You'll find yourself starting up your workspace, then grabbing a cup of coffee as it runs. If you did this 5-6 times a day, you'll be as hyperactive as a beaver in a timber store!
 
 GitPod offers you the ability to **cache** your builds. What this means, is that you can define two sets of instructions that run when you start your workspace. One of these sets will run each time you start a workspace. The second will run once, then store the result in a cache ready for further workspace creations. For example, you could whack your `docker-compose pull` and `docker build` instructions in this process, and when the workspace begins the resources are *already present*!
 
@@ -50,9 +50,9 @@ GitPod offers you the ability to **cache** your builds. What this means, is that
 
 All **web-based projects** will work on GitPod.
 
-GitPod is pretty much language-agnostic at this point, since for each workspace they spin you up an **Ubuntu** environment complete with pretty much most common language packages (think what you get when you install xcode on macOS). You don't *have* to use this either, as the container comes fully-equipped with **Docker**. That means you can spin up whatever container you want that works with your project. All exposed ports will have the option of allowing just you to see the project, or make the application URL visible outside (like [ngrok](https://ngrok.com/)). 
+GitPod is pretty much language-agnostic at this point, since for each workspace they spin you up an **Ubuntu** environment complete with pretty much most common language packages (think what you get when you install xcode on macOS). You don't *have* to use this either, as the container comes fully-equipped with **Docker**. That means you can spin up whatever container you want that works with your project. All exposed ports will have the option of allowing just you to see the project, or make the application URL visible outside (like [ngrok](https://ngrok.com/)).
 
-For one of my projects - **WordPress Simple SMTP** - I had configured GitPod to immediately grab [MySQL][dm], [WordPress][dw] and [Composer][dc] docker containers, and compile the WordPress container to contain [WordPress CLI][wc]. This cuts out around about **2-3 minutes of the start-up process**! The rest of my script focuses on minimising the setup process by executing a quickstart shell script on the container, so once my GitPod initalisation finishes, I'm greeted with a **fully installed WordPress instance** with the plugin in question already activated and ready to be worked on. Neat, right?
+For one of my projects - **WordPress Simple SMTP** - I had configured GitPod to immediately grab [MySQL][dm], [WordPress][dw] and [Composer][dc] docker containers, and compile the WordPress container to contain [WordPress CLI][wc]. This cuts out around about **2-3 minutes of the start-up process**! The rest of my script focuses on minimising the setup process by executing a quick-start shell script on the container, so once my GitPod initialisation finishes, I'm greeted with a **fully installed WordPress instance** with the plugin in question already activated and ready to be worked on. Neat, right?
 
 (If you want to see this script, [you can find it here](https://github.com/soup-bowl/wp-simple-smtp/blob/main/.gitpod.yml)).
 
@@ -62,7 +62,7 @@ So far I've also tried GitPod with [Laravel][tr-l], an [SSO project with WordPre
 
 So long as you use it for less than **50 hours a month**, this service is **free** for everyone - private and public repositories alike! Perfect for hobbyist programmers, weekend devs, and as an alternative to running locally when you're out and about with a low CPU laptop. You can pay **€8 (Approx. £6.75) a month for 100 hours** of dev time, or **€23 (Approx. £19) for unlimited usage** and more.
 
-Personally, as someone who uses GitPod outside of my working day job, I've not even come close to meeting the 50 hour limit. I've found it an invaluable tool when I've been working remotely, as it enables me to offload the heavy work to the cloud and spare the battery on my laptop. I was also able to try this out on a tiny Windows 8-era tablet hybrid, and it worked flawlessly to enable portable coding. 
+Personally, as someone who uses GitPod outside of my working day job, I've not even come close to meeting the 50 hour limit. I've found it an invaluable tool when I've been working remotely, as it enables me to offload the heavy work to the cloud and spare the battery on my laptop. I was also able to try this out on a tiny Windows 8-era tablet hybrid, and it worked flawlessly to enable portable coding.
 
 [gp]: https://www.gitpod.io/
 
