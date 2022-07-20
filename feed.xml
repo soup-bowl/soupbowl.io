@@ -1,0 +1,1499 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://soupbowl.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://soupbowl.io/" rel="alternate" type="text/html" /><updated>2022-07-20T11:05:39+00:00</updated><id>https://soupbowl.io/feed.xml</id><title type="html">Soupbowl</title><subtitle>Personal blog for Casey - a back-end developer specialising in PHP, primarily for WordPress developments. Primarily a source of niche setup guides, cool Raspberry Pi builds, and general ranting.</subtitle><author><name>soup-bowl</name></author><entry><title type="html">Bored Waiting for GitHub Codespaces? GitPod has Your Back</title><link href="https://soupbowl.io/2022/03/gitpod-review" rel="alternate" type="text/html" title="Bored Waiting for GitHub Codespaces? GitPod has Your Back" /><published>2022-03-19T00:00:00+00:00</published><updated>2022-03-19T00:00:00+00:00</updated><id>https://soupbowl.io/2022/03/gitpod-review</id><content type="html" xml:base="https://soupbowl.io/2022/03/gitpod-review"><![CDATA[<p>I’ve been on the waiting list for GitHub Codespaces for nearly 2 years now, and I haven’t seen anything from GitHub about it. At this point, I’m even wondering if the Codespaces initiative was some kind of desert mirage, and actually doesn’t exist at all!</p>
+
+<p>But bored of waiting for something I’m losing the plot over, I saw what alternatives are available. In comes <strong><a href="https://www.gitpod.io/">GitPod</a></strong> to save the day.</p>
+
+<p class="article-image"><img src="/assets/img/gitpod-screenshot.webp" alt="Purchased PS One console before modifications." /></p>
+
+<h1 id="whats-the-point-in-github-codespaces-and-gitpod-anyway">What’s the Point in (GitHub) Codespaces and GitPod Anyway?</h1>
+
+<p>We’re in the time of the cloud. 15 years ago we were told by the seers of technology it was coming, and we’d soon live in a time where your website would be hosted on a server not in a cabinet… Just in a cabinet thousands of miles away in someone else’s data centre…</p>
+
+<p>All in that time, we’ve still been coding on our machines. Our machines whirring and buzzing away writing, compiling and debugging our code in front of us, we’ve been developing on our local machine… At what point did our development work get shifted into the cloud?</p>
+
+<p>Clearly some engineers have considered this, as there’s been multiple initiatives to get <strong>Visual Studio Code</strong> and other web based editors into the browser. You can run <a href="https://coder.com/docs/code-server/latest">your own server version of Visual Studio Code</a>) (preferably in a Docker/Kubernetes container), or run a <a href="https://vscode.dev/">localStorage-accessible variant for quick edits</a>. Truly Visual Studio Code is the master of portable code editing (ironic since it’s written in JavaScript technically).</p>
+
+<p>This is all well and good, but neither of these avoid the typical issue of <strong>configuration</strong>. If you use Codeserver, you typically will need to setup and configure your own Kubernetes cluster or Docker server to operate with. This then comes with the challenges of the security, and making sure you provision the server enough resources to run. Plus, when you gain contributors to the project, will they have access to your cluster or will you go through the arduous process of getting them to set one up? Argh! Headaches!</p>
+
+<p>Well, this is just part of what both Codespaces and GitPod solve. Everyone has a cloud-based editing platform that they can use, authenticated by the Git provider, and shares the same environmental configuration for all your contributors. <strong>Everyone</strong> has the same setup, and can work on the same project <strong>regardless</strong> of their machine specifications and knowledge of containers.</p>
+
+<p>If I’ve explained this now, you’ve hopefully stopped reading this article and have signed up for GitPod already!</p>
+
+<h2 id="why-gitpod-over-github-codespaces">Why GitPod over GitHub Codespaces?</h2>
+
+<p><strong>Quick answer</strong>: You can use GitPod immediately, without waiting 2,147,483,647 years for GitHub to launch Codespaces.</p>
+
+<p>But once you’ve used GitPod, you might not be so quick to leave them for GitHub Codespaces once they launch. I will never be able to do as must justice as GitPod have already done with <a href="https://www.gitpod.io/vs/github-codespaces">their GitPod vs Codespaces informational</a>. But to summarise:</p>
+
+<ul>
+  <li>If configured correctly, GitPod will <strong>cache</strong> your builds. This makes spin-ups <strong>a lot faster</strong>.</li>
+  <li>Unless GitHub changes things, GitPod is cheaper on your wallet than Codespaces is. Certainly less complicated!</li>
+  <li>You’re not limited to GitHub - you can use <strong>GitLab</strong> and <strong>BitBucket</strong> too!</li>
+  <li>Decided you want to self-host? <a href="https://www.gitpod.io/self-hosted/">They’ve got you covered</a>.
+    <ul>
+      <li>This is for corporate environments and SysAdmin gurus - this isn’t a good pathway for saving a buck.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="cached-builds">Cached builds?</h3>
+
+<p>This is definitely one of the prevalent strengths of GitPod. While these cloud code editors keep your workspace going for a few weeks after you’ve finished, they mostly operate on the basis of a <strong>new workspace per run</strong>. What this means is that each time you start up GitPod/Codespaces, you’ll start with a fresh install. As you can imagine, this gets a little time consuming. You’ll find yourself starting up your workspace, then grabbing a cup of coffee as it runs. If you did this 5-6 times a day, you’ll be as hyperactive as a beaver in a timber store!</p>
+
+<p>GitPod offers you the ability to <strong>cache</strong> your builds. What this means, is that you can define two sets of instructions that run when you start your workspace. One of these sets will run each time you start a workspace. The second will run once, then store the result in a cache ready for further workspace creations. For example, you could whack your <code class="language-plaintext highlighter-rouge">docker-compose pull</code> and <code class="language-plaintext highlighter-rouge">docker build</code> instructions in this process, and when the workspace begins the resources are <em>already present</em>!</p>
+
+<h2 id="what-projects-work-on-gitpod">What Projects work on GitPod?</h2>
+
+<p>All <strong>web-based projects</strong> will work on GitPod.</p>
+
+<p>GitPod is pretty much language-agnostic at this point, since for each workspace they spin you up an <strong>Ubuntu</strong> environment complete with pretty much most common language packages (think what you get when you install xcode on macOS). You don’t <em>have</em> to use this either, as the container comes fully-equipped with <strong>Docker</strong>. That means you can spin up whatever container you want that works with your project. All exposed ports will have the option of allowing just you to see the project, or make the application URL visible outside (like <a href="https://ngrok.com/">ngrok</a>).</p>
+
+<p>For one of my projects - <strong>WordPress Simple SMTP</strong> - I had configured GitPod to immediately grab <a href="https://hub.docker.com/_/mysql">MySQL</a>, <a href="https://hub.docker.com/_/wordpress/">WordPress</a> and <a href="https://hub.docker.com/_/composer">Composer</a> docker containers, and compile the WordPress container to contain <a href="https://wp-cli.org/">WordPress CLI</a>. This cuts out around about <strong>2-3 minutes of the start-up process</strong>! The rest of my script focuses on minimising the setup process by executing a quick-start shell script on the container, so once my GitPod initialisation finishes, I’m greeted with a <strong>fully installed WordPress instance</strong> with the plugin in question already activated and ready to be worked on. Neat, right?</p>
+
+<p>(If you want to see this script, <a href="https://github.com/soup-bowl/wp-simple-smtp/blob/main/.gitpod.yml">you can find it here</a>).</p>
+
+<p>So far I’ve also tried GitPod with <a href="https://github.com/soup-bowl/wp-simple-smtp/blob/main/.gitpod.yml">Laravel</a>, an <a href="https://github.com/soup-bowl/project-wp-mw-sso/blob/main/.gitpod.yml">SSO project with WordPress &amp; MediaWiki</a>, a <a href="https://github.com/soup-bowl/jekyll-bootstrap-5/blob/main/.gitpod.yml">Jekyll theme</a>, and a whole bunch of other private repository codebases. In fact, this website (currently closed source but runs on Jekyll) was edited on GitPod! Once <a href="https://revive.today">ReviveToday</a> is opened-up the GitPod configuration will be visible.</p>
+
+<h2 id="cost--conclusion">Cost &amp; Conclusion</h2>
+
+<p>So long as you use it for less than <strong>50 hours a month</strong>, this service is <strong>free</strong> for everyone - private and public repositories alike! Perfect for hobbyist programmers, weekend devs, and as an alternative to running locally when you’re out and about with a low CPU laptop. You can pay <strong>€8 (Approx. £6.75) a month for 100 hours</strong> of dev time, or <strong>€23 (Approx. £19) for unlimited usage</strong> and more.</p>
+
+<p>Personally, as someone who uses GitPod outside of my working day job, I’ve not even come close to meeting the 50 hour limit. I’ve found it an invaluable tool when I’ve been working remotely, as it enables me to offload the heavy work to the cloud and spare the battery on my laptop. I was also able to try this out on a tiny Windows 8-era tablet hybrid, and it worked flawlessly to enable portable coding.</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Review" /><category term="Development" /><summary type="html"><![CDATA[I’ve been on the waiting list for GitHub Codespaces for nearly 2 years now, and I haven’t seen anything from GitHub about it. At this point, I’m even wondering if the Codespaces initiative was some kind of desert mirage, and actually doesn’t exist at all!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/gitpod-screenshot.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/gitpod-screenshot.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">I built: PlayStation 1, Pi Powered!</title><link href="https://soupbowl.io/2021/09/pi-playstation-1" rel="alternate" type="text/html" title="I built: PlayStation 1, Pi Powered!" /><published>2021-09-19T00:00:00+00:00</published><updated>2021-09-19T00:00:00+00:00</updated><id>https://soupbowl.io/2021/09/pi-playstation-1</id><content type="html" xml:base="https://soupbowl.io/2021/09/pi-playstation-1"><![CDATA[<p><strong>And this completes my PlayStation console collection… If we ignore the PS5.</strong></p>
+
+<p>A lot of things happened at once to trigger this project. I had not bought a Pi 4 at this point, and I had the PlayStations 2-4…</p>
+
+<p>Next minute I’ve bought a dead PSOne off eBay, a Pi from the Pi Hut, and waved goodbye to my bank account… <strong>In December.</strong></p>
+
+<p>The idea was incredibly simple – Whack a Pi 4 inside a PSOne shell, with the toggle button and LED still functioning. With such a simple project, the idea can expand in phases (powered USB ports, hard drive storage, etc).</p>
+
+<p>:information_source: This article has been in the works since February, just left unpublished.</p>
+
+<h2 id="shopping_cart-what-i-bought">:shopping_cart: What I Bought</h2>
+
+<p>(The links below are not affiliates).</p>
+
+<ul>
+  <li>Dead Sony PSOne (bagged mine for £3, <a href="https://www.ebay.co.uk/sch/i.html?_from=R40&amp;_nkw=psone&amp;_sacat=0&amp;rt=nc&amp;LH_ItemCondition=7000">eBay</a>).</li>
+  <li>Raspberry Pi 4, 2 GB* (<a href="https://thepihut.com/products/raspberry-pi-4-model-b">Pi Hut</a>).</li>
+  <li>Official USB-C Power Supply (<a href="https://thepihut.com/products/raspberry-pi-psu-uk">Pi Hut</a>).</li>
+  <li>MicroSD.</li>
+  <li>Petrockblock’s Powerblock (<a href="https://thepihut.com/products/powerblock-raspberry-pi-power-switch">Pi Hut</a>).</li>
+  <li>HDMI ribbon receptacle (<a href="https://aliexpress.ru/item/32833580742.html">AliExpress</a>).</li>
+  <li>M2.5 screws (<a href="https://aliexpress.ru/item/4000056753202.html">AliExpress</a>) &amp; M2.5 Standoffs (<a href="https://aliexpress.ru/item/32862529967.html">AliExpress</a>).</li>
+  <li>Power status LED (1 needed, <a href="https://aliexpress.ru/item/32848810276.html">AliExpress</a>).</li>
+  <li>USB pinout, connectors &amp; receptacles (<a href="https://aliexpress.ru/item/4000385426649.html">AliExpress</a>).</li>
+  <li>Wire (I used 28 AWG, <a href="https://aliexpress.ru/item/4001048052736.html">AliExpress</a>).</li>
+  <li>Heatsinks (<a href="https://aliexpress.ru/item/33021531558.html">AliExpress</a>).</li>
+</ul>
+
+<p>I already had, but also needed:</p>
+
+<ul>
+  <li>Soldering equipment (iron, solder, sucker).</li>
+  <li>Hot glue gun.</li>
+  <li>Cutting tools (I MacGyvered with diagonal pliers).</li>
+  <li>Safety googles (I didn’t have these, and nearly injured myself).</li>
+</ul>
+
+<p>:warning: Excluding the tools, the whole project (at this stage) <strong>cost me £120</strong>. Albeit, if you follow my steps you’ll end up with quite a lot of re-usable resource.</p>
+
+<p><em>* You can go for a higher RAM, but emulation mostly requires more powerful CPUs. If you’re planning to operate the Pi as a console, then the higher RAM will go to waste. You can find a <a href="https://retropie.org.uk/forum/topic/24302/raspberry-pi-4-does-ram-matter">discussion about it here</a>.</em></p>
+
+<h2 id="book-the-plan">:book: The Plan</h2>
+
+<p class="article-image"><img src="/assets/img/IMG-20201125-WA0002-1024x557.webp" alt="Purchased PS One console before modifications." /></p>
+
+<p>Dead PSOne from a bodged-up mod chip job.</p>
+
+<p>My current goals for the project were:</p>
+
+<ul>
+  <li>The original toggle button functions with the Pi.</li>
+  <li>LED indicator comes through the existing beam channel.</li>
+  <li>Accessible power, USB and HDMI port(s).</li>
+  <li>Keep casing modifications to a minimum.</li>
+  <li>No affixing components directly to the plastic.</li>
+  <li>Ability to cool the Pi, or add a fan at a later stage.</li>
+</ul>
+
+<p>First two are pretty much dealt with by the Powerblock module. The rest will be where the challenge lies.</p>
+
+<p>I had a hell of a time trying to figure out actually <em>where</em> the Pi would sit inside the casing. Now more than ever, cooling is <strong>fundamental</strong> due to the sheer power the Pi 4 is packing. I could place the Pi in normally, but I would potentially need to add vents, or use the disc tray door as a vent.</p>
+
+<p>I’d recently <a href="/2020/09/raspberry-pi-gameboy-and-mega-drive-my-retro-setup">bought a Mega Drive case</a> from <a href="http://retroflag.com/MEGAPi-CASE-M.html">Retroflag</a>. Their method of dealing with the cooling was to have the Raspberry Pi upside down, with a heatsink and a fan venting out below. This is <strong>applicable</strong> to the PSOne shell, as there’s vents at the bottom. I opted to go with this approach, which would require me to modify the Powerblock module.</p>
+
+<p>I mounted the Pi so that the USB-C port on the Powerblock was facing the barrel jack connector slot.</p>
+
+<p>Unfortunately I found with my spacers that the Pi was an extremely snug fit, which concerned me. I removed the centre columns, and some struts underneath the top casing. Doing this I found that I over-did mine, so I’d advise caution if you take this approach. I also chopped the square of the barrel recess out to allow for the USB-C connector to come through.</p>
+
+<h2 id="construction-hardware-the-complex-bit">:construction: Hardware, the complex bit</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20201221_122256-1024x768.webp" alt="Eagle view of the modified PS One with the circuits exposed." /></p>
+
+<p>Top view of the circuit. Pi is upside down for a future fan addition, and the power port (unpictured) is in-line with the port gap.</p>
+
+<p>I opted to use the original hardware toggle switch. This needs to be de-soldered from the board, which is an <strong>absolute nightmare</strong>. A few hours with both the braid and the sucker, and I finally got the component off the board. Bear in mind that the button grips the board, so you will need to pry the legs away slightly. Once off, check with a multimeter to establish polarity (although it’s just a box-standard toggle switch).</p>
+
+<p>With the orientation decided, I marked on the casing where the mounting holes of the Pi would align to the plastic. On these points, I glued four of the 2.5M standoffs to provide a solid base, without sticking the Pi down (bear in mind 2 will be smaller, and 2 are larger).</p>
+
+<p>Before the Pi will fit snug onto the mounts, the Powerblock’s LED and button headers need to be dealt with. You can bend them away (avoid them touching), trim them, or de-solder them from the board. I chose the latter, opting to solder wires into their points instead. YMMV.</p>
+
+<p>I wired up the LED and button to the Powerblock with the cables and solder, and glued the button directly to the plastic in the recess. I found the LED went nicely next to it, and shines bright through the channel… But also through the gaps and the hole from the controller connector.</p>
+
+<p>The ribbon HDMI connector is easily put together, and can nicely convert the Micro HDMI to a full-size HDMI receptacle in the gap where the AV socket was. Word of caution here that I fell foul of, is that if you glue the socket board straight into the recess, your HDMI cables might rub against the plastic casing. I would recommend propping them up with a few nuts from the standoff kit.</p>
+
+<p>You should be able to test the system at this point, and it should start up! There’s no driver installed yet, so it might behave strangely, but it should at least turn the Pi on and dimly light the LED.</p>
+
+<h2 id="cd-software-the-easy-bit">:cd: Software, the easy bit</h2>
+
+<p>For software, I went for <a href="https://retropie.org.uk/download/">RetroPie</a>. I chose this because it’s the package I’m most familiar with, but <a href="https://www.recalbox.com/">RecalBox</a> is also available if you want a more ready-rolled system.</p>
+
+<p><a href="https://youtu.be/oAhvQoLpvsM">NeoZeroo on YouTube</a> hosts a 1080p fan render of the famous PS1 boot intro. This can be <a href="https://retropie.org.uk/docs/Splashscreen/">used as a splash screen</a> with RetroPie, and works fantastically at that! Once set, you’ll be greeted with the famous boom upon each boot. Enable <code class="language-plaintext highlighter-rouge">quiet</code> boot to <a href="https://retropie.org.uk/docs/FAQ/#how-do-i-hide-the-boot-text">hide the boot text</a>.</p>
+
+<p>You can install a theme that <a href="https://retropie.org.uk/docs/Themes/#theme-gallery">styles the Emulation Station to look like the PlayStation 1</a> no-disc boot interface.</p>
+
+<p>All that’s left now is to <a href="https://www.reddit.com/r/PlaystationClassic/comments/alla7z/how_to_get_started_ripping_my_psone_games/">start ripping your original PlayStation discs</a> on a computer, <a href="https://retropie.org.uk/docs/Transferring-Roms/">sticking them on your RetroPie</a> and playing like the PlayStation you could only dream would exist in the 00’s! And while you’re there, don’t forget the other classics it can handle – <a href="https://retropie.org.uk/docs/Supported-Systems/">from Atari to Dreamcast</a>.</p>
+
+<h2 id="joystick-verdict">:joystick: Verdict</h2>
+
+<p>The end result – while taking quite a bit of effort to construct – is fantastic. You now have a PlayStation One looking device that supports HDMI and can run many different consoles outside of Just the PlayStation 1. The perfect emulation machine.</p>
+
+<p>Built in February, I have been using this device <strong>religiously</strong>. The problem with Retro builds is that you often shelve them a few months after you’ve finished, but the performance and stability of this model is <strong>excellent</strong>, so it remains in use to this day.</p>
+
+<p>I wish to make a few changes in time, but I haven’t got round to these yet. These include:</p>
+
+<ul>
+  <li>Adding more USB ports, and a cover fascia (so you can’t see inside via the controller recess).</li>
+  <li>Possibly bring back the original controller connectors, and convert them to USB.</li>
+  <li>Add a small fan (in progress).</li>
+</ul>
+
+<p>But otherwise – as-is – this PlayStation become my favourite emulation machine.</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Gadgets" /><category term="Gaming" /><category term="Guides" /><category term="Raspberry Pi" /><summary type="html"><![CDATA[And this completes my PlayStation console collection… If we ignore the PS5.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/IMG_20201221_122851-1980x1114.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/IMG_20201221_122851-1980x1114.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">I Wanted a Pi to Tell me Useless Stuff About my Computer!</title><link href="https://soupbowl.io/2021/07/deskdash" rel="alternate" type="text/html" title="I Wanted a Pi to Tell me Useless Stuff About my Computer!" /><published>2021-07-22T00:00:00+00:00</published><updated>2021-07-22T00:00:00+00:00</updated><id>https://soupbowl.io/2021/07/deskdash</id><content type="html" xml:base="https://soupbowl.io/2021/07/deskdash"><![CDATA[<p><strong>Yep, here we go again – another semi-useless but way over-complicated Raspberry Pi thing…</strong></p>
+
+<p>I had a fantastic idea to make an <a href="/2018/04/smarting-up-my-car-with-a-raspberry-pi-crankshaft-openauto">Android Auto screen for my classic tech car</a>. Did it work? Yes. Did it obscure my windshield? Kinda. Did it over-complicate my audio setup? *sigh*… Yeah.</p>
+
+<p>I’m not a fan of e-waste, so naturally instead of going into the bin, my Raspberry Pi screen got reused… As a paperweight.</p>
+
+<p>Mid-way through <strong>COVID-19 2: Electric Boogaloo</strong>, I was chilling after playing a computer game when my PC fans ramped up. Perplexed, I wondered if there was a way I could show information about my computer, without using something on-screen.</p>
+
+<p>And what did I discover? Yeah idiot there’s like a trillion ways to do that.</p>
+
+<p>So here comes the trillion and 1th way –</p>
+
+<h2 id="deskdash">DeskDash</h2>
+
+<p>Yep, while trying to think of a name for my <strong>desktop dashboard</strong> project, I came up with a pretty good name… For an office food delivery company.</p>
+
+<p>My goals for my project were simple:</p>
+
+<ul>
+  <li>Got a Raspberry Pi.</li>
+  <li>I have a screen.</li>
+  <li>Let’s see some cool things. [citation needed]</li>
+</ul>
+
+<p>I also wanted to keep things consistent. I’m pretty well versed in PHP so I could make a simple PHP webserver, run an instance of Chrome in kiosk mode, and show some SNMP data. Simple right?</p>
+
+<p>So I made a two-split system of a fullscreen scrolling Electron application, with an accompanying Python Daemon API that runs on the PC you want data/interactions from. Thanks for coming to my TED talk.</p>
+
+<h2 id="the-api">The API</h2>
+
+<p>So I mentioned SNMP. SNMP is <strong>Simple Network Management Protocol</strong>. The ‘simple’ is subjective – Google SNMP, and tell me how long it takes you to understand it – I’ll wait.</p>
+
+<p>While seriously over-complicated, it would achieve pretty much what I want, cross platform. Sadly, despite being a CCNA qualified network engineer, I completely forgot SNMP existed and lost my ability to use Google, so I made my own way.</p>
+
+<p><em>Since I wanted to actually interact with the PC too, in theory I saved myself a lot of time here. That’s my defence and I’m sticking with it.</em></p>
+
+<p>And so the <strong>Deskdash Communicator API</strong> was born. I decided I wanted the following information:</p>
+
+<ul>
+  <li>Basic machine info (name, OS, etc).</li>
+  <li>Task Manager level details (CPU, GPU, RAM, the more the better).</li>
+  <li>Added bonus – let me turn my PC off.</li>
+</ul>
+
+<p>Choice of language was a difficult one. I’m a PHP developer by trade but I was by chance learning to program in Java. Could be a fantastic learning project, right?</p>
+
+<p>So yeah I wrote it in <strong>Python</strong>.</p>
+
+<p>The ‘MVP’ ended up being a Python mini webserver that would garner the desired details through different libraries and scripts, as Python is pretty much famous for. Coming from PHP, it took me ages to understand why PIP wouldn’t let me install dependencies locally… Then the <a href="https://docs.python.org/3/library/venv.html"><strong>venv</strong> penny dropped</a>.</p>
+
+<p>I also added the ability to run <strong>shutdown</strong> from the script by making a callback with a password you’d set in config. Since shutdown normally needs <strong>sudo</strong>, I’m still quite surprised to find it works <em>flawlessly</em>… Although I don’t want to question it in case it stops working.</p>
+
+<p><em>I also set a 5 minute timer so my partner doesn’t prank shutdown my computer… Yeah, that was a <strong>lesson learned</strong> implementation.</em></p>
+
+<p>I’ve now got all my info, what about my visuals?</p>
+
+<h2 id="the-application">The Application</h2>
+
+<p>I decided to make a simple HTML page with some not-so-simple JavaScript stuff. But to help keep things simple layout-wise, I used <strong>Bootstrap</strong>.</p>
+
+<p>My idea would be to take the worst part of a website – the banner – and make it <strong>full-screen</strong>. I could make it configurable so that you could make <strong>slides</strong>. Each slide could show different bits of info, not just stuff about my PC.</p>
+
+<p>I’m not a fan of <strong>JQuery in 2020</strong>. It was good for the time, but JavaScript has come a long way since. I swapped the Bootstrap JQuery aspects with <strong><a href="https://thednp.github.io/bootstrap.native/">Bootstrap native</a></strong>, a fantastic library that converts Bootstrap superbly.</p>
+
+<p>I also made an infinite loop that ran every 5 seconds, that could be instructed by the various on-screen components to grab information. I’m in no need for <strong>instant</strong> information, so I thought a 5 second limiter would help not overload my network and/or PI.</p>
+
+<p>My goal was to display this in Chromium in Kiosk Mode, but I ended up needing a ridiculous number of different plugins and quirks to get a decent application. Since I don’t need to heavily rely on NPM, I used this opportunity to make a very simplistic <strong>Electron</strong> application.</p>
+
+<hr />
+
+<p>So after 4-5 months of development work, and the stages of grief over various development choices, deskdash was alive. I watched in awe (and some disgust) as my Raspberry Pi told me my PC was doing fine, it was 4:00am on a Sunday, and that loading up YouTube was bizarrely a big struggle for my GPU.</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot_20210520_205742.webp" alt="" /></p>
+
+<p>I’d done it – the <strong>Deskdash GUI</strong> – now to put it somewhere useful.</p>
+
+<h2 id="oh-god-who-trusted-me-with-a-drill">Oh god who trusted me with a drill???</h2>
+
+<p>My enclosure for my Raspberry Pi screen is a <strong>Smartpi Touch 1</strong> (no longer sold). This screen has a normal horizontal placement stand that comes with <strong>VESA</strong> mounting holes. I looked at the side of my desk, it looked back at me- oh yeah, 4am… Mmm, I should sleep.</p>
+
+<p>Woke up and got straight to work drilling at my desk. As with all great DIY stories, I eyeballed the location of where my Pi screen would go – mounted to the outside edge of my <strong><a href="https://www.ikea.com/us/en/p/micke-desk-black-brown-s49926749/">MICKE desk</a></strong>. I drilled into the wooden side panels, and mounted my screen with some spare VESA screws. Perfect, first time!</p>
+
+<p><em>Some advice – maybe check the height you want it <strong>before</strong> blindly following my same steps.</em></p>
+
+<p class="article-image"><img src="/assets/img/IMG_20210722_210644-edited-scaled.webp" alt="" /></p>
+
+<p>Fantastic – my screen is mounted to my desk (slightly lower than it should’ve been)!</p>
+
+<h2 id="was-it-worth-it">Was it worth it?</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210722_210859-1024x768.webp" alt="" /></p>
+
+<p>I’m writing this article <strong>4 months</strong> later, and it’s <strong>still in use</strong>!</p>
+
+<p>It can do a few more things now, like watch my Bitcoins crash into oblivion and let me know when IP addresses join and leave my network (far less useful than I imagined), and I’m gradually <a href="https://github.com/users/soup-bowl/projects/2">making it more useful, one ticket at a time</a>.</p>
+
+<p>Did I build it well? Well- that’s a different story.</p>
+
+<h2 id="source-code">Source Code</h2>
+
+<p>If you really want to give this a shot for yourself, the source code is available on GitHub under the MIT license. PRs are welcome but I may be pretty particular of the outcome, so independent forks are also completely welcome.</p>
+
+<div class="aligncentre"><p class="button"><a href="https://www.soupbowl.io/projects/deskdash/">Deskdash Project Page</a></p></div>
+
+<p>Despite building the code for a Raspberry Pi application, in theory the combination of a Python API + Electron GUI should make this fully cross-platform. Go ahead and try this on a big screen, small screen, horizontal or vertical. Just please – show off your creations below!</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Development" /><category term="Project" /><category term="Raspberry Pi" /><summary type="html"><![CDATA[Yep, here we go again – another semi-useless but way over-complicated Raspberry Pi thing…]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/IMG_20210722_210859-1024x768.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/IMG_20210722_210859-1024x768.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">I made: Cardboard Macintosh with a Raspberry Pi</title><link href="https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi" rel="alternate" type="text/html" title="I made: Cardboard Macintosh with a Raspberry Pi" /><published>2021-04-25T00:00:00+00:00</published><updated>2021-04-25T00:00:00+00:00</updated><id>https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi</id><content type="html" xml:base="https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi"><![CDATA[<p><strong>And it also runs DOS too. Yes, it feels <em>really weird</em>.</strong></p>
+
+<p>If you’re a maker of any level of expertise, signing up to the <strong>Instructables Newsletter</strong> is a bad idea for your bank account. A week in and you’re looking at buying a laser cutter, a 3D printer, and an assortment of different power tools.</p>
+
+<p>I’m in the camp of “Oh that’s looks cool… Oh I can’t afford any of this!”. But one thing I do end up with a lot of, is cardboard.</p>
+
+<p>And then I saw the <strong><a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/">Mini Mac on Instructables</a></strong>…</p>
+
+<h2 id="thinking-what-did-i-use">:thinking: What did I use?</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210423_181904-edited-scaled.webp" alt="" /></p>
+
+<p>I don’t have a 3D printer, so I was immediately scrubbed at that point. However, armed with my cutting knife (exacto knife I think it’s called across the pond?) and a truckload of cardboard from a household Amazon order, I got to work.</p>
+
+<p>Without beating around the bush, I needed the following to make a cardboard Macintosh:</p>
+
+<ul>
+  <li><a href="https://shop.pimoroni.com/products/raspberry-pi-zero-w">Raspberry Pi Zero wireless, no header</a> (Pimoroni – £9.30)
+    <ul>
+      <li>I soldered a socket header to the Pi instead. The author has an alternative method which should work here too.</li>
+    </ul>
+  </li>
+  <li><a href="https://www.aliexpress.com/item/32908424504.html">Raspberry Pi LCD screen</a> (AliExpress – £12.93).
+    <ul>
+      <li>I used the same one as the author. Search the product code <strong>MZDPI-VGA-ZERO</strong> in <strong>AliExpress</strong> and you’ll likely find it at a reasonable price.</li>
+      <li>Typically comes with a socket. If not, <a href="https://shop.pimoroni.com/products/2x20-pin-gpio-header-for-raspberry-pi-2-b-a?variant=1132812261">here’s one you can buy</a>.</li>
+    </ul>
+  </li>
+  <li><a href="https://www.amazon.co.uk/SanDisk-microSDHC-Memory-Adapter-Performance/dp/B073K14CVB">MicroSD Card</a> (16GB – Amazon – £6).</li>
+  <li><a href="https://www.amazon.co.uk/Anker%C2%AE-Reader-RS-MMC-Support-Warranty/dp/B00LFIXC8I/">MicroSD to USB adapter</a> (Amazon – £8.99).
+    <ul>
+      <li>Pause! Your laptop might have one built-in.</li>
+    </ul>
+  </li>
+  <li><a href="https://shop.pimoroni.com/products/raspberry-pi-universal-power-supply">MicroUSB power supply</a> (Pimoroni – £8.40).</li>
+  <li><a href="https://www.amazon.co.uk/Rii-K01X1-Mini-Wireless-Keyboard/dp/B01G6XGLQQ">Wireless/1 socket mouse and keyboard</a> (Amazon – £15.99).
+    <ul>
+      <li>Bluetooth might be best. if you get 2.4G dongle, you’ll need a <a href="https://www.amazon.co.uk/Rankie-R-1170-Female-Adapter-Convertor-Black/dp/B00YOX4JU6/">MicroUSB to USB converter</a> (£5) most likely.</li>
+    </ul>
+  </li>
+  <li><a href="https://shop.pimoroni.com/products/antex-xs25-soldering-iron-uk-plug">Soldering Iron</a> (Pimoroni – £30).
+    <ul>
+      <li>If you go Pi w/header + extension cable, it’s not needed.</li>
+      <li><a href="https://shop.pimoroni.com/products/gpio-hammer-header?">There’s also this header</a> if you really want to avoid it. I’ve not tried it, so your experience may vary.</li>
+    </ul>
+  </li>
+  <li><a href="https://www.hobbycraft.co.uk/black-hot-melt-11mm-glue-gun/638425-1000">Glue gun</a> (Hobbycraft – £10).
+    <ul>
+      <li>Definitely needed when working with cardboard. If the glue is too expensive, you can <a href="https://www.aliexpress.com/item/33015733185.html?">get it from AliExpress</a>.</li>
+    </ul>
+  </li>
+  <li><strong>Lots</strong> of cardboard.
+    <ul>
+      <li>Just don’t throw order boxes out, and even a family of low online orders will have enough in 3 months.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>My method managed to avoid both a USB Ethernet peripheral (so a <strong>Wireless Router</strong> is required) and requiring a HDMI screen to setup the display drivers, but it might also be good to have a <strong>Mini HDMI to HDMI adapter/cable</strong> too.</p>
+
+<p>I had a lot of the parts already in my workspace, but the rough estimate I’d give to the cardboard Macintosh (excluding cardboard, I’m really clueless how much that’d cost) was <strong>around the £125</strong> mark (including tools). If you get fed up down the line, <strong>all parts are reusable</strong>.</p>
+
+<p>Here’s the software that you will need:</p>
+
+<ul>
+  <li><a href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit"><strong>Raspberry Pi OS</strong></a> (‘with desktop’ recommended).</li>
+  <li><a href="https://www.balena.io/etcher/"><strong>Etcher</strong></a>, a cross platform image writer.</li>
+  <li>We need to edit a few Pi system files, so a good text editor is needed. We recommend the free and cross platform <strong><a href="https://code.visualstudio.com/">Visual Studio Code</a></strong>.</li>
+  <li>Display driver, but this will be done on the Pi.</li>
+  <li>We’ll be dealing with non-standard archives, so I recommend <strong><a href="https://www.7-zip.org/">7zip</a></strong> for <strong>Windows</strong> or <strong><a href="https://www.keka.io/en/">Keka</a></strong> for <strong>macOS</strong> to export them properly.</li>
+</ul>
+
+<p>And finally, the optional extras:</p>
+
+<ul>
+  <li>Beverage (alcohol not recommended).</li>
+</ul>
+
+<h2 id="pie-setting-up-the-pi">:pie: Setting up the Pi</h2>
+
+<h3 id="first-steps">First Steps</h3>
+
+<p>Installing Raspberry Pi OS is incredibly complicated, and requires a lot of books and online courses to learn how to install. Just kidding, it’s a few button presses!</p>
+
+<p>Connect your MicroSD card you’re dedicating to the Pi into your computer, via either an adapter or a laptop SD card reader. Fire up <strong>Balena Etcher</strong>. You’ll be asked to select:</p>
+
+<ul>
+  <li>Your MicroSD (if it’s the only one plugged in, it selects auto).</li>
+  <li>Your Raspberry Pi OS you downloaded earlier (if it doesn’t appear, extract the archive).</li>
+</ul>
+
+<p>Check to make sure you’re not about to wipe your entire PC of all your precious cat GIFs, and click Flash. Pop on a video on YouTube and wait for the flash + verification process to complete.</p>
+
+<p>Done? Eject, but plug the MicroSD back in again. We’ve got some tinkering to do.</p>
+
+<h3 id="preparing-for-headless">Preparing for Headless</h3>
+
+<p>The problem here is if we go and whack it straight into the Raspberry Pi and power it up, Raspberry Pi OS will expect a screen and for us to configure networking. Ideally, we want to get this done beforehand, and it’s super easy to do. For the curious, <a href="https://www.raspberrypi.org/documentation/configuration/wireless/headless.md">we’re setting this up headless</a>.</p>
+
+<p>Depending on your platform, you might now see between 1-3 new mysterious storage locations pop-up. We’re looking for the one called <strong>BOOT</strong>. Go into that one.</p>
+
+<p>Create a blank file <strong>ssh</strong> inside this directory. On Windows, you might need to temporarily turn off hide file extensions, create a new text file and remove the .txt extension. If it moans, your text editor’s save as dialog should be able to achieve it.</p>
+
+<p>Create another file in this directory called <strong>wpa_supplicant.conf</strong>. Open this file in a code editor, and change the contents to this, replacing the <text> with your own information:</text></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=&lt;Insert 2 letter ISO 3166-1 country code here&gt;
+
+network={
+ ssid="&lt;Name of your wireless LAN&gt;"
+ psk="&lt;Password for your wireless LAN&gt;"
+}
+</code></pre></div></div>
+
+<p>So what have we done? The <strong>ssh</strong> file enables SSH from the start. SSH allows you to access a command prompt for the device from anywhere in your network, so long as you have login information. This will let us install the display driver without an existing display.</p>
+
+<p>The <strong>wpa_supplicant.conf</strong> does a similar thing. When the Pi sees this file, it will turn the on-board WiFi on and use the contents of this file to connect to the wireless network.</p>
+
+<p>Once you’ve done all this, eject the MicroSD from your computer, whack the MicroSD card into the Pi Zero, and connect it to power. Here’s another time to whack something on YouTube, as initialisation will take a while. I recommend <strong>leaving it 10 minutes</strong> before thinking something’s wrong.</p>
+
+<h3 id="setting-up-the-display">Setting up the display</h3>
+
+<p>Left it a while? Good, by now it should’ve connected to your network. This is where things may get a bit… Fun.</p>
+
+<p>On Windows, I generally find that I can try <code class="language-plaintext highlighter-rouge">ssh pi@raspberrypi</code> and job done. However, on both macOS and Linux this has been a nightmare, presumably thanks to my network’s router. If you’re in the same boat, try <strong>raspberrypi.local</strong>. Doesn’t work? try loading up your router’s configuration page – it might have a non-login list of devices on your network.</p>
+
+<p>If you get a prompt for a password – try <strong>raspberry</strong>. Congratulations! Now we can setup the display.</p>
+
+<p>The display driver we will use is <a href="https://github.com/tianyoujian/MZDPI">found here on GitHub</a>, if you’re using the display mentioned in the parts list. This is installed by running the following commands on your SSH connection. Run the following (taken from the GitHub page):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/tianyoujian/MZDPI.git
+cd MZDPI/vga
+sudo chmod +x mzdpi-vga-autoinstall-online
+sudo ./mzdpi-vga-autoinstall-online
+sudo reboot
+</code></pre></div></div>
+
+<p>The commands, broken down, do:</p>
+
+<ul>
+  <li>git clone will make a copy of the files you see on the webpage, in a directory named after the repo (MZDPI). Git is very complex and is essential knowledge for code development, see here if you’re interested in learning more.</li>
+  <li>Change into the ‘vga’ directory of the cloned Git repository.</li>
+  <li>Tell the system we want to make the script <strong>mzdpi-vga-autoinstall-online</strong> executable (otherwise the next command will throw an error).</li>
+  <li>Run said script
+    <ul>
+      <li>I’ll revisit this with a breakdown of the script actions, but generally it’s a driver that will read the GPIO pins and let the Pi know it’s a functioning display.</li>
+    </ul>
+  </li>
+  <li>Finally, reboot our Raspberry Pi.
+    <ul>
+      <li>Running ‘reboot’ over an SSH connection will only reboot the machine you’re connected to. On your PC, it’ll just show the message “host terminated the SSH connection” and leave it be.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>If all has gone correctly, your Pi screen drivers will be ready for us to connect the LCD display onto! I’ll move onto the ‘hardware’ setup for now, and come back to the emulation software in a bit.</p>
+
+<p class="article-image"><img src="/assets/img/original_893ddc20-fa1b-4f8f-98e8-b4fa8c095e32_IMG_20210418_022309-1024x792.webp" alt="" /></p>
+
+<p>For the security conscious, I don’t recommend switching off SSH yet as we will be using it for SCP (file transfer) a bit later. If you want to strengthen your Pi security, <a href="https://www.raspberrypi.org/documentation/configuration/security.md">here’s some good recommendations</a> on setting up key-based authentication.</p>
+
+<h2 id="hammer_and_wrench-constructing-the-cardboard-macintosh">:hammer_and_wrench: Constructing the Cardboard Macintosh</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210422_182005-edited-scaled.webp" alt="" /></p>
+
+<p>You can now solder the socket header to the Pi, if that’s the route you’ve taken. You want the socket aspect of the header to be <strong>underneath</strong> the Pi. We want the Pi to be facing <strong>away</strong> from the screen when it is attached to the screen (away means the big CPU chip is facing you, not the screen).</p>
+
+<p>The <a href="https://magpi.raspberrypi.org/articles/how-to-solder-gpio-pin-headers-to-raspberry-pi-pico">MagPi magazine has a great guide</a> for soldering Pi GPIO headers. My advice for soldering the header is to start with the corners, as once you’re done it’ll keep the header stable within the GPIO sockets for you do to the rest. Solder by briefly touching/tinning the soldering iron onto the solder, then use the iron to heat up each pad &amp; pin. Put the solder into this heated area (without touching the iron directly) and it should flow straight onto the pad. If you’ve got a triangle-like solder pad, you’ve done good.</p>
+
+<p>If you’ve got a multi-meter handy, you can use one to test how strong your connections are in continuity mode. You’ll likely get bored doing so, so long as they’re all visibility soldered and your ground and 5V rails are fine you should be good to go.</p>
+
+<p>Cardboard will require some creative ingenuity from yourself. Personally I found it was handy to get the <a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/">SketchUp model from the original Instructable</a> and follow that as a guide. I have no real good advice here, other than I got to where I am by lots of trial and error. It’s depending on your own level of pefectionism, as I was quite happy to have mine vaguely computer looking.</p>
+
+<p>To get a stable mount of the Pi screen, I opted to essentially make a thin wall of cardboard that would go up the side of the screen and hold it with friction. I ended up losing quite a lot of hot glue at this point, but the wall worked and keeps the screen pressed up to the gap in the enclosure.</p>
+
+<p>My plan is to come back to this project with a way of having ports facing outside the cardboard. For now I would make a hole in the cardboard and pull the power and data cables through there. Or my personal choice to not damage the enclosure for now – slant the roof/lid and pull it in through there.</p>
+
+<p>At this point, you should now have a neat looking little cardboard computer that runs Raspberry Pi OS quite fine. You could stop here if you want, because this is pretty damn cool in itself. Up next I’ll talk about how to emulate the OS the Macintosh would’ve used back in the day.</p>
+
+<h2 id="apple-emulating-system-7">:apple: Emulating System 7</h2>
+
+<h3 id="pre-preperation">Pre-preperation</h3>
+
+<p>You’re <a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/#step5">best following the Instructable here</a>, as their explanation is absolutely perfect. If you follow the guide you can skip this step here entirely, but I’ll explain it for anyone who’d want my chaotic style of explanations.</p>
+
+<p>Since the Pi itself won’t run System 7 (incompatible processor), we will need to <em>emulate</em> a Motorola CPU. This will use the amazing <strong>Gyphel Project</strong> <strong>vMac</strong> emulator. This software will make a virtual sandbox of a Macintosh on your Pi, translating all system resource commands to the Raspberry Pi. This is <strong>intense</strong> work, but the Pi Zero is crazily capable of handling this well.</p>
+
+<p>The Instructable author has pre-compiled the ARM executable you’ll need for both the Raspberry Pi and the screen size. You can <a href="https://www.dropbox.com/s/89g3pumrftrw6ly/Pi_ececutables.zip?dl=0">download it here</a> (or my copy if it’s since taken down). The one we’ll primarily need is <strong>Mini_vMac_ARM</strong> (other one’s good if you’re on a VNC session).</p>
+
+<p>Create a folder on your PC, and call it <strong>Macintosh</strong>. Extract your zip of executables here, and we’ll add the upcoming resources here too. Once we’re done, we’ll move the whole bulk over to the Pi.</p>
+
+<p>First we need a system ROM. <a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/">Visit this archive site</a> and download the file <strong>9779D2C4 – Macintosh II.7z</strong>. Extract it to our <strong>Macintosh</strong> directory and rename the file to <strong>MacII.ROM</strong>. The emulator will use this as the basis (virtualised guts so-to-speak) of the system.</p>
+
+<p>Next, we need to install System 7.5.5 on the emulator. For this we need a virtual disk drive, and install medium to achieve this. <a href="http://www.toughdev.com/content/2008/06/system-7-5-5-on-mini-vmac/">ToughDev has a fantastic write-up on this</a>, but for this guide you can download the resources he provides (where it’s labelled <strong>Download the above files here</strong>).</p>
+
+<p>This package contains System 7 install medium and two upgrade packages up to 7.5.5, and a blank drive we can use to install onto.</p>
+
+<p>Inside the <strong>hfs500M.rar</strong> archive is <strong>hfv500M.dsk</strong>. Extract this file to our <strong>Macintosh</strong> directory and rename it to <strong>disk1.dsk</strong>. This is our virtual hard drive.</p>
+
+<p>Inside the <strong>Mac701.zip</strong> is a folder <strong>Mac701</strong>. This contains a load of floppy installation medium images. Move this <strong>Mac701</strong> folder (not the loose files, or you’ll be doing some awful cleanup later) into your <strong>Macintosh</strong> directory. This is what will setup System 7 initially into your disk drive.</p>
+
+<p>Finally, the <strong>mac753.zip</strong> and <strong>mac755up.zip</strong> archives contain .img files. Move both these .img files into your <strong>Macintosh</strong> directory. This will boost our cardboard Macintosh from 7.0.1 to 7.5.5.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-8.webp" alt="" /></p>
+
+<p>This is what your folder structure should look like.</p>
+
+<h3 id="moving-to-the-raspberry-pi">Moving to the Raspberry Pi</h3>
+
+<p>You can now move this <strong>Macintosh</strong> directory over to your Pi. There’s several ways we can do this:</p>
+
+<ul>
+  <li>Over the network via SCP (we’ll cover this).</li>
+  <li>Over the network via FTP (<a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/#step6">Instructable covers this</a>).</li>
+  <li>Via USB stick (if you’ve got a MicroUSB to USB hub).</li>
+  <li>Directly via mounting MicroSD to PC (advanced – needs Linux).</li>
+</ul>
+
+<p>If you didn’t turn off the SSH setup from earlier, we can do this via SCP. If you’re on a PC, you’ll need <strong><a href="https://winscp.net/eng/index.php">WinSCP</a></strong> for this. For all other platforms, your system will handle this like a normal shared directory.</p>
+
+<p>On macOS, in Finder go to <strong>go &gt; Connect to Server</strong> and enter **sftp://<name of="" Pi="">** (similar to how you connected for setting up the display). If successful, you should see a load of folders appear. We want to travel to **/home/pi**.</name></p>
+
+<p>In this folder, copy your <strong>Macintosh</strong> folder here. This might take a little while, but once done you can now start running the emulator.</p>
+
+<h3 id="installing-system-7">Installing System 7</h3>
+
+<p>We’re now moving to the Pi to setup System 7. If you find the screen too small to work with, you can <a href="https://www.raspberrypi.org/documentation/remote-access/vnc/">enable VNC to see your Raspberry Pi screen</a> on your PC or a mobile device.</p>
+
+<p>On your Pi, open up file explorer and go to your <strong>Macintosh</strong> folder. Double click on <strong>Mini_vMac_ARM</strong> and select ‘Execute’. Suddenly, you’ll be greeted to a full screen view of a Macintosh screen with a flashing floppy disk icon. Don’t worry, this is expected.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-9.webp" alt="" /></p>
+
+<p>Press <strong>ctrl – F</strong> to <strong>exit full screen</strong> mode. Outside the emulator, open the <strong>Mac701</strong> folder, and drag <strong>Install 1.image</strong> onto the emulator screen. This will virtually mount the image file as a Floppy disk in your emulator. Neat! Go back up a folder and drag your <strong>disk1.dsk</strong> into the emulator screen. Your cardboard Macintosh should now ask if you want to install System 7 onto <strong>Mac500M</strong>. Now click install.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-10.webp" alt="" /></p>
+
+<p>It will ask you to mount various disks during the installation process. All of the ones it needs are in <strong>Mac701</strong> directory, so drag them onto the screen when prompted. It won’t take too long, and you’ll soon reboot into System 7. Congratulations!</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-11.webp" alt="" /></p>
+
+<p>If your drive disk is called <strong>disk1.dsk</strong> and is in the same directory as the executable, you can just double-click the executable and it’ll boot. If you’re faced with a flashing floppy disk any time post-installation, drag <strong>disk1.dsk</strong> onto the screen.</p>
+
+<h3 id="updating-system-7">Updating System 7</h3>
+
+<p>You can stop here if you wish, but we can take it right up to the latest version of System 7 – 7.5.5!</p>
+
+<p>Upgrading is very different to the installation. Boot your cardboard Macintosh, and once you’re in the system, drag <strong>mac753.img</strong> onto the screen. This will then appear underneath your hard drive in the virtual Mac. Double click on this, and click on Installer (for 7.5.5, click the first part, click agree, then it mounts). Follow the instructions, and you’ll soon be on System 7.5.3.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-12.webp" alt="" /></p>
+
+<p>Do the same process again for the <strong>mac755up.img</strong> file. Same thing again, and woohoo – we’re on 7.5.5!</p>
+
+<h2 id="shock-bonus--install-windows-311">:shock: Bonus – Install Windows 3.11</h2>
+
+<p>Now you can achieve something that was definitely seen as impossible (and sacrilegious to the Apple fans) – You can install Windows on your cardboard Macintosh.</p>
+
+<p>Whereas Apple was generally a closed-off system, Windows 3.11 was designed to be more portable, so installation is a little bit easier. However, the trade-off is that there’s no specialist software (yet) for it, so we’re misusing a game emulation package to get 3.11 working – <strong>DOSBox</strong>.</p>
+
+<p>Dosbox is actually available on the Pi repository system. You can install it by running:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install dosbox
+</code></pre></div></div>
+
+<p>Make a folder in your home directory on the Pi and call it <strong>DOS</strong> (alongside your <strong>Macintosh</strong> folder). Inside this folder, make a folder called <strong>C</strong>. You may have figured it, this is going to be our C drive.</p>
+
+<p>We want C to mount when you startup dosbox, so run <code class="language-plaintext highlighter-rouge">nano ~/.dosbox/dosbox-0.74-2.conf</code> in Terminal, and add the following line (right at the very end under [autoexec]).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MOUNT C ~/DOS/C -freesize 2048
+</code></pre></div></div>
+
+<p>While you’re here, you can get a more immersive experience by turning <strong>fullscreen</strong> to <strong>true</strong>. Alt-Enter will let you escape like how Ctrl-F works in vMac.</p>
+
+<p>Now when we start-up Dosbox, our C drive will be present.</p>
+
+<p>On <a href="https://www.kirsle.net/msdos">this Kirsle page</a>, they have a copy of Windows for Workgroups that has already been unpacked from floppy disks. Make a folder in your <strong>DOS</strong> directory called <strong>W311</strong>. Download that copy (11 MB) and extract it to the W311 folder. This is your installation medium.</p>
+
+<p>Start up Dosbox, and you should be greeted by a Z:&gt; prompt. Type the following command to mount our installation medium:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MOUNT G ~/DOS/W311
+</code></pre></div></div>
+
+<p>You should be greeted with a message saying the folder has been mounted. Great! Type <strong>G:</strong> and press enter to switch to our G drive.</p>
+
+<p>Now let’s check we have all the correct drives mounted. We should have a blank C drive where we will install Windows to, a G drive for our installation media, and a Z drive used by Dosbox. Run <strong>mount</strong> with no arguments to list all drives, and they should look like this:</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-1.webp" alt="" /></p>
+
+<p>All good? Type <strong>SETUP</strong> and press enter. The install window will appear!</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-2.webp" alt="" /></p>
+
+<p>Press <strong>Enter</strong>, and again to select the Express Setup mode. If you get a red prompt to say it can’t write to the drive, check to make sure a ‘drive’ is mounted to C in the instructions above.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-3.webp" alt="" /></p>
+
+<p>Once this segment finishes (it will take about 1-2 minutes), you’ll then see a more familiar setup screen. Enter a name and company (you don’t need a product number), then continue.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-4.webp" alt="" /></p>
+
+<p>After this, get a drink while the install process takes some time (~6-8 minutes).</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-5.webp" alt="" /></p>
+
+<p>When it asks for a printer, press enter to select <strong>Install</strong> on <strong>No Printer Attached</strong>.</p>
+
+<p>It will now ask about network settings. Press enter or click continue to skip this segment.</p>
+
+<p>Windows 3.11 will now briefly flash up a visual folder walk where it sets up all the different aspects of the system, and then it will ask if you wish to visit a tutorial. You can go through this if you want an introduction, otherwise I clicked <strong>Skip Tutorial</strong>.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-6.webp" alt="" /></p>
+
+<p>It will now ask if you wish to restart or return to MS-DOS. Click <strong>Restart</strong> and it will close Dosbox. Congratulations, you’ve installed <strong>Windows for Workgroups 3.11</strong>!</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-7.webp" alt="" /></p>
+
+<p>To start Windows, boot up Dosbox. Type <strong>c:</strong> and press Enter to switch to Windows drive, type <strong>AUTOEXEC.BAT</strong> and press Enter to see a bunch of commands appear on the screen. Now type <strong>win</strong> and press Enter, and the Windows GUI will start up.</p>
+
+<h3 id="cursor-doesnt-work">Cursor doesn’t work?</h3>
+
+<p>Unfortunately the cursor does not work so well when Dosbox is run in windowed mode. When you run fullscreen, the cursor runs fine. <a href="https://github.com/dosbox-staging/dosbox-staging/issues/310">This is a known issue</a>, and is currently not officially resolved (likely due to the fact Dosbox is for games). In the next guide level, I’ll be exploring <strong>Dosbox-X</strong> which is supposedly designed for Windows emulation.</p>
+
+<h2 id="question-finished">:question: Finished</h2>
+
+<p class="article-image"><img src="https://media4.giphy.com/media/wYyTHMm50f4Dm/giphy.gif" alt="" /></p>
+
+<p>Absolutely not.</p>
+
+<p>In the words of the late Steve Jobs – It just works. That’s great, but not without a cable poking out the top of it! No I ain’t done yet.</p>
+
+<p>The next steps for this cardboard Macintosh is:</p>
+
+<ul>
+  <li>Working rear ports – 2 USB, and a MicroUSB power port.</li>
+  <li>External HDMI port… No idea why.</li>
+  <li>Internal speaker.
+    <ul>
+      <li>I’ve bought a three-port USB hub, and a audio DAC… This will be interesting.</li>
+    </ul>
+  </li>
+  <li>Windows 95.</li>
+</ul>
+
+<h2 id="cardboard-macintosh-3-months-later">Cardboard Macintosh 3 months later…</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210623_144042-edited.webp" alt="" /></p>
+
+<p>Now with ports and a fake bootloader!</p>
+
+<p>Since the initial cardboard Macintosh build, I was able to add a full-size SD card slot to the front of the unit. I’ve also added two USB ports and a full size HDMI to the right-hand size, a power MicroUSB to the rear, and internal speakers – last bit wasn’t too successful.</p>
+
+<h3 id="hardware">Hardware</h3>
+
+<p>For the side USB ports, I used a <strong><a href="https://www.aliexpress.com/item/4000406755380.html">cheap 3-port USB hub</a></strong> that had a dual 2 USB port facing outwards, and 1 USB port facing upwards. In this scenario, the two USB ports are free for use, and inside I added a <strong><a href="https://www.aliexpress.com/item/1005002011544878.html">USB audio DAC</a></strong> to the remaining port. This hub was connected using a <strong><a href="https://www.aliexpress.com/item/4001289088224.html">female USB-A to male MicroUSB ribbon cable</a></strong>.</p>
+
+<p>For the power port, I used a <strong>female MicroUSB to male MicroUSB</strong> variant of the ribbon cable, however the port wasn’t too strong for the repeated connecting of the power cable, so I eventually replaced it with a <strong><a href="https://www.ebay.co.uk/itm/153878133658">generic extender lead</a></strong>.</p>
+
+<p class="article-image"><img src="/assets/img/IMG_20210616_181249-1024x1021.webp" alt="" /></p>
+
+<p>Wub, wub…</p>
+
+<p>For the HDMI port, I used a <strong><a href="https://www.aliexpress.com/item/32833580742.html">female HDMI to male mini HDMI ribbon cable</a></strong>. While this works as a viable HDMI port, the LCD screen I used takes over most of the HDMI operations. This ends up being useful for the initial setup without using WiFi, but not much use after that.</p>
+
+<p>the front-facing SD slot was the most problematic. Since I’d already glued everything together, I used my <a href="https://www.amazon.co.uk/Draper-Redline-67677-Retractable-Segment/dp/B0144NEUY0/ref=sr_1_11?dchild=1&amp;keywords=crafting+knife&amp;qid=1624462614&amp;sr=8-11">knife</a> to effectively carve out the required gap for the card slot. I also discovered the gap between Pi and wall wasn’t big enough for the converter to fit comfortably in. Using a combination of a <strong><a href="https://www.aliexpress.com/item/32982519053.html">very tiny MicroSD extender</a></strong> and a <strong><a href="https://www.aliexpress.com/item/4000275747655.html">MicroSD to regular SD</a></strong> cables, I was able to get the front panel slot working.</p>
+
+<p class="article-image"><img src="/assets/img/IMG_20210623_112020-939x1024.webp" alt="" /></p>
+
+<p>Lastly, but non-successful was the speakers. The jack port is solved by the DAC mentioned earlier. However, I wanted in-built speakers instead of relying on plugging them in. I had a parted-out laptop lying around, so I converted the speaker module from the laptop to use 3.5mm jack. Simple right?</p>
+
+<p>The speaker was <strong>incredibly quiet</strong>. So it does work, but you have to be point blank to the device to hear it. I believe the module I extracted from the laptop was using a powered chip to boost the audio. With an already high number of peripherals (USB hub and screen) I think I reached the limit of what juice I could squeeze out of the Pi without getting a higher voltage power supply. I decided to cut my losses at this point.</p>
+
+<h3 id="software">Software</h3>
+
+<p class="article-image"><img src="https://user-images.githubusercontent.com/11209477/117720836-0e3e9700-b1d7-11eb-8f55-941694225e3a.webp" alt="" /></p>
+
+<p>Glorious, glorious retro beige…</p>
+
+<p>To show off the device, I had two shell scripts on the desktop that would start-up their relevant OS 9 or DOS operating system. This works well, but I wanted something prettier.</p>
+
+<p>Using <strong>Python</strong> and with some assistance from the lovely engineers over at the <strong><a href="https://discord.gg/V6Ahbvmz2Y">Technical Family Discord</a></strong>, the desktop scripts were replaced with a <strong><a href="https://github.com/soup-bowl/cardboardmac-bootselection">visual bootloader application</a></strong>. Just makes the whole thing a bit prettier to look at when it started up.</p>
+
+<p>If you decide to use this same application, the clickable buttons are configurable, so if you wish to dedicate the device to just System 7 (like it really should be), you can just show that script instead.</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Gadgets" /><category term="Guides" /><category term="Mac" /><category term="Raspberry Pi" /><summary type="html"><![CDATA[And it also runs DOS too. Yes, it feels really weird.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/IMG_20210423_110928-c.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/IMG_20210423_110928-c.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">MacOS in VMware. Yep, This Also Works</title><link href="https://soupbowl.io/2021/04/macos-in-vmware-yep-this-also-works" rel="alternate" type="text/html" title="MacOS in VMware. Yep, This Also Works" /><published>2021-04-10T00:00:00+00:00</published><updated>2021-04-10T00:00:00+00:00</updated><id>https://soupbowl.io/2021/04/macos-in-vmware-yep-this-also-works</id><content type="html" xml:base="https://soupbowl.io/2021/04/macos-in-vmware-yep-this-also-works"><![CDATA[<p><strong><a href="/2020/04/macos-in-virtualbox">macOS Mojave worked great(ish) in Virtualbox</a>. Does it work in VMware? Turns out, yes – works great, and has guest additions.</strong></p>
+
+<p>Virtualbox is fantastic for Open Source software, but VMware is one of the primary players in the virtualisation scene. As soon as I got macOS working in Virtualbox, I almost immediately turned my attention to doing the same thing in VMware… Because I’m mad.</p>
+
+<p>Not only does it work just as well as it does in Virtualbox, you can also <strong>install guest additions</strong> thanks to some super smart cookies in the scene. While this doesn’t exactly perform miracles, you get a much more smoother experience once it’s installed.</p>
+
+<h2 id="question-the-stuff">:question: The Stuff</h2>
+
+<p>If you Google this approach, you’ll find that there are pre-made ISO and vmdk floating around. In this project <strong>we won’t use anything custom</strong>, start from scratch with regular resources. As a result, <strong>you will need a donor Mac</strong> to get the installer image from. In this project, I’m using the following:</p>
+
+<h3 id="i-have">I have…</h3>
+
+<ul>
+  <li>VMware Workstation 16.1 (Player should work too).</li>
+  <li>AMD FX-4350.
+    <ul>
+      <li>Should be easier if you’re running Intel.</li>
+    </ul>
+  </li>
+  <li>8 GB of RAM.</li>
+  <li><strong>A donor Mac</strong> to grab install medium.
+    <ul>
+      <li>If you got a VBox machine from before, that counts.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="i-got">I got…</h3>
+
+<ul>
+  <li>Mojave install medium.</li>
+  <li><a href="https://github.com/paolo-projects/unlocker">macOS Unlocker V3.0 for VMware Workstation</a>.</li>
+  <li>A cup of tea.</li>
+  <li>A spare hour.</li>
+</ul>
+
+<p>Everything should work on the main 3 platforms (Windows, macOS and Linux) that VMware support. Although if you’re on macOS already, you shouldn’t need to do any extra steps to get things working.</p>
+
+<h2 id="cd-getting-the-mojave-install-medium">:cd: Getting the Mojave Install Medium</h2>
+
+<p>The way of extracting the install medium for Mojave has not changed, so if you want to grab the macOS ISO, <a href="https://www.soupbowl.io/2020/04/macos-in-virtualbox/">follow the guided segment on the Virtualbox guide</a> (Creating the ISO). Once you’ve got your Mojave.iso file, come back to this guide and we can proceed with infecting your VMWare with Apple.</p>
+
+<h2 id="key-unlocking-macos-in-vmware-windows--linux">:key: Unlocking macOS in VMware Windows &amp; Linux</h2>
+
+<p>Apple isn’t particularly happy about people trying to emulate macOS and OS X on non-Apple platforms against their EULA. As a result, this feature isn’t available on Windows or Linux. Boo!</p>
+
+<p>Don’t stop there though, as it’s still <em>available</em> – just hidden. Thanks to <strong>TheJaxon</strong> and <strong>paolo-projects</strong>, the open source community have a tool to unlock these features – aptly called <strong>macOS Unlocker</strong>.</p>
+
+<p><a href="https://github.com/paolo-projects/unlocker/releases/latest">Grab a copy of the unlocker.zip from the latest releases</a>, and unzip it. Open a command prompt or console to the directory you extracted it to, and run:</p>
+
+<p>Windows: <code class="language-plaintext highlighter-rouge">win-install.cmd</code>
+Linux: <code class="language-plaintext highlighter-rouge">sudo lnx-install.sh</code> (you might need to <code class="language-plaintext highlighter-rouge">chmod +x</code> first).</p>
+
+<p>This script will change the VMware configuration to un-hide the missing macOS options, then download the system files for macOS guests. Once done, restart your VMware Player/Workstation and the options should now appear in the VM creation wizard.</p>
+
+<h2 id="desktop_computer-setting-up-vmware">:desktop_computer: Setting up VMware</h2>
+
+<p>Start up <strong>VMWare Workstation</strong> or <strong>Player</strong>, and click on <strong>File &gt; New Virtual Machine</strong>.</p>
+
+<p>When the wizard starts, select (or keep on) <strong>Typical</strong> for <strong>Virtual Machine Configuration</strong>. If you’ve got some specific setup oddities you can go down the other route, but we’ll need to make some post-wizard adjustments anyway.</p>
+
+<p>Select <strong>I will install the operating system later</strong>, and click next.</p>
+
+<p>For <strong>Guest Operating System</strong>, select <strong>Apple OS X</strong> and then select <strong>macOS 10.14</strong> (if you’re following with Mojave, change if you’re using another version).</p>
+
+<p>Change the name or location if you desire, then click next.</p>
+
+<p>Disk size is entirely up to you, depending on your use conditions. If you’re just exploring, keep it at the default <strong>40 GB</strong> and continue. Don’t go any lower, or there be dragons.</p>
+
+<p>Once you’re at the end summary, click <strong>Customize Hardware</strong> (this is the same as <strong>Edit Virtual Machine Settings</strong> on the home page if you don’t click it).</p>
+
+<p>Now we’ve got the VM made, we need to make some additional tweaks to get macOS to play nicely with our platform. This is where things will get technical, so be aware that some trial and error may ensue.</p>
+
+<p>In the <strong>Hardware</strong> tab, go down to <strong>Memory</strong> and set the RAM to <strong>4GB or higher</strong>. If not, you’re in for a very choppy and slow ride.</p>
+
+<p>Next, go to <strong>Processors</strong> and set both <strong>Number of Processors</strong> and the <strong>Cores per Processor</strong> to 2. Click <strong>Save</strong>.</p>
+
+<p>Now we need to edit the configuration file to change a few settings that do not have options in that panel. Right click on the VM in the manager and click <strong>Open VM Directory</strong>.</p>
+
+<p>Open the file &lt;VM Name&gt;<strong>.vmx</strong> in a code editor (if you’re using Notepad, now’s the time to grab <strong><a href="https://code.visualstudio.com/">Visual Studio Code</a></strong>, or even <strong><a href="https://notepad-plus-plus.org/">Notepad++</a></strong>). Add the following lines to the end of the document:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smc.version = "0"
+</code></pre></div></div>
+
+<p>If you’ve got an <strong>AMD CPU</strong>, you might also try adding these too, to help the VM recognise a AMD CPU it can work with.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smc.version = "0"
+cpuid.0.eax = "0000:0000:0000:0000:0000:0000:0000:1011"
+cpuid.0.ebx = "0111:0101:0110:1110:0110:0101:0100:0111"
+cpuid.0.ecx = "0110:1100:0110:0101:0111:0100:0110:1110"
+cpuid.0.edx = "0100:1001:0110:0101:0110:1110:0110:1001"
+cpuid.1.eax = "0000:0000:0000:0001:0000:0110:0111:0001"
+cpuid.1.ebx = "0000:0010:0000:0001:0000:1000:0000:0000"
+cpuid.1.ecx = "1000:0010:1001:1000:0010:0010:0000:0011"
+cpuid.1.edx = "0000:0111:1000:1011:1111:1011:1111:1111"
+smbios.reflectHost = "TRUE"
+hw.model = "MacBookPro14,3"
+board-id = "Mac-551B86E5744E2388"
+</code></pre></div></div>
+
+<p><em>Above info found from <a href="https://youtu.be/ogEPiiufrO0">this YouTube video</a>.</em></p>
+
+<p>You can experiment with changing the last 3 options for your setup, so long as they match actual Macintosh configurations.</p>
+
+<p>You can now save and close the editor. Now mount the ISO you made earlier into your VM (<strong>VM Settings &gt; CD/DVD &gt; Connected at Power On</strong> and <strong>Choose ISO image</strong>), and click start!</p>
+
+<h2 id="apple-booting-into-the-installer">:apple: Booting into the Installer</h2>
+
+<p>You will now boot up to see the vmware logo, then an Apple logo that pops up with a slider. If you get stuck for 5 minutes on the Apple logo, or you get the message <strong>The CPU has been disabled by the guest operating system</strong>, try the additional lines of code in the segment above (and use find (ctrl-f) to check there’s no duplicates).</p>
+
+<p>If all goes well, you’ll be greeted (after a <em>long wait</em>) with a the macOS reinstallation screen. Hooray! First things first, pop open <strong>Utilities &gt; Disk Utility</strong> and full-erase and format the VMware empty disk with <strong>Apple Filesystem (APFS)</strong> or <strong>Mac OS Extended</strong>.</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-2021-04-11-at-01.05.59-1024x673.webp" alt="" /></p>
+
+<p>Once done, you can now click on the <strong>(re)install macOS Mojave</strong> option. It will then ask for your drive that you formatted earlier, and then run the installer. You’ll probably need another drink at this point.</p>
+
+<p>After a million hours, a few questions for initialisation, potentially a fruitless attempt to use a non-existent fingerprint sensor, you should finally boot into macOS. Congratulations! Now’s a good time to power off and take a snapshot if you’re using the Workstation edition.</p>
+
+<h2 id="question-what-works">:question: What works?</h2>
+
+<p class="article-image"><img src="/assets/img/Screenshot_20210410_170530-1024x872.webp" alt="" /></p>
+
+<h4 id="heavy_check_mark-does">:heavy_check_mark: Does</h4>
+
+<ul>
+  <li>Screen.</li>
+  <li>Input &amp; USB devices.</li>
+  <li>Networking.</li>
+  <li>Mac App Store.</li>
+  <li>Guest additions.
+    <ul>
+      <li>File shares.</li>
+      <li>Screen resizing.</li>
+      <li>Seamless mouse.</li>
+      <li>Clipboard (text only).</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="x-does-not">:x: Does not</h4>
+
+<ul>
+  <li>Full (3D) graphics.</li>
+  <li>Audio.</li>
+</ul>
+
+<p>The performance is not great, and is not much different from the Virtualbox counterpart. The stand-out feature that VMware offers is the fully functioning <strong>guest additions</strong> that add a more fluid support to the system, which also improves performance to a small degree.</p>
+
+<p>For powerful enough machines, this can be a great way to bridge the gap of requirements sometimes needed by Apple devices, such as the need for <strong>xcode</strong>, managing iPod devices with native iTunes, and even plundering hard drives that have been formatted with Apple-only partition formats.</p>
+
+<h2 id="bug-troubleshooting">:bug: Troubleshooting</h2>
+
+<h3 id="kernel-panic-after-updating-vmware-playerworkstation">Kernel Panic after updating VMware Player/Workstation.</h3>
+
+<p class="article-image"><img src="/assets/img/kernelpanic.webp" alt="The message &quot;Your computer restarted because of a problem. Press a key or wait a few seconds to continue starting up&quot; is shown with a background image of a power button." /></p>
+
+<p>The message “Your computer restarted because of a problem. Press a key or wait a few seconds to continue starting up” is shown with a background image of a power button.Womp, womp.</p>
+
+<p>If this happens to you, don’t panic! Leave that up to the processor 😏 This is caused by the update replacing files patched by the Unlocker tool. Simply re-running the Unlocker installation will fix it.</p>
+
+<p>If you wish to double-check the problem is caused by the update before trying a resolution, try to create a new OS X/macOS virtual machine. if you find the OS X option is mysteriously absent, then run Unlocker again.</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Guides" /><category term="Mac" /><summary type="html"><![CDATA[macOS Mojave worked great(ish) in Virtualbox. Does it work in VMware? Turns out, yes – works great, and has guest additions.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/Screenshot_20210410_170530-1024x872.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/Screenshot_20210410_170530-1024x872.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Raspberry Pi Gameboy and Mega Drive – My Retro Setup</title><link href="https://soupbowl.io/2020/09/raspberry-pi-gameboy-and-mega-drive-my-retro-setup" rel="alternate" type="text/html" title="Raspberry Pi Gameboy and Mega Drive – My Retro Setup" /><published>2020-09-21T00:00:00+00:00</published><updated>2020-09-21T00:00:00+00:00</updated><id>https://soupbowl.io/2020/09/raspberry-pi-gameboy-and-mega-drive-my-retro-setup</id><content type="html" xml:base="https://soupbowl.io/2020/09/raspberry-pi-gameboy-and-mega-drive-my-retro-setup"><![CDATA[<p><strong>In my quest for all things retro, I discovered that the company I bought a Mega Drive Pi case from makes a really convincing Game Boy case.</strong> I promise this isn’t sponsored.</p>
+
+<p>It’s no secret that <a href="https://www.soupbowl.io/projects/revivetoday/">I have a love for retro</a>, and I also have a love for Raspberry Pi. For ages I’ve always recommended setting up a <a href="https://revive.today/diy/raspberry-pi/">Raspberry Pi as the ideal retro machine</a>.</p>
+
+<p>But recently I came across <strong><a href="http://www.retroflag.com/">Retroflag</a></strong>, and their extremely faithful reconstructions of retro game console cases for the Raspberry Pi. They do (S)NES, Mega Drive and even a fully kitted out Gameboy.</p>
+
+<p>I couldn’t resist, with some extreme case of lockdown boredom, I bought the <strong><a href="http://www.retroflag.com/MEGAPi-CASE-M.html">MEGAPi</a></strong>. With some birthday cash I then bought the <strong><a href="http://www.retroflag.com/GPi-CASE.html">GPi</a></strong>.</p>
+
+<h2 id="megapi-the-mega-drive-case">MEGAPi, The Mega Drive Case</h2>
+
+<p><img src="/assets/img/IMG_20200814_165945-Large-1024x952.webp" alt="" /></p>
+
+<p>I am super impressed with the quality of this case. On the outside this looks very much like a genuine SEGA revival product! In goes my trusty Raspberry Pi 3.</p>
+
+<p>Assembly was fairly easy to go about. The cables hooking up the button to the Raspberry Pi were very stiff and felt like I was about to break the assembly, but eventually seemed to mold into the recess.</p>
+
+<p>I added the standard heat sinks to the Raspberry Pi (5mm height heat sink for the CPU to avoid fan collision), and a cooling fan. However, the fan is powered directly by the 5V without PWM or GPIO control, so it becomes annoying very quickly when it makes an awful whining noise.</p>
+
+<p>For software I went down the <strong><a href="https://retropie.org.uk/">RetroPie</a></strong> route. I added a range of games from the 70’s to the 90’s, and had an absolutely fantastic experience.</p>
+
+<p>N64, Dreamcast and PlayStation 1 is where I began to experience problems. N64 seemingly ran on a slightly slower framerate than expected. The same problem was worse on Dreamcast, to the point it sadly became unplayable. PlayStation 1 ran absolutely perfectly, with a few problematic games here and there, and framerate drops on intensive screens. No overclocking was used in this experience.</p>
+
+<p>But now I wanted portable (let’s just forget <a href="https://revive.today/blog/turn-an-old-or-current-android-phone-into-the-best-handheld-with-retroarch/">the one I made earlier</a>)…</p>
+
+<h2 id="retroflag-gpi-the-modern-gameboy-i-always-wanted">Retroflag GPi, the Modern Gameboy I Always Wanted</h2>
+
+<p><img src="/assets/img/IMG-20200905-WA0014-edited-scaled.webp" alt="" /></p>
+
+<p>I simply cannot overstate how much I love the detail in this case. To make an absolute classic handheld into a form factor that closely resembles it, but also providing usable modern features, is a hellish a task.</p>
+
+<p>And the GPi <strong>nails it</strong>!</p>
+
+<p>It’s hard to say what has made it into this, because almost everything matches the original Gameboy. Instead, the differences are:</p>
+
+<ul>
+  <li>There’s 4 purple buttons instead of 2 (A, B, X, Y).</li>
+  <li>A and B are reversed.</li>
+  <li>The actual dot matrix screen is replaced with a small LCD.
+    <ul>
+      <li>But the dot matrix banner is still there!</li>
+    </ul>
+  </li>
+  <li>Contrast slider now controls the brightness.</li>
+  <li>Cartridge slot is there, but houses the Raspberry Pi instead of actual Gameboy cartridges.</li>
+  <li>Power supply cable is for a lower voltage, and runs off phone chargers.</li>
+  <li>There’s a hidden MicroUSB slot in the battery door.</li>
+</ul>
+
+<p>I put three high capacity NiMH batteries (2500mAh) and achieved a staggering <strong>6 hours of gameplay</strong> on battery! Bring along the cable and a 10k mAh pack and you could be gaming for days.</p>
+
+<p>The screen is 320 x 240, so don’t expect any miracles coming from the screen. It also only supports the <strong>Raspberry Pi Zero (W)</strong>, so gaming beyond the late 90’s is a complete no.</p>
+
+<h3 id="update--getting-retropie-to-work-with-the-retroflag-gpi-case">Update – Getting RetroPie to work with the Retroflag GPi case</h3>
+
+<p>I used <strong>Recalbox</strong> for a while since it was <strong>much</strong> easier to install, however I decided to try getting <strong>RetroPie</strong> to work since it’s what I’m used to. <strong>Do not do this on battery power</strong> as this takes about <strong>~15-20 minutes</strong> to complete. Here’s what I did:</p>
+
+<ul>
+  <li>Installed the latest <strong>RetroPie</strong> image for <strong>Raspberry Pi Zero</strong>.</li>
+  <li>Enabled <strong>ssh</strong> and <strong>WiFi</strong> before ejecting MicroSD.
+    <ul>
+      <li>Make a blank <strong>ssh</strong> file in BOOT – SSH will now be available.</li>
+      <li>Make a <strong>wpa_supplicant.conf</strong> file for <strong>WiFi</strong> – <a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">This guide explains how</a> to configure this.</li>
+    </ul>
+  </li>
+  <li>Plug MicroSD into GPi and boot it up.</li>
+  <li>Wait 2-3 minutes, then find the IP address of the Pi via your router’s web GUI.</li>
+  <li>SSH in, and run
+<code class="language-plaintext highlighter-rouge">sudo ~/RetroPie-Setup/retropie_setup.sh</code>.
+    <ul>
+      <li>I’d add this to your .bash_aliases file, you’ll use this command <strong>a lot</strong>.</li>
+    </ul>
+  </li>
+  <li><a href="https://retropie.org.uk/docs/Updating-RetroPie/">Run through the upgrade process</a> to get the latest RetroPie.</li>
+  <li>Install the <strong><a href="https://github.com/RetroFlag/retroflag-picase">GPi safe shutdown</a></strong> drivers, by running:
+<code class="language-plaintext highlighter-rouge">wget -O - "[https://raw.githubusercontent.com/RetroFlag/retroflag-picase/master/install_gpi.sh](https://raw.githubusercontent.com/RetroFlag/retroflag-picase/master/install_gpi.sh)" | sudo bash</code></li>
+  <li>Edit <strong>/boot/cmdline.txt</strong> to add the following to the end of the file (all on one line):
+<code class="language-plaintext highlighter-rouge">snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_compat_alsa=1</code></li>
+  <li>Once complete, shutdown and eject the MicroSD.</li>
+  <li>Install the <strong><a href="http://download.retroflag.com/">screen patch</a></strong> you can find here.
+    <ul>
+      <li>Extract the subfolder <strong>patch_files</strong> into your Pi’s <strong>boot</strong> MicroSD partition, overwriting when prompted.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>And relax, everything should (hopefully) be working now. <strong>RetroPie</strong> has no on-screen keyboard, so if you want to scrape for your games, <a href="https://retropie.org.uk/docs/Scraper/#steven-selphs-scraper">follow this guide instead</a> on how to do it over SSH (arguably a better way anyway).</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Gadgets" /><category term="Gaming" /><category term="Raspberry Pi" /><summary type="html"><![CDATA[In my quest for all things retro, I discovered that the company I bought a Mega Drive Pi case from makes a really convincing Game Boy case. I promise this isn’t sponsored.]]></summary></entry><entry><title type="html">MacOS in Virtualbox. It just works.</title><link href="https://soupbowl.io/2020/04/macos-in-virtualbox" rel="alternate" type="text/html" title="MacOS in Virtualbox. It just works." /><published>2020-04-25T00:00:00+00:00</published><updated>2020-04-25T00:00:00+00:00</updated><id>https://soupbowl.io/2020/04/macos-in-virtualbox</id><content type="html" xml:base="https://soupbowl.io/2020/04/macos-in-virtualbox"><![CDATA[<p><strong>You can run MacOS in Virtualbox. Because? Because.</strong></p>
+
+<p>In the <a href="https://www.soupbowl.io/category/mac/hackintosh/">pursuit of Hackintosh</a>, you need a Mac. That’s well and great, but I didn’t want to screw around with my partner’s Macbook. So what if you want to sandbox something? Virtualbox!</p>
+
+<p>I had <strong>no expectations</strong> that this was going to work. OS X has always been runnable in Virtualbox for a while, but the performance has normally been lacklustre. While it’s not exactly daily-driver level, the performance in Virtualbox wasn’t too bad!</p>
+
+<p><strong>The macOS Virtualbox option is designed for <em>genuine</em> Apple hardware. <a href="https://forums.virtualbox.org/viewtopic.php?f=1&amp;t=92649">You will not get community support</a> from Virtualbox if you have trouble with this process, as it’s against Apple ToS.</strong></p>
+
+<p><strong>VMware</strong> more your jam? <a href="/2021/04/macos-in-vmware-yep-this-also-works">We’ve got this working in there too</a>.</p>
+
+<h2 id="thinking-what-do-i-need">:thinking: What do I need?</h2>
+
+<p>You <strong>need a donor Mac</strong> to start this process. You will not need access to it permanently, but just during the process of creating an ISO for your VM to setup with. Else, you need:</p>
+
+<ul>
+  <li>A Mac to create an ISO with.</li>
+  <li><a href="https://apps.apple.com/us/app/macos-mojave/id1398502828?mt=12">MacOS Mojave installer</a> from the Mac App Store.</li>
+  <li><a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox</a> (Windows, Linux or MacOS).
+    <ul>
+      <li><a href="https://www.virtualbox.org/wiki/Downloads#VirtualBox6.1.6OracleVMVirtualBoxExtensionPack">Virtualbox Extension Pack</a> is <strong>required</strong>.</li>
+    </ul>
+  </li>
+  <li>At least 4GB of RAM (8GB or more recommended).</li>
+  <li>40GB of free disk space (more preferred).</li>
+  <li>2 core CPU or more.</li>
+</ul>
+
+<p>This guide will discuss installing <strong>MacOS Mojave</strong>, however installation process should be similar for all <strong>MacOS versions</strong>.</p>
+
+<p>:warning: At the time of writing, <strong>Virtualbox</strong> and <strong>Hyper-V</strong> cannot co-exist on Windows. MacOS is also <strong>not installable</strong> on Hyper-V. I use Linux in my screenshots as I use Docker on Windows. This also includes <strong>Windows Subsystem for Linux</strong>, which tripped me up from installing.</p>
+
+<h2 id="cd-creating-the-iso">:cd: Creating the ISO</h2>
+
+<p>Virtualbox installs generally prefer to use an ISO file, which unfortunately will require some handiwork to get a hold of. Persevere and you will get there!</p>
+
+<p>On the MacOS machine, <a href="https://apps.apple.com/us/app/macos-mojave/id1398502828?mt=12">download the Mojave installer</a>. Don’t worry about actually <strong>running</strong> this application, as we’re going to use some terminal magic to build the ISO from the package.</p>
+
+<p><strong>This process is not affected by <a href="https://support.apple.com/en-us/HT208052">MacOS Installer expiry</a>.</strong> <strong>If your MacOS installer has expired, you can continue with this guide.</strong></p>
+
+<p>Once the package has been downloaded, pop open <strong>Terminal</strong> (Utilities folder in Launcher), and run the following commands:</p>
+
+<p><code class="language-plaintext highlighter-rouge">hdiutil create -o /tmp/Mojave.cdr -size 8000m -layout SPUD -fs JHFS+</code></p>
+
+<p>This will create a virtual ‘disc’ stored in your temporary directory. This is what we’ll stuff the Mojave installation stuff into.</p>
+
+<p><code class="language-plaintext highlighter-rouge">hdiutil attach /tmp/Mojave.cdr.dmg -noverify -nobrowse -mountpoint /Volumes/installer_goes_here</code></p>
+
+<p>Now MacOS can ‘see’ your disc as an actual disc, ready for writing to!</p>
+
+<p><code class="language-plaintext highlighter-rouge">asr restore -source /Applications/Install\ macOS\ Mojave.app/Contents/SharedSupport/BaseSystem.dmg -target /Volumes/installer_goes_here -noprompt -noverify -erase</code></p>
+
+<p>We’re now grabbing the installation DMG from within the updater package, and storing it within the disc image. <strong>This will rename the disc image</strong>, so don’t panic that ‘installer_goes_here’ has vanished.</p>
+
+<p>Now, detach the image from our MacOS. You can just eject it like regular DMGs. If not, run the command:</p>
+
+<p><code class="language-plaintext highlighter-rouge">hdiutil detach /Volumes/OS\ X\ Base\ System</code></p>
+
+<p>(it may change since OS X is legacy. To check, run <code class="language-plaintext highlighter-rouge">ls /Volumes</code> and see if it’s there, renamed).</p>
+
+<p>Now for the final process, let’s convert our CDR image to an ISO!</p>
+
+<p><code class="language-plaintext highlighter-rouge">hdiutil convert /tmp/Mojave.cdr.dmg -format UDTO -o ~/Desktop/Mojave.iso</code></p>
+
+<p>You should now have a file on the Mac desktop called ‘Mojave.iso’. Congratulations, you have your installation disc! Copy this over to where your Virtualbox is setup. <strong>The Mac is no longer needed at this point</strong>.</p>
+
+<h2 id="hammer_and_wrench-setting-up-virtualbox">:hammer_and_wrench: Setting up Virtualbox</h2>
+
+<p>:warning: Before continuing, install the <a href="https://www.virtualbox.org/wiki/Downloads#VirtualBox6.1.6OracleVMVirtualBoxExtensionPack"><strong>Virtualbox Extension Pack</strong></a>, if you haven’t already. This comes with a special USB 3 driver that without, the Mac simply won’t see USB devices.</p>
+
+<p>Virtualbox has the option for a MacOS virtual machine in it’s New VM dialog, but we will need to make further adjustments to make it truly Mac-ready.</p>
+
+<p>Pop open Virtualbox, and Create a new Virtual Machine. Name this <strong>MacOS Mojave</strong>, and set it to <strong>Mac OS X (64-bit)</strong>.</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-from-2020-04-25-02-57-54.webp" alt="Screenshot of the 'Create Virtual Machine' dialog from Virtualbox. In the screenshot, 'name' is set to 'MacOS Mojave', 'Type' is set to 'Mac OS X' and 'Version' is set to 'Mac OS X (64-bit)'." /></p>
+
+<p>Set the <strong>RAM</strong> to <strong>4096 MB</strong> (or higher if you can achieve it!).</p>
+
+<p>When creating the disk, you can use either format versions. <strong>Dynamic</strong> will not immediately take up the storage size you chose, whereas <strong>Static</strong> immediately reserves the chosen size for the VM. The latter is slightly better for performance.</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-from-2020-04-25-02-58-52.webp" alt="Screenshot of the 'Create Virtual Hard Disk' dialog, with 40 gigabytes set to the storage size." /></p>
+
+<p>Now you should have a new, primed MacOS machine. But you will need to run some commands now. <strong>This can be hit-and-miss</strong>, and may require some Google-fu. The following works for my <strong>AMD FX</strong> computer:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VBoxManage modifyvm "MacOS Mojave" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
+VBoxManage modifyvm "MacOS Mojave" --cpu-profile "Intel Core i7-6700K"
+VBoxManage setextradata "MacOS Mojave" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac11,3"
+VBoxManage setextradata "MacOS Mojave" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
+VBoxManage setextradata "MacOS Mojave" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+VBoxManage setextradata "MacOS Mojave" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+VBoxManage setextradata "MacOS Mojave" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+</code></pre></div></div>
+
+<p><strong>Windows? Change <code class="language-plaintext highlighter-rouge">VBoxManage</code> to <code class="language-plaintext highlighter-rouge">"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe"</code> (if you didn’t change your Virtualbox install location).</strong></p>
+
+<p>The above does the following, in order of command:</p>
+
+<ul>
+  <li>Sets a known CPU ID set that MacOS will recognise.</li>
+  <li>Especially for AMD machines, changes what MacOS sees as your processor to something it supports.</li>
+  <li>Tells MacOS you’re installing Mojave onto a <strong>mid-2010 iMac</strong>. You can change this to your preference.</li>
+  <li>These two specify a fake DMI, typically found in Apple PCs.</li>
+  <li>A device key to pass system checks.</li>
+</ul>
+
+<p>Before starting the VM, open the VM settings and make the following changes:</p>
+
+<ul>
+  <li>System &gt; Processor &gt; Processor(s) is <strong>2 or more</strong>.</li>
+  <li>System &gt; Acceleration &gt; uncheck <strong>Enable Nested Paging</strong>.</li>
+  <li>Display &gt; Screen &gt; Video Memory is <strong>128MB</strong>.</li>
+  <li>USB &gt; <strong>USB 3.0 Controller</strong>.
+    <ul>
+      <li>If greyed/not there, you did not <a href="#setup-vbox">install additions</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>With all that done, we’re ready to start the VM!</p>
+
+<p>You should be greeted with the following screen:</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-from-2020-04-25-03-13-47.webp" alt="The 'Select start-up disk' dialog is shown, with the default 'host drive' currently selected." /></p>
+
+<p>Click on the folder icon, and find your ISO created on the Mac before, then click Start.</p>
+
+<p>And wait. yes, this process takes <em>a long</em> time. If your installation stops, try googling the last output message to see if there is a community fix, or post below… Otherwise, this is generally a slow process.</p>
+
+<p>If all has gone well, you should be greeted by the MacOS installer language selection. If so, you’re almost there! On the top menu, open <strong>Utilities &gt; Disk Utility</strong>.</p>
+
+<p>There should be a disk named <strong>VBOX HARDDISK</strong> or similar. This is the VDI you created during the setup process, and not your actual hard drive. So go ahead and full-erase this disk, with <strong>Mac OS Extended (Journaled)</strong> and <strong>GUID Partition Map</strong>.</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-2020-04-25-at-03.45.51-1024x673.webp" alt="A screenshot of Disk utility on MacOS, intending to erase VBOX HARDDISK Media. The Name is set to Untitled, Format set to Mac OS Extended (Journaled), and scheme set to GUID Partition Map." /></p>
+
+<p>Once the disk formatting has completed, close it down. You should now be able to start the installation!</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-from-2020-04-21-16-01-47-1024x831.webp" alt="" /></p>
+
+<p>Once this is complete and you filled all the required details in, congratulations! You’re running MacOS Mojave within Virtualbox!</p>
+
+<p class="article-image"><img src="/assets/img/Screenshot-from-2020-04-21-17-50-11-1024x831.webp" alt="" /></p>
+
+<h2 id="question-what-works">:question: What works?</h2>
+
+<h4 id="heavy_check_mark-does">:heavy_check_mark: Does</h4>
+
+<ul>
+  <li>Screen (No 3D).</li>
+  <li>Regular input methods (mouse sharing).</li>
+  <li>Networking.</li>
+  <li>USB devices.</li>
+  <li>Mac App Store.</li>
+</ul>
+
+<h4 id="x-does-not">:x: Does not</h4>
+
+<ul>
+  <li>Full graphics.</li>
+  <li>Audio.</li>
+  <li>Guest additions.</li>
+</ul>
+
+<p>At the end of the day it’s still a <strong>virtual machine</strong>, and a technically unsupported one at that. However, considering the matter it’s still impressive how Virtualbox can cope with MacOS.</p>
+
+<p>Files can be shared using typical Windows share features. If you share a folder on your network from your host machine, your Mac VM should be able to connect to it.</p>
+
+<h2 id="star-special-thanks">:star: Special Thanks</h2>
+
+<p>This required <strong>a lot of Googling</strong>, and these are the people who saved me at the end of the process!</p>
+
+<ul>
+  <li><a href="https://www.howtogeek.com/289594/how-to-install-macos-sierra-in-virtualbox-on-windows-10/">This How-to Geek article</a>, that started this whole process. They have a much better step-by-step guide on this!</li>
+  <li><strong>Forchia</strong> on Reddit for a <a href="https://www.reddit.com/r/hackintosh/comments/barlbo/stuck_at_end_checkhibernate_in_high_sierra_1013/euco32a/">different instruction set</a>.</li>
+  <li><strong>miranhasan</strong> on Reddit for <a href="https://www.reddit.com/r/hackintosh/comments/9xvspq/stuck_at_end_randomseed_on_mojave_in_virtualbox/eigwon3/">AMD processors</a>.</li>
+  <li><strong>kvotheV</strong> on Reddit for <a href="https://www.reddit.com/r/hackintosh/comments/aij0v0/stuck_at_start_randomseed_on_mojave_in_virtualbox/ekmy83w/">disabling nested paging</a>.</li>
+</ul>
+
+<h2 id="bug-troubleshooting">:bug: Troubleshooting</h2>
+
+<h3 id="you-get-guru-meditation-a-critical-error-has-occurred-while-running-the-virtual-machine-and-the-machine-execution-has-been-stopped-when-machine-gets-to-randomseed">You get Guru Meditation, “A critical error has occurred while running the virtual machine and the machine execution has been stopped” when machine gets to RandomSeed.</h3>
+
+<p class="article-image"><img src="/assets/img/Annotation-2020-05-22-183438-2.webp" alt="" /></p>
+
+<p>This is a difficult one, and will require investigation. I checked the logs as the error message said, and discovered:</p>
+
+<blockquote>
+  <p>HM: HMR3Init: Attempting fall back to NEM: AMD-V is not available</p>
+
+  <p>If you’re on an Intel processor, it’ll likely say VT-x instead.</p>
+</blockquote>
+
+<p>Obviously, check if this is enabled. If you’re on a legacy BIOS computer, it’s a straightfoward scan for AMD-V/VT-x in your settings. If it’s UEFI, you’re gonna have to Google it.</p>
+
+<p>Strangely, on my machine it was <strong>enabled</strong>. Supposedly Virtualbox and Hyper-V can run side-by-side, so at this point I decided to <strong>remove Hyper-V</strong>, to see if that would improve. It didn’t, but I forgot something. For this to work, <strong>you must turn off Windows Subsystem for Linux</strong>!</p>
+
+<p>I completely forgot that WSL uses Hyper-V, and apparently still does when it’s disabled. Unfortunately, it would seem (for me at least) you need to trade it off for macOS in Virtualbox.</p>
+
+<p><em>I will retest this when WSL2 is launched</em>.</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Guides" /><category term="Mac" /><summary type="html"><![CDATA[You can run MacOS in Virtualbox. Because? Because.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/Screenshot-from-2020-04-21-17-50-11-1024x831.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/Screenshot-from-2020-04-21-17-50-11-1024x831.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Toshiba Satellite Pro L850, Hackintosh Revisited</title><link href="https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited" rel="alternate" type="text/html" title="Toshiba Satellite Pro L850, Hackintosh Revisited" /><published>2020-04-25T00:00:00+00:00</published><updated>2020-04-25T00:00:00+00:00</updated><id>https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited</id><content type="html" xml:base="https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited"><![CDATA[<p><a href="/2018/08/hackintoshing-a-toshiba-satellite-pro-l850-1uj">Back in 2018</a> I turned my laptop into a Hackintosh device, running High Sierra. I had a donor MacBook mid-2010 that I used to run TonyMac tools to get Hackintosh working. It was a fun if complicated process of trial and error, but the result was always impressive – a craptop unexpectedly booting macOS.</p>
+
+<p>I eventually wiped macOS and re-installed Windows for a WordCamp coding session. The laptop proved to be quite a letdown, and now sits on a shelf collecting dust.</p>
+
+<p>So, let’s Hackintosh it – <strong><a href="/2018/08/hackintoshing-a-toshiba-satellite-pro-l850-1uj">again</a></strong>!</p>
+
+<h2 id="stop_sign-if-youre-attempting-this">:stop_sign: If You’re Attempting This…</h2>
+
+<p>I hate it when some guides forget to do this, but if you want to try this yourself, you <strong>absolutely must</strong> have the following or you won’t be able to do it:</p>
+
+<ul>
+  <li>An <strong>existing Mac</strong> or <strong>Hackintosh</strong> to build the USB on.</li>
+  <li>A copy of <strong>Install macOS Mojave.app</strong>. I can’t legally provide mine <a href="#expiry">and they <strong>do expire</strong></a>, so fresh is good!</li>
+  <li>My laptop is <strong>Toshiba Satellite Pro L850-1UJ</strong>. Other L850’s might have a different setup.</li>
+  <li>A large capacity (8GB+) usb storage device.</li>
+  <li>Dedicate the laptop – you will <strong>erase everything</strong> on it.</li>
+</ul>
+
+<p><a href="https://gist.github.com/soup-bowl/04fa2321bc0c28f8584f569cf7997ff1">Hardware Dump</a></p>
+
+<p>If you can’t fufill these, then <strong>stop now</strong>. You’ll be wasting your time. If you want to see roughly how Hackintosh works or how my experience was, then please read on!</p>
+
+<h2 id="thinking-what-does-and-does-not-work">:thinking: What Does and Does not Work?</h2>
+
+<p>This is from my current setup. They might actually have working configs that I’ve yet to find. If you know any, please comment below!</p>
+
+<h4 id="heavy_check_mark-does">:heavy_check_mark: Does</h4>
+
+<ul>
+  <li>Screen (full graphics).</li>
+  <li>Display brightness.</li>
+  <li>Keyboard &amp; trackpad.</li>
+  <li>Battery monitor.</li>
+  <li>USB.</li>
+  <li>Ethernet.</li>
+  <li>Speaker audio.</li>
+</ul>
+
+<h4 id="x-does-not">:x: Does not</h4>
+
+<ul>
+  <li>Suspend.</li>
+  <li>WiFi.</li>
+  <li>Keyboard brightness controls.</li>
+</ul>
+
+<p>The L850 has a <strong>Qualcomm Atheros AR9462</strong>, which does not work in macOS. I happened to have both the Edimax and TP-Link USB wireless adapters, <a href="https://github.com/chris1111/Wireless-USB-Adapter-Clover">which worked with Chris1111 drivers</a>.</p>
+
+<h2 id="clock4-changes-from-2018">:clock4: Changes from 2018</h2>
+
+<p>Instead of relying on <a href="http://www.tonymacx86.com">TonyMac</a> software, I’ve decided to attempt <a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/">Hackintosh Vanilla</a>. To quote the website:</p>
+
+<blockquote>
+  <p>A vanilla setup implies that the OS itself remains relatively untouched – and that the bulk of the Hackintosh-related kexts, patches, etc are contained on the EFI partition. For all intents and purposes, a vanilla install’s main partition is <em>identical</em> to that of an official Apple computer.</p>
+
+  <p><a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/">hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide</a></p>
+</blockquote>
+
+<p>Other than the different approach, I had the following caveats:</p>
+
+<ul>
+  <li>Instead of High Sierra, I’m installing <strong>Mojave</strong>.</li>
+  <li>My MacBook blew up*, so I’m using a combination of <strong><a href="https://www.soupbowl.io/2020/04/macos-in-virtualbox/">Virtualbox</a></strong> and my partner’s <strong>Macbook Air</strong>.</li>
+  <li>This time, I will <strong>not</strong> be undoing it. This will be a continuous project until the laptop dies.</li>
+</ul>
+
+<p>*An important point I must raise here. I bought my mac from an eBay listing a few years back. One day I plugged it in and it literally <strong>blew up</strong>. Smoke came from the plug and I had a residual shock. I put the MacBook and the dead charger in a cupboard and forgot about it. Recently, I pried open the plug to find it was a fake (or a non-recall), and the fuse was bypassed. Please, <strong>check your chargers</strong>! I now have a plug in RCD when using eBay auction purchases, just in case…</p>
+
+<h2 id="woman_technologist-the-process">:woman_technologist: The Process</h2>
+
+<h3 id="setting-up-a-bootable-usb">Setting up a Bootable USB</h3>
+
+<p>My trusty SanDisk Cruiser was still lying around, but I’d long since wiped it. So I wiped it without a moment’s consideration of the content (not recommended, of course) and prepped it for being a macOS conduit!</p>
+
+<h4 id="installer-expires">Installer expires?!</h4>
+
+<p>Now I keep an archive of macOS installers because… Well, I don’t really know why. Using my partner’s Mac I created a bootable macOS drive using an archived Mojave, only to find I got the error:</p>
+
+<blockquote>
+  <p>This copy of the Install macOS Mojave application is damaged, and can’t be used to install macOS</p>
+</blockquote>
+
+<p>So it turns out these macOS installers <strong>expire</strong>! Like a bad carton of milk, macOS would simply refuse to run (other tools like Disk Utility and Terminal were fine). I tried multiple solutions I found on Google to bypass it, but none worked.</p>
+
+<p>It would seem that Apple sign a certificate on the day you downloaded the installer from them. If you wait too long, macOS deems it damaged. You appear to be able to reset the system clock or edit the date via Terminal, but you need to know <strong>when</strong> your package was signed. Unfortunately, I didn’t note the date down. I discovered however I could re-download it from Apple still. Phew!</p>
+
+<p>…</p>
+
+<p>Back on track (and still on my partner’s Mac), once I had created the Bootable USB, I used <a href="https://github.com/Dids/clover-builder/releases">Did’s autobuild of Clover</a> to install Clover onto my USB. Complete shout-out to anyone who works on Clover in any form, as this fantastic bit of kit is what will get your Mac installation drive booting on a PC, and beyond!</p>
+
+<p>In my previous attempt I had a config.plist that worked wonders with my current setup. However, the default config that comes with Did’s Autobuild was apparently completely fine for this laptop. This makes a great starting point!</p>
+
+<p>I ran the Clover Installer package, changed the location to my USB drive, and didn’t change a damn setting. Install, and (safely) yanked that newly primed Hackintosh stick out.</p>
+
+<h3 id="uefibios-changes">UEFI/BIOS Changes</h3>
+
+<p>This laptop comes with UEFI and legacy BIOS mode. Supposedly Clover works with both, but for my install I enabled <strong>UEFI mode</strong> and <strong>disabled safe boot</strong>. Saved changes and exited.</p>
+
+<p>Smashing F12 like the refresh button, My trusty Toshiba asked what to boot from. What else but the Macintosh conversion stick?!</p>
+
+<p>I left Clover alone, and it booted straight into the Mac recovery screen. Now, if you’re going to commit to this make <strong>damn well sure your Toshiba has nothing important stored on it, and is backed up!</strong> This process (or at least how I did it) will <strong>erase everything!</strong></p>
+
+<p>Pop open Disk Utility from the Utilities menu. I had to click the button at the top left and show all devices. On my main hard drive (not the USB stick) I selected it and chose erase. I made sure to choose <strong>Mac OS Extended (Journaled)</strong>. APFS might be supported, but I’d rather use the tried-and-true format, and the <strong>GUID Partition Map</strong>. Hooray, the whole disk is now in Mac format!</p>
+
+<p>Excluding the certificate expiry, the installation ran without a hitch. My network adapters (ethernet and wireless) were not detected so I opted to install without connecting to the internet. I also selected <strong>British – PC</strong> as my keyboard format, which seems OK except <strong>alt</strong> and <strong>special</strong> are swapped round.</p>
+
+<p>Storm through the install like a regular Mac. After a lot of waiting and reboots, you’ll be greeted with the Mac screen. Hooray, you’re done(ish)!</p>
+
+<h3 id="hammer_and_wrench-getting-stuff-working">:hammer_and_wrench: Getting Stuff Working</h3>
+
+<p>Most things are working at this point, or at least the most important stuff. <strong>Networking, sound, and laptop detection</strong> are not.</p>
+
+<p>As a basepoint, I found this <a href="https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/config_HD4000_1366x768.plist">config.plist from RehabMan</a> worked well as a jumping point. I renamed the existing plist as ‘legacy.plist’ and used this file (<a href="https://gist.github.com/soup-bowl/2da067860a3a1d953e90f8832ff15d69">with a few modifications</a>) as the main driver.</p>
+
+<p>I used the following kexts (In the <strong>EFI</strong> partition, in <strong>Clover/Kexts/Other</strong>):</p>
+
+<ul>
+  <li><strong>FakeSMC</strong>, what <em>doesn’t</em> this one do?</li>
+  <li><strong>Lilu</strong>, a dependency for almost all Hackintosh kexts.</li>
+  <li><strong>VoodooPS2Controller</strong>, enables keyboard and trackpad.</li>
+  <li><strong>ACPIBatteryManager</strong>, battery is detectable by MacOS.</li>
+  <li><strong>NativeBacklight</strong>, MacOS detects display has adjustable brightness.</li>
+  <li><strong><a href="https://bitbucket.org/RehabMan/os-x-realtek-network/downloads/">OSX Realtek Network</a></strong>, by RehabMan.</li>
+  <li><strong><a href="https://sourceforge.net/projects/voodoohda/">VoodooHDA</a></strong> for Intel HD Audio out speakers.</li>
+</ul>
+
+<p>Great. With the above, your <strong>keyboard, trackpad, audio, battery, brightness &amp; wired network</strong> now work.</p>
+
+<p>Native backlighting took some jiggling to get working. <a href="https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/">RehabMan on TonyMac has a great guide</a> to getting this working (I installed the kext into Clover, not MacOS).</p>
+
+<h2 id="thinking-the-verdict">:thinking: The Verdict</h2>
+
+<p class="article-image"><img src="/assets/img/Screenshot-2020-04-25-at-11.43.50.webp" alt="" /></p>
+
+<p>I’ve actually been finding the performance on this base-spec (inc. original hard drive) runs really well on MacOS. There are slowdowns, and I have not tried gaming on this machine, but nothing more than I would expect from a <strong>very old</strong> machine. Plus Apple tends to care for their ageing old Intel machines really well, so I’m not <em>too</em> surprised.</p>
+
+<p>The lack of sound and wireless networking is troublesome though. I make do with a USB wireless dongle, but until I can find a solution to let MacOS see my actual WiFi card, I may not be able to upgrade to MacOS Catalina. The lack of ethernet detection also causes problems with the Mac App Store, which seems to always reckon I’m not connected (despite updates downloading just fine).</p>
+
+<p>So, I’m gonna keep it!</p>
+
+<h2 id="catalina">Catalina?</h2>
+
+<p class="article-image"><img src="/assets/img/Screenshot-2020-08-16-at-23.21.18-1.webp" alt="" /></p>
+
+<p>The upgrade to Catalina was a sucess! However, some changes were needed first.</p>
+
+<p>I had to add an EC ACPI patch to allow the macOS Catalina installer to run past the first stage.</p>
+
+<p><a href="https://dortania.github.io/Getting-Started-With-ACPI/ssdt-platform.html#laptop">Based on this information</a>, I also added <a href="https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-LAPTOP.aml">this ACPI configuration</a> to <strong>clover/acpi/patched</strong>. So far I’ve only added the EC configuration in the effort of trying to install the Catalina update.</p>
+
+<p>After the installation of Catalina, my screen brightness controls stopped working. To remedy this, I installed <a href="https://github.com/acidanthera/WhateverGreen"><strong>WhateverGreen</strong></a> kext and enabled <strong>SetIntelBacklight</strong> and <strong>SetIntelMaxBacklight</strong> (Devices in Clover Configurator). <strong>AddPNLF</strong> might be needed from <strong>ACPI</strong> section.</p>
+
+<h2 id="big-sur-and-beyond">Big Sur and Beyond?</h2>
+
+<p>Alas, I’ve hit a roadblock. Easy to blame Apple on this, but at this point not only is <strong>Ivy Bridge nearly 10 years old</strong>, but Apple are also moving to <strong>ARM architecture</strong>. Catalina was rocky enough!</p>
+
+<p>I’ve tried adjusting my Clover for support and simply facing constant kernel panic. At this point for other purposes I <strong>reinstalled Windows for a year</strong>, and it seems community progress has come a long way, so I will not give up just yet.</p>
+
+<p>Since the community has moved from <strong>Clover</strong> to <strong>OpenCore</strong>, I’ll be trying that off the bat to continue the progress of this Hackintosh. If all goes well, I’ll make a seperate post so watch this space.</p>
+
+<h2 id="robot-the-future">:robot: The Future</h2>
+
+<p>With no dire need to use this laptop (the battery is <strong>really</strong> dead), I’m going to persist on trying to get Hackintosh to work as much as possible. It really does feel rewarding, and you never get tired of the shock some people have when they see your craptop suddenly boot MacOS.</p>
+
+<p><em>Although they will question “<strong>why not buy a real Mac</strong>“</em>…</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Hackintosh" /><category term="Mac" /><summary type="html"><![CDATA[Back in 2018 I turned my laptop into a Hackintosh device, running High Sierra. I had a donor MacBook mid-2010 that I used to run TonyMac tools to get Hackintosh working. It was a fun if complicated process of trial and error, but the result was always impressive – a craptop unexpectedly booting macOS.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://soupbowl.io/assets/img/IMG_20200424_111621-1200x900.webp" /><media:content medium="image" url="https://soupbowl.io/assets/img/IMG_20200424_111621-1200x900.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Replace LAMP with Docker, the Easy way</title><link href="https://soupbowl.io/2020/03/replace-lamp-with-docker-the-easy-way" rel="alternate" type="text/html" title="Replace LAMP with Docker, the Easy way" /><published>2020-03-15T00:00:00+00:00</published><updated>2020-03-15T00:00:00+00:00</updated><id>https://soupbowl.io/2020/03/replace-lamp-with-docker-the-easy-way</id><content type="html" xml:base="https://soupbowl.io/2020/03/replace-lamp-with-docker-the-easy-way"><![CDATA[<p><strong>Just about to install LAMP, XAMPP, or MAMP? Stop. Right. Now.</strong> Docker’s gotchu, fam.</p>
+
+<p class="article-image"><img src="https://media0.giphy.com/media/lRmjNrQZkKVuE/giphy.gif" alt="" /></p>
+
+<p>LAMP stacks are great. They are an absolute fundamental to development, unless you enjoy the thrill of writing your code on your production environments.</p>
+
+<p>Seriously, LAMP is the absolute fundamental in the toolbox for website development.</p>
+
+<p>But <strong>do not install it</strong>.</p>
+
+<p>Cancel that download, uninstall that software. Because there’s a <strong>better solution</strong>.</p>
+
+<h2 id="cry-problems-with-lamp">:cry: Problems with LAMP</h2>
+
+<p>LAMP (XAMPP, MAMP, etc included) kits you out with all the essentials needed for running a website. Web server, language runtime and database. It can come with all the additionals you may need such as email and request logging.</p>
+
+<p>Sounds good. So what’s wrong?</p>
+
+<p>An immediate problem here is that the package you downloaded was tailored for your machine. This is especially a pain point for <strong>Windows</strong>, which will grab Apache compiled for Windows. More than likely you’ll be deploying to a server running <strong>Linux</strong>, in which case the environment already does not match. Mac is a lot closer, but is built on BSD which is still <strong>not Linux</strong>.</p>
+
+<p>The chances of hitting a problem due to mis-matched environments is low, but when dealing with complexities such as encoding, you may experience a problem here.</p>
+
+<p>Oh no, you got a cryptolocker virus! You backed up your code like a good human, flipped the bird at the locker screen, and bought a new laptop. Hooray!</p>
+
+<p>You spend some time to install your chosen LAMP stack again… Wait, why isn’t it working…</p>
+
+<p class="article-image"><img src="https://media1.giphy.com/media/heIX5HfWgEYlW/giphy.gif" alt="" /></p>
+
+<p>Here’s a joyful problem – differences in environment. This can be painful when sharing code, as your great new changes are broken on someone else’s machine. There could be a whole range of causes; The LAMP build you now have has a tiny build problem, Dave gave you a corrupted font file, or you didn’t realise you’re using PHP 5 instead of PHP 7.</p>
+
+<p>Wouldn’t it be great if you could have an environment that each machine could share? This way the machine is <strong>identical</strong> on each machine, and does not experience this kind of machine-limitation?</p>
+
+<p>Well I have just the solution for you!</p>
+
+<h2 id="whale-docker">:whale: Docker!</h2>
+
+<p><strong>Docker</strong> is complicated, so I will keep things short and brief. Feel free to shout at me in the comments for it.</p>
+
+<p>Docker runs a small <strong>server</strong> on your machine, which can run server software as <strong>containers</strong>. This will split out the tasks into various mini-servers, but <strong>share the resources</strong> that each container can use. The minature server is set up by your instructions, and these instructions can be shared with others, rather than lugging a whole VM with you.</p>
+
+<p>So with Docker, we can write a file that tells Docker what stuff we need to work our development site, and it will do all the heavy lifting to give you the environment that you need!</p>
+
+<h3 id="ooft-my-head">ooft, my head…</h3>
+
+<p>Docker is complex. However, you don’t need to necessarily <em>understand</em> how it works. This guide will cover the basics needed to achieve what you want, and then you can expand on your learning if you want!</p>
+
+<h2 id="musical_score-docker-compose">:musical_score: Docker Compose</h2>
+
+<p>Here’s a script, <strong>docker-compose.yml</strong> –</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.6'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:latest</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">www</span><span class="pi">:</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">php:apache</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">./www:/var/www/html"</span>
+    <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8080:80</span>
+</code></pre></div></div>
+
+<p>Now what does this do?</p>
+
+<ul>
+  <li>Created two containers – www and db.</li>
+  <li>Grabs the latest Dockerhub images of <a href="https://hub.docker.com/_/php">PHP</a> (using Apache) and <a href="https://hub.docker.com/_/mysql">MySQL</a>.</li>
+  <li>Sets them up based on their default configs.</li>
+  <li>MySQL sets the admin password to ‘password’ based on our environmental variables.</li>
+  <li>Requests from our local machine port 8080 (http://localhost:8080) are fed into port 80 of our PHP container.</li>
+  <li>A directory called ‘www’ is created in our docker-compose directory. Anything in this folder is now in the web root of our container.</li>
+</ul>
+
+<h3 id="whats-docker-doing">What’s Docker doing?</h3>
+
+<p>This powerful little script has just made you a server on your machine that would’ve otherwised taken some time to setup and configure! Yay Docker!</p>
+
+<p>The Docker-compose also creates a <strong>network adapter</strong> for these containers. What that means is that they can freely talk to each other, but your PC can only see what ports you have bound to it. With the above config, you can access port 80 on your www container easily, but none of the rest. However, the www container can happily chat to the db container without a hitch.</p>
+
+<p>Something important to note – When a Docker container is removed, all the data stored within it <strong>is lost</strong>. if you wish to keep it, set up a volume binding – like our www container. Anything stored on in a volume isn’t removed when the container dies. In my example, the database is <strong>not persisted</strong>. In the end example, I’ll show you how to keep it on container deletion.</p>
+
+<p>You can modify the file to add more services if you wish. For example, let’s add mail!</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.6'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:latest</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">mail</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mailhog/mailhog:latest</span>
+    <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8081:8025</span>
+  <span class="na">www</span><span class="pi">:</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">php:apache</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">./www:/var/www/html"</span>
+    <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8080:80</span>
+</code></pre></div></div>
+
+<p>Simple! Using <a href="https://hub.docker.com/r/mailhog/mailhog">Mailhog</a>‘s Dockerhub container, we now have a great development catch-all email server. We can access the GUI via http://localhost:8081, and configure the application to send email to hostname <strong>mail</strong> on port <strong>1025</strong>.</p>
+
+<p>So we got web, db and mail. That’s all well and great. But how do you <strong>use</strong> it? Simple! Open a command prompt/terminal where your docker-compose file is, and run <code class="language-plaintext highlighter-rouge">docker-compose up</code>.</p>
+
+<p>That’s it. Literally.</p>
+
+<h2 id="muscle-full-lamp-stack">:muscle: Full LAMP stack</h2>
+
+<p>Okay okay, enough with the lecturing. Here’s a full LAMP stack I whipped up earlier (where’s my Blue Peter badge?).</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.6'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:latest</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">--default-authentication-plugin=mysql_native_password</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">e9w86036f78sd9</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">./database:/var/lib/mysql"</span>
+  <span class="na">db_pma</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">phpmyadmin/phpmyadmin:latest</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8082:80</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">e9w86036f78sd9</span>
+      <span class="na">PMA_USER</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">PMA_PASSWORD</span><span class="pi">:</span> <span class="s">e9w86036f78sd9</span>
+  <span class="na">mail</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mailhog/mailhog:latest</span>
+    <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8081:8025</span>
+  <span class="na">www</span><span class="pi">:</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">db</span>
+    <span class="pi">-</span> <span class="s">mail</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">php:apache</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">./www:/var/www/html"</span>
+    <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8080:80</span>
+</code></pre></div></div>
+
+<p>Looks awful, right? <a href="https://gist.github.com/soup-bowl/f3880a446ea27f2088b4243d3e8f2c65">Here’s a highighted gist version.</a></p>
+
+<p>This is what this bad boy does:</p>
+
+<ul>
+  <li>Creates a <strong>MySQL Server</strong>.
+    <ul>
+      <li>Stored (persisted) in a folder called ‘database’ where your compose file is.</li>
+      <li>The ‘command’ switches new MySQL back to the old auth type, supported by most PHP apps.</li>
+    </ul>
+  </li>
+  <li>Creates a <strong>phpMyAdmin</strong> access point.
+    <ul>
+      <li>Web GUI accessible on port <strong>8082</strong>.</li>
+    </ul>
+  </li>
+  <li>Creates an <strong>SMTP Mail Catcher</strong>.
+    <ul>
+      <li>Configure your apps to send emails to host <strong>mail</strong> on port <strong>1025</strong>, with no authentication.</li>
+      <li>Web GUI accessible on port <strong>8081</strong>.</li>
+    </ul>
+  </li>
+  <li>Finally, creates a <strong>PHP (Apache) frontend</strong>.
+    <ul>
+      <li>HTTP accessible on port 8080.</li>
+      <li>Uses content found in folder ‘www’ relative to where your compose file is.</li>
+      <li>Loads last, after DB and Mail have been setup by Docker.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Run with <code class="language-plaintext highlighter-rouge">docker-compose up</code> and congratulations – You have a development <strong>LAMP stack</strong> running via <strong>Docker</strong>!</p>
+
+<p>This will serve you for simple applications, but I absolutely insist that you edit, tinker and break this script to truely discover what Docker can give you. If you mess it up beyond belief, then simply run <code class="language-plaintext highlighter-rouge">docker-compose down</code>, and start again!</p>
+
+<h2 id="bug-more-command-info">:bug: More command info</h2>
+
+<p><code class="language-plaintext highlighter-rouge">docker-compose</code> (<code class="language-plaintext highlighter-rouge">up</code>/<code class="language-plaintext highlighter-rouge">stop</code>/<code class="language-plaintext highlighter-rouge">down</code>)</p>
+
+<p>Docker compose is the magical command that translates your yml configuration file into docker commands.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">up</code> runs the containers detailed in the config file (will create them, or start up <code class="language-plaintext highlighter-rouge">stop</code>ped containers).</li>
+  <li><code class="language-plaintext highlighter-rouge">stop</code> pauses the containers, like clicking shutdown on your PC.</li>
+  <li><code class="language-plaintext highlighter-rouge">down</code> stops and deletes your containers, ready to start fresh. <strong>Data in volumes are not deleted</strong>.</li>
+  <li>Bonus: <code class="language-plaintext highlighter-rouge">exec &lt;container name&gt; /bin/bash</code> lets you run Linux commands <em>within</em> the container!</li>
+</ul>
+
+<p>If your docker-compose file has a strange name, or isn’t stored where it expects, you can use <code class="language-plaintext highlighter-rouge">docker-compose -f /path/to/your/docker-compose.yml</code>. As yml and json are compatible, you an use this command to write your compose file in JSON notation.</p>
+
+<p>Make sure when running these commands, your terminal is local to where the docker-compose file is. Also, my script will create folders relative to where docker-compose file is. You can modify the volume paths to change this.</p>
+
+<h2 id="1-closing-notes">:+1: Closing Notes</h2>
+
+<p>The great level of flexibility with docker-compose files lets you think outside of the box. With a traditional LAMP stack, you would install it then stuff your PHP scripts into it’s www/htdocs directory. With Compose, you can actually create the docker-compose.yml inside your project directory, and tailor the script around it.</p>
+
+<p>Confused? Say you wrote a WordPress plugin. You can craft your docker-compose to setup a full WordPress environment, and bind the project directory into the WordPress plugin dir. You can then access WordPress with your plugin <strong>already loaded in</strong>!</p>
+
+<p>So get creative with your newfound Docker experience, and let me know what you achieve with Docker. I’m also by no means an expert, so if I’ve missed something please give me a shout and I’ll revision this with all the great stuff you find!</p>
+
+<p><strong>28 May 2021 Edit:</strong> latest-apache is no longer a supported tag. Thanks to <a href="https://disqus.com/by/janoverberg/"><strong>Jan Overberg</strong></a> in the comments for pointing this out.</p>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Development" /><category term="Guides" /><summary type="html"><![CDATA[Just about to install LAMP, XAMPP, or MAMP? Stop. Right. Now. Docker’s gotchu, fam.]]></summary></entry><entry><title type="html">Colour Firefox like Netscape and Pretend it still exists</title><link href="https://soupbowl.io/2020/02/colour-firefox-like-netscape-and-pretend-it-still-exists" rel="alternate" type="text/html" title="Colour Firefox like Netscape and Pretend it still exists" /><published>2020-02-05T00:00:00+00:00</published><updated>2020-02-05T00:00:00+00:00</updated><id>https://soupbowl.io/2020/02/colour-firefox-like-netscape-and-pretend-it-still-exists</id><content type="html" xml:base="https://soupbowl.io/2020/02/colour-firefox-like-netscape-and-pretend-it-still-exists"><![CDATA[<p><strong>I love Netscape. I still haven’t forgiven AOL <a href="https://www.engadget.com/2014/05/10/history-of-netscape/">for the event that occurred February 2008</a>.</strong></p>
+
+<p>Firefox has decided that the colouring of your browser should be left to you. While it may not be the elaborate and fancy themes of old, at least you can still have a level of customisation to your boring browser window.</p>
+
+<div class="aligncentre"><p class="button"><a href="https://color.firefox.com">Firefox Color</a></p></div>
+
+<p>Here are some colour themes I have created to re-live the glory days of Netscape Navigator.</p>
+
+<p><strong>Edit from 2021:</strong> If you’re happy to go through some effort to apply a Firefox theme, I ported <strong>Modern Modoki</strong> a popular Netscape port theme from Firefox 3 to userChrome CSS. <a href="https://github.com/soup-bowl/Modoki-FirefoxCSS"><strong>Go to the GitHub page</strong></a> to find out more.</p>
+
+<h2 id="netscape-fusion">Netscape Fusion</h2>
+
+<p class="article-image"><img src="/assets/img/netscape-fusion-classic.webp" alt="Firefox browser with orange buttons, an aliceblue toolbar background, and black header bars." /></p>
+
+<div class="aligncentre"><p class="button"><a href="https://color.firefox.com/?theme=XQAAAAIgAQAAAAAAAABBqYhm849SCia2CaaEGccwS-xNKliFupMrJ872ljiI850ad-7K1H8h-qnbTAdIVcniTliWEBDOS5-omSx7Z4tOQb3An26lJHMxF31tPWQt9sXJNwzmJeoH0baqQMCIfnP8ihrdCOlGz-l8n306jagp4EV0dl8VZbMtCz8wbUKZ3uTLY7EgnOYwqxyZ_jiqID4MaIuN5vALw-ngNNl90GvnrwClPUob1APDoFQEdh0fnMIvwd__fin_AA">Apply theme</a></p></div>
+
+<h2 id="fusion-revised">Fusion Revised</h2>
+
+<p class="article-image"><img src="/assets/img/netscape-fusion-modern.webp" alt="Firefox browser with blue buttons, an grey toolbar background, and black header bars." /></p>
+
+<div class="aligncentre"><p class="button"><a href="https://color.firefox.com/?theme=XQAAAAIgAQAAAAAAAABBqYhm849SCia2CaaEGccwS-xNKliFucAyqRGQbFmhXVFziO3U6NNQwSRr82gB3_2l8wQwMpRNwmNfQWepmu57-Mvw15UB7s_ZwiwrezE_1bhjLZyNZg0HunEw5wz_8CiVYPZ2YF15O5PePvCjeiozoIOpRjqy6teu0ZFW3PApY4kbRKpQgDMY1LaFyS96yX52HLIjk3DEwsUrEjKDKAS2fMmu_7f9hAA">Apply theme</a></p></div>
+
+<h2 id="and-the-final-touch">And the Final Touch…</h2>
+
+<p>You can add the throbber into your header!</p>
+
+<p class="article-image"><img src="/assets/img/netscape-ff-throbber.webp" alt="A crop of the top right part of the Firefox Browser window. Where the window control buttons are, a little Netscape Navigator icon is pictured to the left of the buttons." /></p>
+
+<div class="aligncentre"><p class="button"><a href="https://addons.mozilla.org/en-GB/firefox/addon/firescape_navigator/?utm_source=addons.mozilla.org&amp;utm_medium=referral&amp;utm_content=search">Firescape Addon</a></p></div>]]></content><author><name>Casey (Soupbowl)</name></author><category term="Miscellaneous" /><summary type="html"><![CDATA[I love Netscape. I still haven’t forgiven AOL for the event that occurred February 2008.]]></summary></entry></feed>

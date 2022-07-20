@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="/favicon.ico"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Complete Guide to Running WordPress on Windows/IIS | Soupbowl</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="The Complete Guide to Running WordPress on Windows/IIS" />
+<meta name="author" content="Casey (Soupbowl)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="So you’ve discovered to your absolute horror that the WordPress site your company has inherited is running on Windows… on IIS?" />
+<meta property="og:description" content="So you’ve discovered to your absolute horror that the WordPress site your company has inherited is running on Windows… on IIS?" />
+<link rel="canonical" href="https://soupbowl.io/2020/01/the-complete-guide-to-running-wordpress-on-windows" />
+<meta property="og:url" content="https://soupbowl.io/2020/01/the-complete-guide-to-running-wordpress-on-windows" />
+<meta property="og:site_name" content="Soupbowl" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Complete Guide to Running WordPress on Windows/IIS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Casey (Soupbowl)"},"dateModified":"2020-01-24T00:00:00+00:00","datePublished":"2020-01-24T00:00:00+00:00","description":"So you’ve discovered to your absolute horror that the WordPress site your company has inherited is running on Windows… on IIS?","headline":"The Complete Guide to Running WordPress on Windows/IIS","mainEntityOfPage":{"@type":"WebPage","@id":"https://soupbowl.io/2020/01/the-complete-guide-to-running-wordpress-on-windows"},"url":"https://soupbowl.io/2020/01/the-complete-guide-to-running-wordpress-on-windows"}</script>
+<!-- End Jekyll SEO tag -->
+<meta name="theme-color" content="#0f0f0f">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/main.css?v=3"><link type="application/atom+xml" rel="alternate" href="https://soupbowl.io/feed.xml" title="Soupbowl" /></head>
+<body><header class="site-header" role="banner">
+
+	<div class="wrapper">
+<a class="site-title" rel="author" href="/">Soupbowl</a>
+	  <span class="site-subtitle">Ramblings of a DevOps Nerd</span><nav class="site-nav">
+		  <input type="checkbox" id="nav-trigger" class="nav-trigger">
+		  <label for="nav-trigger">
+			<span class="menu-icon">
+			  <svg viewbox="0 0 18 15" width="18px" height="15px">
+				<path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+			  </svg>
+			</span>
+		  </label>
+
+		  <div class="trigger">
+<a class="page-link" href="/projects/">Projects</a><a class="page-link" href="/blog/">Blog</a><a class="page-link" href="/guides">Guides</a>
+</div>
+		</nav>
+</div>
+  </header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+	<header class="post-header"><h1 class="post-title p-name" itemprop="name headline">The Complete Guide to Running WordPress on Windows/IIS</h1>
+<p class="post-meta"><time class="dt-published" datetime="2020-01-24T00:00:00+00:00" itemprop="datePublished">
+				24 January 2020
+			</time>• 
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+						<span class="p-author h-card" itemprop="name">Casey (Soupbowl)</span></span> • Development,
+				<a href="/guides">Guides</a>,
+				Windows
+				</p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<p>So you’ve discovered to your absolute horror that the WordPress site your company has inherited is running on Windows… on IIS?</p>
+
+<p class="article-image"><img src="https://media.giphy.com/media/jquDWJfPUMCiI/source.gif" alt=""></p>
+
+<p>Before you stand up, throw your computer chair out the Window, maliciously eat your co-workers salad and enjoy it, or drop all the production databases, relax. We’ve got you covered.</p>
+
+<h2 id="confused-whats-the-problem">
+<img class="emoji" title=":confused:" alt=":confused:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f615.png" height="20" width="20"> What’s the problem?</h2>
+
+<p>Good point. IIS (Information Internet Services) is the home-grown proprietary (for now) web server provided by Microsoft for Windows customers. IIS is fantastic at what it does, and can serve as an efficient web host as well as an absolutely golden reverse proxy server.</p>
+
+<p>So what’s the problem?</p>
+
+<h3 id="angry-support">
+<img class="emoji" title=":angry:" alt=":angry:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f620.png" height="20" width="20"> Support</h3>
+
+<p class="article-image"><img src="https://media.giphy.com/media/wofftnAdDtx4s/giphy.gif" alt=""></p>
+
+<p>Zilch. Nada. No dice. WordPress is absolutely <strong>not</strong> designed to be run on IIS and probably never will be. This doesn’t mean your server is going to burst into flames when you run the site, but means that when support is needed you can be damn well sure your first bit of advice will be “don’t use Windows”.</p>
+
+<p>So don’t use IIS? Simple?</p>
+
+<p>Except that currently NGINX is crippled on Windows (<a href="https://nginx.org/en/docs/windows.html">source</a>), and Apache, which is thankfully available on Windows via unofficial channels… But you still have very little support since it operates differently being on Windows.</p>
+
+<p>However, <a href="https://en-gb.wordpress.org/about/requirements/">WordPress requirements</a> state:</p>
+
+<blockquote>
+  <p>We recommend <a href="https://httpd.apache.org/">Apache</a> or <a href="https://nginx.org/">Nginx</a> as the most robust and featureful server for running WordPress, but any server that supports PHP and MySQL will do.</p>
+</blockquote>
+
+<p>– so don’t lose hope just yet.</p>
+
+<h2 id="open_file_folder-the-webconfig-file">
+<img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20"> The web.config File</h2>
+
+<p>If you’re coming from an Apache background, you might be used to a <strong>.htaccess</strong> file. Just like how .htaccess is not compatible with NGINX, it is also <strong>not compatible</strong> with IIS.</p>
+
+<p>For each folder of importance to IIS, a <strong>web.config</strong> file will appear in the directory. This tells IIS what fancy features and involvement the folder has with web capabilities. It will store <strong>everything</strong> configuration-wise, so do be careful not to delete or corrupt this file.</p>
+
+<p>web.config is an XML file, and can be easily edited in an editor of your choice. Once you get very comfortable with IIS, you’ll find yourself editing the file manually more often than using the GUI console. This will also to reduce the management overhead of changing IIS settings.</p>
+
+<p>An example of useful properties stored in here are:</p>
+
+<ul>
+  <li>Priority list of the default index to load.</li>
+  <li>URL rewrite/redirect rules.</li>
+  <li>Request filtering, blocking and setting adjustments.</li>
+  <li>Directory over-riding of parential settings (e.g. PHP Version).</li>
+</ul>
+
+<h2 id="gear-setting-up-wordpress">
+<img class="emoji" title=":gear:" alt=":gear:" src="https://github.githubassets.com/images/icons/emoji/unicode/2699.png" height="20" width="20"> Setting up WordPress</h2>
+
+<p>First you will need a database. It is recommended you have the database on a different server for performance and security reasons, but you can also have MySQL running on the same server as IIS.</p>
+
+<p><strong>MySQL runs well on Windows</strong>, and is very well supported. You shouldn’t expect much push-back in the way of configuring MySQL. However, if you wish to use <strong>Microsoft SQL Server</strong>, you may wish to check out <a href="https://projectnami.org/"><strong>Project Nami</strong></a>.</p>
+
+<p>Once completed, setup a database and access user like you would a Linux-based setup installation.</p>
+
+<p>Also, while it’s best to always be running the latest version of Windows Server, please consider using a version <strong>no later than IIS 10 (Windows Server 2016</strong>). This is because older versions of IIS do not have support for HTTP/2. Technically speaking the <em>minimum</em> requirement is IIS 7 (Windows Server 2008).</p>
+
+<h3 id="elephant-php-on-windowsiis">
+<img class="emoji" title=":elephant:" alt=":elephant:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f418.png" height="20" width="20"> PHP on Windows/IIS</h3>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>You will need to <a href="https://www.iis.net/downloads/community/2018/05/php-manager-150-for-iis-10">configure IIS to use CGI processing for IIS</a> (which isn’t enabled on default IIS installations).</p>
+
+<p>You also need the <strong><a href="https://www.iis.net/downloads/microsoft/url-rewrite">URL Rewriting</a></strong> <a href="https://www.iis.net/downloads/microsoft/url-rewrite">module for IIS</a>, unless you are planning on using those super ugly index.php URLs.</p>
+
+<p>PHP is <strong>fully supported</strong> on Windows*. To download PHP, visit their website at <a href="https://windows.php.net">windows.php.net</a>. You will also need the <strong>C++ Redist 2019</strong> which is found on the sidebar on their website downloads.</p>
+
+<p>This guide will use FastCGI, which will require a <strong>Non-thread safe version (NTS)</strong> of PHP. Typically the first download listed in each PHP version on their site will be the ideal version for IIS.</p>
+
+<p>Download the correct zip file and extract it to a place of your choice on your server (Program Files is acceptable). My choice is normally <strong>C:\PHP\X.X.X</strong> (version number).</p>
+
+<p>If you’re planning on running any PHP tools such as WP-CLI, it would also be a good idea to add the above path to your system Path environmental variable.</p>
+
+<p>To do so, open <strong>Run</strong> (Win key + R), and run <code class="language-plaintext highlighter-rouge">**rundll32 sysdm.cpl,EditEnvironmentVariables**</code>. Append the path to <strong>Path</strong> found under System variables.</p>
+
+<h4 id="installing-wp-cli-optional">Installing WP-CLI (optional)</h4>
+
+<p>Now is a good time to install <a href="https://wp-cli.org/">WordPress CLI</a> if you’re planning on using it. They provide a <a href="https://make.wordpress.org/cli/handbook/installing/#installing-on-windows">fantastic guide to setting up WP-CLI on Windows</a>.</p>
+
+<h4 id="discontinued-web-platform-installer--easy">(Discontinued) Web Platform Installer – Easy</h4>
+
+<p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png" height="20" width="20"> <strong>The Web Platform Installer is sunsetting, due to be officially discontinued on 31st December 2022. This method is no longer recommended and users have already reported experiencing issues with the Web Platform Installer.</strong></p>
+
+<p><strong>RIP WebPI – 2009 – 2022.</strong></p>
+
+<p>Windows Server has an optional comonent called the <strong>Web Platform Installer</strong>. This neat application provides a collection of the most well-known and loved software packages, and provides super-easy methods of installing them. Guess what, WordPress included! You just need to install <strong>IIS with CGI</strong> first.</p>
+
+<p>Create a Site as regular, and double-click on it. You should have an option in <strong>Management</strong> called <strong>Web Platform Installer</strong> (at time of writing, it’s a circular, orange download icon). Open this up, and a new panel will load up. Search for <strong>WordPress</strong>, click Add, then Install.</p>
+
+<p><img class="emoji" title=":question:" alt=":question:" src="https://github.githubassets.com/images/icons/emoji/unicode/2753.png" height="20" width="20"> <strong>No Web Platform Installer?</strong> It’s not installed by default. Click your server name in the Connections left-hand panel. In the now-visible right-hand panel, click on <strong>Get New Web Platform Components</strong>. Follow the Microsoft instructions and you’ll have the aforementioned button.</p>
+
+<p class="article-image"><img src="/assets/img/1-1024x540.webp" alt=""></p>
+
+<p>Now for configurations, you should generally always separate up your servers (e.g. web and database are separate). But sometimes, you just want a get going quickly on a development site. This installer has a neat trick. If you do not have a database server, and the current machine doesn’t have MySQL installed, <strong>it will create a MySQL server instance for you</strong>!</p>
+
+<p class="article-image"><img src="/assets/img/2.webp" alt=""></p>
+
+<p>If done correctly, you should be at this screen. It will by default try to create <strong>localhost/wordpress</strong>. Make sure you’ve got the right Web Site selected, and – if desired – the right subfolder configuration. If something is wrong, it will need to be changed manually afterwards.</p>
+
+<p>Hit Continue, and go grab a coffee. When you return, <strong>WordPress is installed</strong>! Easy as that, you’ve got your first WordPress installation.</p>
+
+<p class="article-image"><img src="/assets/img/5-1024x721.webp" alt=""></p>
+
+<p>For the technical information:</p>
+
+<ul>
+  <li>
+<strong>Microsoft WebMatrix</strong> is installed.</li>
+  <li>
+<img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png" height="20" width="20"> <strong>PHP 7.1</strong> is installed via <strong>IIS Express</strong>.
+    *   A newer version of PHP is recommended.</li>
+  <li>A <strong>global FastCGIModule</strong> for PHP is created.
+    *   This means all sites on your IIS server can run PHP code via this module. Change priority listings if you wish to run different versions.
+    *   You can use the <strong>PHP Manager</strong> or manual process to over-ride this.</li>
+  <li>
+<strong>MySQL 5.1</strong> is installed, if no external database was provided.</li>
+</ul>
+
+<h4 id="php-manager-iis-plugin--intermediate">PHP Manager IIS Plugin – Intermediate</h4>
+
+<p class="article-image"><img src="/assets/img/VirtualBox_windywoo_23_01_2020_22_13_53.webp" alt=""></p>
+
+<p>There is a plugin for IIS called <strong><a href="https://www.iis.net/downloads/community/2018/05/php-manager-150-for-iis-10">PHP Manager</a></strong>, which is able to do most of the heavy-lifting for you in configuring PHP. This will enable you to register new PHP versions, adjust plugins, edit configurations and even split containers to different IIS versions as simply as possible via GUI.</p>
+
+<p>Simply download their extension and install it on your server. When you next run IIS you will find a new PHP module on the snap-in.</p>
+
+<p>You can register a parent PHP version and it will affect all children sites. If you register an alternative version on a child site, it will over-ride the parent and so on, in a hierarchical manner. Multi-version PHP, hooray a benefit!</p>
+
+<h4 id="php-manually--advanced">PHP Manually – Advanced</h4>
+
+<p class="article-image"><img src="/assets/img/202001U2.webp" alt=""></p>
+
+<p>If you opt not to go for IIS manager (not a fan of community IIS modules), then you can still go ahead configuring PHP manually to the IIS container.</p>
+
+<p>First you need to tell the FastCGI system about your PHP installation.</p>
+
+<ul>
+  <li>Open IIS.</li>
+  <li>Click on the root server (just below <strong>Start Page</strong> on the left pane).</li>
+  <li>Open <strong>FastCGI Settings</strong>.</li>
+  <li>On the right hand side, click on <strong>Add Application…</strong>
+</li>
+  <li>In Full Path, navigate to <strong>php-cgi.exe</strong> in your extracted php setup.</li>
+  <li>In <strong>Monitor changes to file</strong>, set this to your php.ini file.</li>
+  <li>Click on … on the end of the row named <strong>Environmental Variables</strong>.</li>
+  <li>Click Add.</li>
+  <li>Add <strong>PHPRC</strong> variable with the value of the <strong>PHP installation path</strong>, where your PHP-CGI file was above.</li>
+  <li>Create another variable named <strong>PHP_FCGI_MAX_REQUESTS</strong>, and match it to the value in <strong>Instance MaxRequests</strong> (recommendation for both is <strong>10000</strong>).</li>
+  <li>Click OK.</li>
+</ul>
+
+<p>Cool! IIS now knows that your PHP folder is a CGI process, it now knows how to handle requests to PHP with this processor. Now let’s set up the individual website to use PHP CGI.</p>
+
+<ul>
+  <li>Find your container in IIS (e.g. Default Web Site) and click it.</li>
+  <li>Open <strong>Handler Mappings</strong>.</li>
+  <li>On the right-hand side, choose ‘<strong>Add Module Mapping</strong>‘.</li>
+  <li>Add the following entry:
+    *   <strong>*.php</strong> for <strong>Request Path</strong>.
+    *   <strong>FastCgiModule</strong> for <strong>Module</strong>.
+    *   Path to your PHP CGI for <strong>Executable</strong>.
+    *   Whatever you want for <strong>Name</strong>.</li>
+  <li>Head back, and go into <strong>Default document</strong>.</li>
+  <li>Add <strong>index.php</strong> to the list (your choice).</li>
+  <li>Test in your browser if PHP loads up.
+    *   Try <strong>index.php</strong> file with <code class="language-plaintext highlighter-rouge">&lt;?php phpinfo();</code>
+</li>
+</ul>
+
+<p>If you do the above for the topmost entry (normally your machine name), it will <strong>copy to all new containers</strong>, so you don’t need to do this process for each site.</p>
+
+<h4 id="recommended-phpini-configuration">Recommended php.ini Configuration</h4>
+
+<p>The perfect php.ini configuration is very much a game of trial and error. Believe me, it’s difficult to find the best config balance when it comes to PHP, WordPress and Windows. Here are some essentials:</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">cgi.force_redirect = 0</code> (essential!).</li>
+  <li><code class="language-plaintext highlighter-rouge">fastcgi.impersonate = 1</code></li>
+  <li><code class="language-plaintext highlighter-rouge">extension_dir = **&lt;Absolute path to install&gt;**/ext</code></li>
+</ul>
+
+<p><strong>These are set when using PHP Manager</strong>. This configures PHP to understand that it is operating via CGI mode. The second configuration also helps to link the PHP operations into how IIS works, enabling better interop between PHP and IIS.</p>
+
+<p>The third is recommended especially if your PHP installation is not located on the C drive. Absolute stops PHP trying to interpret where the extension dir is, which is can get very wrong if not located on the C drive.</p>
+
+<h3 id="setting-up-wordpress">Setting up WordPress</h3>
+
+<p>Now for an easy part – the WordPress installation! Thankfully this is as easy to do, if not easier than the Linux server counterpart.</p>
+
+<p>Create your desired site in IIS. If you’re binding this a domain or subdomain, create a new site. Otherwise, you can create a subfolder (or virtual subfolder) in IIS to setup a subfolder WordPress installation.</p>
+
+<p>In the folder you bound to the container, extract the WordPress installation zip (or use WP-CLI if installed earlier). If done correctly when you visit the URL in the browser you will see the good ol’ 5 minute installation screen.</p>
+
+<p>Run through the installation as per a normal site, and <strong>congratulations</strong> – you have a WordPress site running on IIS!</p>
+
+<p class="article-image"><img src="https://media2.giphy.com/media/uihiEh31AiOCQ/giphy.gif?cid=790b76113f3975ca802e55917a842138c9bf733a2d6fadaf&amp;rid=giphy.gif" alt=""></p>
+
+<h2 id="star-special-thanks">
+<img class="emoji" title=":star:" alt=":star:" src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png" height="20" width="20"> Special Thanks</h2>
+
+<p>In the hopes of keeping the information up to date and relevant, the following commenters below have helped keep me in check:</p>
+
+<ul>
+  <li>
+<strong>Patrick Bates</strong> for pointing out <strong>Web Platform Installer</strong>.</li>
+  <li>
+<strong>John Wilkin</strong> for pointing out I did not cover <strong>web.config</strong>.</li>
+</ul>
+
+<h2 id="information_source-faq">
+<img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> FAQ</h2>
+
+<h3 id="-did-microsoft-drop-support-for-php-on-windows"><strong>* Did Microsoft drop support for PHP on Windows?</strong></h3>
+
+<p class="article-image"><img src="https://media3.giphy.com/media/SVgKToBLI6S6DUye1Y/giphy.gif" alt=""></p>
+
+<p>Microsoft have, community have not.</p>
+
+<p>Microsoft have stopped <em>compiling</em> PHP for Windows past PHP 8, so technically <strong>yes</strong>. However, community edition providers will still continue to make builds for the Windows platform.</p>
+
+<p>SaraMG provides the <a href="https://www.reddit.com/r/PHP/comments/ho9dgq/microsoft_not_going_to_officially_support_php_8/">missing context in this Reddit post</a>. This is well worth checking out, as the community have been providing alternative options you can use post-official builds. We will update this entry with some recommendations once PHP 8 is released.</p>
+
+<h3 id="i-received-an-error-500-the-fastcgi-processed-exited-unexpectedly">I received an error: 500 The FastCGI Processed exited unexpectedly.</h3>
+
+<p>Each version of PHP for Windows depends on a <strong>Visual C++ Redist</strong> package, which is mentioned in the download title. Normally recieving this error means your system does not have the one it needs, causing the CGI process to error.</p>
+
+<p>In each download segment <a href="https://windows.php.net/download/">on the downloads website</a>, check for <strong>VCXX</strong> (X being numerical). The left-hand sidebar will tell you which redistributable package you need and how to obtain it. Once installed, this error will stop.</p>
+
+<p>If – for whatever reason – you are installing the <strong>Legacy 5.6 releases</strong>, download the <strong>32-bit redistributable</strong>, regardless of your server architecture type.</p>
+
+<h3 id="i-recieved-an-error-50021-handler-xyz-has-a-bad-module-fastcgimodule-in-its-module-list">I recieved an error: 500.21 Handler “xyz” has a bad module “FastCGIModule” in its module list.</h3>
+
+<p class="article-image"><img src="/assets/img/3-1-1024x721.webp" alt=""></p>
+
+<p>When installing <strong>Internet Information Services (IIS)</strong>, PHP runs through <strong>CGI</strong>. This lets IIS pass the processing of non-Microsoft language code to it’s relevant processor. For us, it enables IIS to chuck .php code at PHP.</p>
+
+<p>This error simply means that the CGI module it uses (FastCGI) was not installed. This is easily fixed!</p>
+
+<p>Open up <strong>Server Manager</strong>. At the top right, open up <strong>Manage</strong>, then <strong>Add Roles and Features</strong>.</p>
+
+<p>Next next next it through until you get to Roles. In <strong>Web Server (IIS) &gt; Web Server &gt; Application Development &gt;</strong> Check <strong>CGI</strong>. Click Install (or next until you can), and your IIS server should now support CGI, including FastCGI</p>
+
+<p class="article-image"><img src="/assets/img/4.webp" alt=""></p>
+
+<h3 id="pretty-permalinks-and-htaccess">Pretty Permalinks, and .htaccess</h3>
+
+<p>WordPress is smart enough to know it’s on IIS, so when you go to adjust permalinks instead of creating <strong>.htaccess</strong>, they will create a <strong>web.config</strong> file, which is the IIS equivalent. If you need additional rules the IIS rewrite module can attempt to parse your htaccess file in the IIS module.</p>
+
+<p>If you create a .htaccess file, <strong>it will be ignored</strong> – IIS rewrite can attempt to <em>convert</em> these files, but not <em>use</em> them.</p>
+
+<h3 id="how-do-i-disable-xmlrpc-via-iis">How do I disable xmlrpc via IIS?</h3>
+
+<p>In my years of WordPress, this only recently popped up for me – people abusing the xmlrpc.php interface. There’s a range of options to deal with this in WordPress, but they all involve WordPress loading. I personally think it’s better to use IIS to block the interface instead.</p>
+
+<p><strong>Via web.config</strong></p>
+
+<p>Locate the <code class="language-plaintext highlighter-rouge">&lt;system.webServer&gt;</code> block, and add this (normally at the bottom):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	&lt;security&gt;
+		&lt;requestFiltering&gt;
+			&lt;denyUrlSequences&gt;
+				&lt;add sequence="xmlrpc.php" /&gt;
+			&lt;/denyUrlSequences&gt;
+		&lt;/requestFiltering&gt;
+	&lt;/security&gt;
+</code></pre></div></div>
+
+<p>Any <strong>contoso.com/xmlrpc.php</strong> request will now serve a request denied error, instead of passing through to the interface. This stops WordPress processing said requests, therefore stop wasting processing power on these bogus requests.</p>
+
+<h3 id="upload-issues-unique-to-iis-wordpress-56-58-multisite">Upload issues unique to IIS WordPress 5.6-5.8 Multisite?</h3>
+
+<p>Between <strong>WordPress 5.6 and 5.9</strong> (the speculative fix date) there is a bug affecting multisites that <a href="https://wordpress.org/support/topic/iis-wordpress-5-6-multi-sites-file-upload-hang/">can cause media uploads to fail</a>. Since IIS isn’t an officially supported platform, the bug slipped past testing and has unfortunately been causing pain to IIS administrators.</p>
+
+<p><a href="https://wordpress.org/support/topic/iis-wordpress-5-6-multi-sites-file-upload-hang/#post-14754922">The plugin block posted by Joseph Dickson</a> should help to alleviate the issue if you are being impacted. From the Trac report, there is a community maintainer discussion ongoing about getting Windows/IIS included in the auto-tests, and getting the bug fixed for WordPress 5.9.</p>
+
+<h3 id="how-do-i-set-permissions">How do I set permissions?</h3>
+
+<p>The container will default to using the account <strong>IUSR</strong>, which won’t have access rights by default. For starting out, you could simply give <strong>IUSR</strong> full permissions to the folder, and your website will work. Updates will occur, cache will write, all gold.</p>
+
+<p class="article-image"><img src="/assets/img/202001U1.webp" alt=""></p>
+
+<p>This sometimes does not work, in which an alternative you can do is change <strong>Anonymous authentication</strong> in <strong>Authentication</strong> on the container to Application Pool identity, and give <strong>IUSRS</strong> group full access.</p>
+
+<p>Both of these are <strong>not recommended</strong> for production use, as in the event of a compromise the hacker will have full write access. You can <a href="https://wordpress.org/support/article/changing-file-permissions/">check out the guide on permissions</a> from WordPress, as the permission fundamentals are similar.</p>
+
+<h3 id="how-do-i-enable-http2">How do I enable HTTP/2?</h3>
+
+<p><strong>HTTP/2</strong> is only supported in <strong>IIS 10</strong> or above, which requires <strong>Windows Server 2016</strong> or higher.</p>
+
+<h3 id="how-do-i-increase-the-runtime-limits">How do I increase the runtime limits?</h3>
+
+<p>In <strong>PHP Manager</strong>, on the container you wish to adjust, click on <strong>Set runtime limits</strong>. This will show the php.ini config options to quickly change these limits. For everyone else, you can find the limits within php.ini like always.</p>
+
+<p>If you wish to increase the <strong>maximum execution time</strong>, please note that both PHP and IIS track timeouts differently. As well as increasing this via either PHP Manager or php.ini, you will need to tell IIS too.</p>
+
+<p>Pop over to the root (underneath <strong>Start Page</strong> on the left panel in IIS). Open <strong>FastCGI Settings</strong>, and find the CGI you wish to modify. Click edit, and you should see two settings called <strong>Activity Timeout</strong> and <strong>Request Timeout</strong>. Set these both to whatever limit you want, and make sure all three (inc. PHP’s <strong>max_execution_time</strong>) match. Your timeout should now be sufficiently increased!</p>
+
+<h3 id="should-i-choose-windows-over-linux-for-wordpress">Should I choose Windows over Linux for WordPress?</h3>
+
+<p><strong>No</strong>. Absolutely not.</p>
+
+<h3 id="can-i-hook-wordpress-into-microsoft-sql-server">Can I hook WordPress into Microsoft SQL Server?</h3>
+
+<p><a href="https://projectnami.org/"><strong>Project Nami</strong></a> is a fork of WordPress that is designed to work with <strong>Microsoft SQL Server</strong> in place of <strong>MySQL</strong>. This team has replaced all MySQL functionality and added some beneficial functionality from SQL Server. This is well worth checking out!</p>
+
+<h3 id="can-i-run-multiple-versions-of-php">Can I run multiple versions of PHP?</h3>
+
+<p><strong>Yes!</strong> Arguably this is one of the only benefits of running PHP on IIS, you can run multiple PHP versions.</p>
+
+<p>When you are looking at the <strong>Module Mappings</strong> segment (either site or server-wide), there should be an option on the right-hand side column that says <strong>View Ordered List…</strong>. <strong>The topmost version of PHP will be the chosen version</strong>, so use this to your advantage to change which version your site operates with.</p>
+
+	</div>
+<hr>
+
+	<div id="load_disqus" class="aligncentre">
+		<button class="button" onclick="load_comments()">Load Discussion (Disqus)</button><p>By clicking on this button you are agreeing to the <a href="https://help.disqus.com/en/articles/1717103-disqus-privacy-policy">Disqus privacy policy</a>.</p>
+</div>
+
+	<div id="disqus_thread"></div>
+
+	<script>
+		var disqus_config = function () {
+			this.page.url = 'https://soupbowl.io/2020/01/the-complete-guide-to-running-wordpress-on-windows';
+			this.page.identifier = 'https://soupbowl.io/2020/01/the-complete-guide-to-running-wordpress-on-windows';
+		};
+
+		function load_comments() {
+			document.getElementById("load_disqus").remove();
+
+			(function() {
+				var d = document, s = d.createElement('script');
+
+				s.src = 'https://soup-bowl.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		}
+	</script><a class="u-url" href="/2020/01/the-complete-guide-to-running-wordpress-on-windows" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+	<data class="u-url" href="/"></data>
+
+	<div class="wrapper">
+		<div class="footer-col-wrapper-solo">
+<!-- Branded icons provided by FontAwesome - https://fontawesome.com/ -->
+<ul class="social-media-list">
+<li><a class="s-github" href="https://github.com/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" class="svg-inline--fa fa-github fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></li>
+<li><a class="s-gitlab" href="https://gitlab.com/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitlab" class="svg-inline--fa fa-gitlab fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M105.2 24.9c-3.1-8.9-15.7-8.9-18.9 0L29.8 199.7h132c-.1 0-56.6-174.8-56.6-174.8zM.9 287.7c-2.6 8 .3 16.9 7.1 22l247.9 184-226.2-294zm160.8-88l94.3 294 94.3-294zm349.4 88l-28.8-88-226.3 294 247.9-184c6.9-5.1 9.7-14 7.2-22zM425.7 24.9c-3.1-8.9-15.7-8.9-18.9 0l-56.6 174.8h132z"></path></svg></a></li>
+<li><a class="s-wordpress" href="https://profiles.wordpress.org/soupbowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="wordpress-simple" class="svg-inline--fa fa-wordpress-simple fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2l68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"></path></svg></a></li>
+<li><a class="s-google" href="https://g.dev/soupbowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" class="svg-inline--fa fa-google fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg></a></li>
+<li><a class="s-lastfm" href="https://www.last.fm/user/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="lastfm" class="svg-inline--fa fa-lastfm fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M225.8 367.1l-18.8-51s-30.5 34-76.2 34c-40.5 0-69.2-35.2-69.2-91.5 0-72.1 36.4-97.9 72.1-97.9 66.5 0 74.8 53.3 100.9 134.9 18.8 56.9 54 102.6 155.4 102.6 72.7 0 122-22.3 122-80.9 0-72.9-62.7-80.6-115-92.1-25.8-5.9-33.4-16.4-33.4-34 0-19.9 15.8-31.7 41.6-31.7 28.2 0 43.4 10.6 45.7 35.8l58.6-7c-4.7-52.8-41.1-74.5-100.9-74.5-52.8 0-104.4 19.9-104.4 83.9 0 39.9 19.4 65.1 68 76.8 44.9 10.6 79.8 13.8 79.8 45.7 0 21.7-21.1 30.5-61 30.5-59.2 0-83.9-31.1-97.9-73.9-32-96.8-43.6-163-161.3-163C45.7 113.8 0 168.3 0 261c0 89.1 45.7 137.2 127.9 137.2 66.2 0 97.9-31.1 97.9-31.1z"></path></svg></a></li>
+<li><a class="s-twitter" href="https://twitter.com/TheAlmightyWord"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" class="svg-inline--fa fa-twitter fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg></a></li>
+<li><a class="s-insta" href="https://www.instagram.com/thealmightyword/"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram" class="svg-inline--fa fa-instagram fa-w-14" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></a></li>
+<li><a class="s-osgrid" href="hop://hg.osgrid.org/Soupbowl/150/125/26"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="osgrid" class="svg-inline--fa fa-osgrid" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="m 211.03302,495.50159 -28.64472,2.60404 -80.72625,-61.19568 -1.30198,-18.22855 61.19568,-44.26921 -148.432112,-95.04862 -10.4162758,-22.1346 24.7387098,-92.44454 18.228445,-6.51018 178.378953,109.37101 -19.53057,76.8201 62.49773,-44.2692 71.61205,49.47736 -33.85301,-84.63234 63.79978,-48.17533 -80.72625,2.60407 -24.73866,-70.30994 -22.1346,72.91401 -95.04861,-1.30198 -32.55095,-20.83258 57.28959,-179.680948 24.73871,-13.0203587 93.74658,3.9061137 15.62441,18.228512 -23.43658,62.497714 h 171.86869 l 16.92647,9.114247 37.75901,96.35065 -9.11422,15.62443 -79.42419,1.30198 65.10176,171.86873 -6.51012,23.43667 -85.93438,58.59161 -16.92647,-6.51012 -23.43666,-69.00795 z"></path></svg></a></li>
+</ul>
+</div>
+
+		<div class="footer-col-wrapper">
+			<div class="footer-col footer-col-1">
+				<p>
+					<a href="https://github.com/soup-bowl/soupbowl.io" class="copyright">
+						CC BY-SA soup-bowl</a>
+					<a href="https://jekyllrb.com/">Powered by Jekyll</a>
+				</p>
+			</div>
+
+			<div class="footer-col footer-col-2">
+				<p>Hello from London.</p>
+			</div>
+		</div>
+
+	</div>
+
+</footer>
+</body>
+
+</html>

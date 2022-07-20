@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="/favicon.ico"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Toshiba Satellite Pro L850, Hackintosh Revisited | Soupbowl</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Toshiba Satellite Pro L850, Hackintosh Revisited" />
+<meta name="author" content="Casey (Soupbowl)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Back in 2018 I turned my laptop into a Hackintosh device, running High Sierra. I had a donor MacBook mid-2010 that I used to run TonyMac tools to get Hackintosh working. It was a fun if complicated process of trial and error, but the result was always impressive – a craptop unexpectedly booting macOS." />
+<meta property="og:description" content="Back in 2018 I turned my laptop into a Hackintosh device, running High Sierra. I had a donor MacBook mid-2010 that I used to run TonyMac tools to get Hackintosh working. It was a fun if complicated process of trial and error, but the result was always impressive – a craptop unexpectedly booting macOS." />
+<link rel="canonical" href="https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited" />
+<meta property="og:url" content="https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited" />
+<meta property="og:site_name" content="Soupbowl" />
+<meta property="og:image" content="https://soupbowl.io/assets/img/IMG_20200424_111621-1200x900.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://soupbowl.io/assets/img/IMG_20200424_111621-1200x900.webp" />
+<meta property="twitter:title" content="Toshiba Satellite Pro L850, Hackintosh Revisited" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Casey (Soupbowl)"},"dateModified":"2020-04-25T00:00:00+00:00","datePublished":"2020-04-25T00:00:00+00:00","description":"Back in 2018 I turned my laptop into a Hackintosh device, running High Sierra. I had a donor MacBook mid-2010 that I used to run TonyMac tools to get Hackintosh working. It was a fun if complicated process of trial and error, but the result was always impressive – a craptop unexpectedly booting macOS.","headline":"Toshiba Satellite Pro L850, Hackintosh Revisited","image":"https://soupbowl.io/assets/img/IMG_20200424_111621-1200x900.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited"},"url":"https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited"}</script>
+<!-- End Jekyll SEO tag -->
+<meta name="theme-color" content="#0f0f0f">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/main.css?v=3"><link type="application/atom+xml" rel="alternate" href="https://soupbowl.io/feed.xml" title="Soupbowl" /></head>
+<body><header class="site-header" role="banner">
+
+	<div class="wrapper">
+<a class="site-title" rel="author" href="/">Soupbowl</a>
+	  <span class="site-subtitle">Ramblings of a DevOps Nerd</span><nav class="site-nav">
+		  <input type="checkbox" id="nav-trigger" class="nav-trigger">
+		  <label for="nav-trigger">
+			<span class="menu-icon">
+			  <svg viewbox="0 0 18 15" width="18px" height="15px">
+				<path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+			  </svg>
+			</span>
+		  </label>
+
+		  <div class="trigger">
+<a class="page-link" href="/projects/">Projects</a><a class="page-link" href="/blog/">Blog</a><a class="page-link" href="/guides">Guides</a>
+</div>
+		</nav>
+</div>
+  </header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+	<header class="post-header"><div class="post-featured full-width-banner" style="background-image: url(/assets/img/IMG_20200424_111621-1200x900.webp);">
+			<h1 class="post-title p-name" itemprop="name headline">Toshiba Satellite Pro L850, Hackintosh Revisited</h1>
+		</div>
+<p class="post-meta"><time class="dt-published" datetime="2020-04-25T00:00:00+00:00" itemprop="datePublished">
+				25 April 2020
+			</time>• 
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+						<span class="p-author h-card" itemprop="name">Casey (Soupbowl)</span></span> • Hackintosh,
+				Mac
+				</p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<p><a href="/2018/08/hackintoshing-a-toshiba-satellite-pro-l850-1uj">Back in 2018</a> I turned my laptop into a Hackintosh device, running High Sierra. I had a donor MacBook mid-2010 that I used to run TonyMac tools to get Hackintosh working. It was a fun if complicated process of trial and error, but the result was always impressive – a craptop unexpectedly booting macOS.</p>
+
+<p>I eventually wiped macOS and re-installed Windows for a WordCamp coding session. The laptop proved to be quite a letdown, and now sits on a shelf collecting dust.</p>
+
+<p>So, let’s Hackintosh it – <strong><a href="/2018/08/hackintoshing-a-toshiba-satellite-pro-l850-1uj">again</a></strong>!</p>
+
+<h2 id="stop_sign-if-youre-attempting-this">
+<img class="emoji" title=":stop_sign:" alt=":stop_sign:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6d1.png" height="20" width="20"> If You’re Attempting This…</h2>
+
+<p>I hate it when some guides forget to do this, but if you want to try this yourself, you <strong>absolutely must</strong> have the following or you won’t be able to do it:</p>
+
+<ul>
+  <li>An <strong>existing Mac</strong> or <strong>Hackintosh</strong> to build the USB on.</li>
+  <li>A copy of <strong>Install macOS Mojave.app</strong>. I can’t legally provide mine <a href="#expiry">and they <strong>do expire</strong></a>, so fresh is good!</li>
+  <li>My laptop is <strong>Toshiba Satellite Pro L850-1UJ</strong>. Other L850’s might have a different setup.</li>
+  <li>A large capacity (8GB+) usb storage device.</li>
+  <li>Dedicate the laptop – you will <strong>erase everything</strong> on it.</li>
+</ul>
+
+<p><a href="https://gist.github.com/soup-bowl/04fa2321bc0c28f8584f569cf7997ff1">Hardware Dump</a></p>
+
+<p>If you can’t fufill these, then <strong>stop now</strong>. You’ll be wasting your time. If you want to see roughly how Hackintosh works or how my experience was, then please read on!</p>
+
+<h2 id="thinking-what-does-and-does-not-work">
+<img class="emoji" title=":thinking:" alt=":thinking:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png" height="20" width="20"> What Does and Does not Work?</h2>
+
+<p>This is from my current setup. They might actually have working configs that I’ve yet to find. If you know any, please comment below!</p>
+
+<h4 id="heavy_check_mark-does">
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> Does</h4>
+
+<ul>
+  <li>Screen (full graphics).</li>
+  <li>Display brightness.</li>
+  <li>Keyboard &amp; trackpad.</li>
+  <li>Battery monitor.</li>
+  <li>USB.</li>
+  <li>Ethernet.</li>
+  <li>Speaker audio.</li>
+</ul>
+
+<h4 id="x-does-not">
+<img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> Does not</h4>
+
+<ul>
+  <li>Suspend.</li>
+  <li>WiFi.</li>
+  <li>Keyboard brightness controls.</li>
+</ul>
+
+<p>The L850 has a <strong>Qualcomm Atheros AR9462</strong>, which does not work in macOS. I happened to have both the Edimax and TP-Link USB wireless adapters, <a href="https://github.com/chris1111/Wireless-USB-Adapter-Clover">which worked with Chris1111 drivers</a>.</p>
+
+<h2 id="clock4-changes-from-2018">
+<img class="emoji" title=":clock4:" alt=":clock4:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f553.png" height="20" width="20"> Changes from 2018</h2>
+
+<p>Instead of relying on <a href="http://www.tonymacx86.com">TonyMac</a> software, I’ve decided to attempt <a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/">Hackintosh Vanilla</a>. To quote the website:</p>
+
+<blockquote>
+  <p>A vanilla setup implies that the OS itself remains relatively untouched – and that the bulk of the Hackintosh-related kexts, patches, etc are contained on the EFI partition. For all intents and purposes, a vanilla install’s main partition is <em>identical</em> to that of an official Apple computer.</p>
+
+  <p><a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/">hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide</a></p>
+</blockquote>
+
+<p>Other than the different approach, I had the following caveats:</p>
+
+<ul>
+  <li>Instead of High Sierra, I’m installing <strong>Mojave</strong>.</li>
+  <li>My MacBook blew up*, so I’m using a combination of <strong><a href="https://www.soupbowl.io/2020/04/macos-in-virtualbox/">Virtualbox</a></strong> and my partner’s <strong>Macbook Air</strong>.</li>
+  <li>This time, I will <strong>not</strong> be undoing it. This will be a continuous project until the laptop dies.</li>
+</ul>
+
+<p>*An important point I must raise here. I bought my mac from an eBay listing a few years back. One day I plugged it in and it literally <strong>blew up</strong>. Smoke came from the plug and I had a residual shock. I put the MacBook and the dead charger in a cupboard and forgot about it. Recently, I pried open the plug to find it was a fake (or a non-recall), and the fuse was bypassed. Please, <strong>check your chargers</strong>! I now have a plug in RCD when using eBay auction purchases, just in case…</p>
+
+<h2 id="woman_technologist-the-process">
+<img class="emoji" title=":woman_technologist:" alt=":woman_technologist:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-1f4bb.png" height="20" width="20"> The Process</h2>
+
+<h3 id="setting-up-a-bootable-usb">Setting up a Bootable USB</h3>
+
+<p>My trusty SanDisk Cruiser was still lying around, but I’d long since wiped it. So I wiped it without a moment’s consideration of the content (not recommended, of course) and prepped it for being a macOS conduit!</p>
+
+<h4 id="installer-expires">Installer expires?!</h4>
+
+<p>Now I keep an archive of macOS installers because… Well, I don’t really know why. Using my partner’s Mac I created a bootable macOS drive using an archived Mojave, only to find I got the error:</p>
+
+<blockquote>
+  <p>This copy of the Install macOS Mojave application is damaged, and can’t be used to install macOS</p>
+</blockquote>
+
+<p>So it turns out these macOS installers <strong>expire</strong>! Like a bad carton of milk, macOS would simply refuse to run (other tools like Disk Utility and Terminal were fine). I tried multiple solutions I found on Google to bypass it, but none worked.</p>
+
+<p>It would seem that Apple sign a certificate on the day you downloaded the installer from them. If you wait too long, macOS deems it damaged. You appear to be able to reset the system clock or edit the date via Terminal, but you need to know <strong>when</strong> your package was signed. Unfortunately, I didn’t note the date down. I discovered however I could re-download it from Apple still. Phew!</p>
+
+<p>…</p>
+
+<p>Back on track (and still on my partner’s Mac), once I had created the Bootable USB, I used <a href="https://github.com/Dids/clover-builder/releases">Did’s autobuild of Clover</a> to install Clover onto my USB. Complete shout-out to anyone who works on Clover in any form, as this fantastic bit of kit is what will get your Mac installation drive booting on a PC, and beyond!</p>
+
+<p>In my previous attempt I had a config.plist that worked wonders with my current setup. However, the default config that comes with Did’s Autobuild was apparently completely fine for this laptop. This makes a great starting point!</p>
+
+<p>I ran the Clover Installer package, changed the location to my USB drive, and didn’t change a damn setting. Install, and (safely) yanked that newly primed Hackintosh stick out.</p>
+
+<h3 id="uefibios-changes">UEFI/BIOS Changes</h3>
+
+<p>This laptop comes with UEFI and legacy BIOS mode. Supposedly Clover works with both, but for my install I enabled <strong>UEFI mode</strong> and <strong>disabled safe boot</strong>. Saved changes and exited.</p>
+
+<p>Smashing F12 like the refresh button, My trusty Toshiba asked what to boot from. What else but the Macintosh conversion stick?!</p>
+
+<p>I left Clover alone, and it booted straight into the Mac recovery screen. Now, if you’re going to commit to this make <strong>damn well sure your Toshiba has nothing important stored on it, and is backed up!</strong> This process (or at least how I did it) will <strong>erase everything!</strong></p>
+
+<p>Pop open Disk Utility from the Utilities menu. I had to click the button at the top left and show all devices. On my main hard drive (not the USB stick) I selected it and chose erase. I made sure to choose <strong>Mac OS Extended (Journaled)</strong>. APFS might be supported, but I’d rather use the tried-and-true format, and the <strong>GUID Partition Map</strong>. Hooray, the whole disk is now in Mac format!</p>
+
+<p>Excluding the certificate expiry, the installation ran without a hitch. My network adapters (ethernet and wireless) were not detected so I opted to install without connecting to the internet. I also selected <strong>British – PC</strong> as my keyboard format, which seems OK except <strong>alt</strong> and <strong>special</strong> are swapped round.</p>
+
+<p>Storm through the install like a regular Mac. After a lot of waiting and reboots, you’ll be greeted with the Mac screen. Hooray, you’re done(ish)!</p>
+
+<h3 id="hammer_and_wrench-getting-stuff-working">
+<img class="emoji" title=":hammer_and_wrench:" alt=":hammer_and_wrench:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e0.png" height="20" width="20"> Getting Stuff Working</h3>
+
+<p>Most things are working at this point, or at least the most important stuff. <strong>Networking, sound, and laptop detection</strong> are not.</p>
+
+<p>As a basepoint, I found this <a href="https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/config_HD4000_1366x768.plist">config.plist from RehabMan</a> worked well as a jumping point. I renamed the existing plist as ‘legacy.plist’ and used this file (<a href="https://gist.github.com/soup-bowl/2da067860a3a1d953e90f8832ff15d69">with a few modifications</a>) as the main driver.</p>
+
+<p>I used the following kexts (In the <strong>EFI</strong> partition, in <strong>Clover/Kexts/Other</strong>):</p>
+
+<ul>
+  <li>
+<strong>FakeSMC</strong>, what <em>doesn’t</em> this one do?</li>
+  <li>
+<strong>Lilu</strong>, a dependency for almost all Hackintosh kexts.</li>
+  <li>
+<strong>VoodooPS2Controller</strong>, enables keyboard and trackpad.</li>
+  <li>
+<strong>ACPIBatteryManager</strong>, battery is detectable by MacOS.</li>
+  <li>
+<strong>NativeBacklight</strong>, MacOS detects display has adjustable brightness.</li>
+  <li>
+<strong><a href="https://bitbucket.org/RehabMan/os-x-realtek-network/downloads/">OSX Realtek Network</a></strong>, by RehabMan.</li>
+  <li>
+<strong><a href="https://sourceforge.net/projects/voodoohda/">VoodooHDA</a></strong> for Intel HD Audio out speakers.</li>
+</ul>
+
+<p>Great. With the above, your <strong>keyboard, trackpad, audio, battery, brightness &amp; wired network</strong> now work.</p>
+
+<p>Native backlighting took some jiggling to get working. <a href="https://www.tonymacx86.com/threads/guide-laptop-backlight-control-using-applebacklightfixup-kext.218222/">RehabMan on TonyMac has a great guide</a> to getting this working (I installed the kext into Clover, not MacOS).</p>
+
+<h2 id="thinking-the-verdict">
+<img class="emoji" title=":thinking:" alt=":thinking:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png" height="20" width="20"> The Verdict</h2>
+
+<p class="article-image"><img src="/assets/img/Screenshot-2020-04-25-at-11.43.50.webp" alt=""></p>
+
+<p>I’ve actually been finding the performance on this base-spec (inc. original hard drive) runs really well on MacOS. There are slowdowns, and I have not tried gaming on this machine, but nothing more than I would expect from a <strong>very old</strong> machine. Plus Apple tends to care for their ageing old Intel machines really well, so I’m not <em>too</em> surprised.</p>
+
+<p>The lack of sound and wireless networking is troublesome though. I make do with a USB wireless dongle, but until I can find a solution to let MacOS see my actual WiFi card, I may not be able to upgrade to MacOS Catalina. The lack of ethernet detection also causes problems with the Mac App Store, which seems to always reckon I’m not connected (despite updates downloading just fine).</p>
+
+<p>So, I’m gonna keep it!</p>
+
+<h2 id="catalina">Catalina?</h2>
+
+<p class="article-image"><img src="/assets/img/Screenshot-2020-08-16-at-23.21.18-1.webp" alt=""></p>
+
+<p>The upgrade to Catalina was a sucess! However, some changes were needed first.</p>
+
+<p>I had to add an EC ACPI patch to allow the macOS Catalina installer to run past the first stage.</p>
+
+<p><a href="https://dortania.github.io/Getting-Started-With-ACPI/ssdt-platform.html#laptop">Based on this information</a>, I also added <a href="https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-LAPTOP.aml">this ACPI configuration</a> to <strong>clover/acpi/patched</strong>. So far I’ve only added the EC configuration in the effort of trying to install the Catalina update.</p>
+
+<p>After the installation of Catalina, my screen brightness controls stopped working. To remedy this, I installed <a href="https://github.com/acidanthera/WhateverGreen"><strong>WhateverGreen</strong></a> kext and enabled <strong>SetIntelBacklight</strong> and <strong>SetIntelMaxBacklight</strong> (Devices in Clover Configurator). <strong>AddPNLF</strong> might be needed from <strong>ACPI</strong> section.</p>
+
+<h2 id="big-sur-and-beyond">Big Sur and Beyond?</h2>
+
+<p>Alas, I’ve hit a roadblock. Easy to blame Apple on this, but at this point not only is <strong>Ivy Bridge nearly 10 years old</strong>, but Apple are also moving to <strong>ARM architecture</strong>. Catalina was rocky enough!</p>
+
+<p>I’ve tried adjusting my Clover for support and simply facing constant kernel panic. At this point for other purposes I <strong>reinstalled Windows for a year</strong>, and it seems community progress has come a long way, so I will not give up just yet.</p>
+
+<p>Since the community has moved from <strong>Clover</strong> to <strong>OpenCore</strong>, I’ll be trying that off the bat to continue the progress of this Hackintosh. If all goes well, I’ll make a seperate post so watch this space.</p>
+
+<h2 id="robot-the-future">
+<img class="emoji" title=":robot:" alt=":robot:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f916.png" height="20" width="20"> The Future</h2>
+
+<p>With no dire need to use this laptop (the battery is <strong>really</strong> dead), I’m going to persist on trying to get Hackintosh to work as much as possible. It really does feel rewarding, and you never get tired of the shock some people have when they see your craptop suddenly boot MacOS.</p>
+
+<p><em>Although they will question “<strong>why not buy a real Mac</strong>“</em>…</p>
+
+	</div>
+<hr>
+
+	<div id="load_disqus" class="aligncentre">
+		<button class="button" onclick="load_comments()">Load Discussion (Disqus)</button><p>By clicking on this button you are agreeing to the <a href="https://help.disqus.com/en/articles/1717103-disqus-privacy-policy">Disqus privacy policy</a>.</p>
+</div>
+
+	<div id="disqus_thread"></div>
+
+	<script>
+		var disqus_config = function () {
+			this.page.url = 'https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited';
+			this.page.identifier = 'https://soupbowl.io/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited';
+		};
+
+		function load_comments() {
+			document.getElementById("load_disqus").remove();
+
+			(function() {
+				var d = document, s = d.createElement('script');
+
+				s.src = 'https://soup-bowl.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		}
+	</script><a class="u-url" href="/2020/04/toshiba-satellite-pro-l850-hackintosh-revisited" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+	<data class="u-url" href="/"></data>
+
+	<div class="wrapper">
+		<div class="footer-col-wrapper-solo">
+<!-- Branded icons provided by FontAwesome - https://fontawesome.com/ -->
+<ul class="social-media-list">
+<li><a class="s-github" href="https://github.com/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" class="svg-inline--fa fa-github fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></li>
+<li><a class="s-gitlab" href="https://gitlab.com/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitlab" class="svg-inline--fa fa-gitlab fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M105.2 24.9c-3.1-8.9-15.7-8.9-18.9 0L29.8 199.7h132c-.1 0-56.6-174.8-56.6-174.8zM.9 287.7c-2.6 8 .3 16.9 7.1 22l247.9 184-226.2-294zm160.8-88l94.3 294 94.3-294zm349.4 88l-28.8-88-226.3 294 247.9-184c6.9-5.1 9.7-14 7.2-22zM425.7 24.9c-3.1-8.9-15.7-8.9-18.9 0l-56.6 174.8h132z"></path></svg></a></li>
+<li><a class="s-wordpress" href="https://profiles.wordpress.org/soupbowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="wordpress-simple" class="svg-inline--fa fa-wordpress-simple fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2l68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"></path></svg></a></li>
+<li><a class="s-google" href="https://g.dev/soupbowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" class="svg-inline--fa fa-google fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg></a></li>
+<li><a class="s-lastfm" href="https://www.last.fm/user/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="lastfm" class="svg-inline--fa fa-lastfm fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M225.8 367.1l-18.8-51s-30.5 34-76.2 34c-40.5 0-69.2-35.2-69.2-91.5 0-72.1 36.4-97.9 72.1-97.9 66.5 0 74.8 53.3 100.9 134.9 18.8 56.9 54 102.6 155.4 102.6 72.7 0 122-22.3 122-80.9 0-72.9-62.7-80.6-115-92.1-25.8-5.9-33.4-16.4-33.4-34 0-19.9 15.8-31.7 41.6-31.7 28.2 0 43.4 10.6 45.7 35.8l58.6-7c-4.7-52.8-41.1-74.5-100.9-74.5-52.8 0-104.4 19.9-104.4 83.9 0 39.9 19.4 65.1 68 76.8 44.9 10.6 79.8 13.8 79.8 45.7 0 21.7-21.1 30.5-61 30.5-59.2 0-83.9-31.1-97.9-73.9-32-96.8-43.6-163-161.3-163C45.7 113.8 0 168.3 0 261c0 89.1 45.7 137.2 127.9 137.2 66.2 0 97.9-31.1 97.9-31.1z"></path></svg></a></li>
+<li><a class="s-twitter" href="https://twitter.com/TheAlmightyWord"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" class="svg-inline--fa fa-twitter fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg></a></li>
+<li><a class="s-insta" href="https://www.instagram.com/thealmightyword/"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram" class="svg-inline--fa fa-instagram fa-w-14" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></a></li>
+<li><a class="s-osgrid" href="hop://hg.osgrid.org/Soupbowl/150/125/26"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="osgrid" class="svg-inline--fa fa-osgrid" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="m 211.03302,495.50159 -28.64472,2.60404 -80.72625,-61.19568 -1.30198,-18.22855 61.19568,-44.26921 -148.432112,-95.04862 -10.4162758,-22.1346 24.7387098,-92.44454 18.228445,-6.51018 178.378953,109.37101 -19.53057,76.8201 62.49773,-44.2692 71.61205,49.47736 -33.85301,-84.63234 63.79978,-48.17533 -80.72625,2.60407 -24.73866,-70.30994 -22.1346,72.91401 -95.04861,-1.30198 -32.55095,-20.83258 57.28959,-179.680948 24.73871,-13.0203587 93.74658,3.9061137 15.62441,18.228512 -23.43658,62.497714 h 171.86869 l 16.92647,9.114247 37.75901,96.35065 -9.11422,15.62443 -79.42419,1.30198 65.10176,171.86873 -6.51012,23.43667 -85.93438,58.59161 -16.92647,-6.51012 -23.43666,-69.00795 z"></path></svg></a></li>
+</ul>
+</div>
+
+		<div class="footer-col-wrapper">
+			<div class="footer-col footer-col-1">
+				<p>
+					<a href="https://github.com/soup-bowl/soupbowl.io" class="copyright">
+						CC BY-SA soup-bowl</a>
+					<a href="https://jekyllrb.com/">Powered by Jekyll</a>
+				</p>
+			</div>
+
+			<div class="footer-col footer-col-2">
+				<p>Hello from London.</p>
+			</div>
+		</div>
+
+	</div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="/favicon.ico"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>I made: Cardboard Macintosh with a Raspberry Pi | Soupbowl</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="I made: Cardboard Macintosh with a Raspberry Pi" />
+<meta name="author" content="Casey (Soupbowl)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="And it also runs DOS too. Yes, it feels really weird." />
+<meta property="og:description" content="And it also runs DOS too. Yes, it feels really weird." />
+<link rel="canonical" href="https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi" />
+<meta property="og:url" content="https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi" />
+<meta property="og:site_name" content="Soupbowl" />
+<meta property="og:image" content="https://soupbowl.io/assets/img/IMG_20210423_110928-c.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://soupbowl.io/assets/img/IMG_20210423_110928-c.webp" />
+<meta property="twitter:title" content="I made: Cardboard Macintosh with a Raspberry Pi" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Casey (Soupbowl)"},"dateModified":"2021-04-25T00:00:00+00:00","datePublished":"2021-04-25T00:00:00+00:00","description":"And it also runs DOS too. Yes, it feels really weird.","headline":"I made: Cardboard Macintosh with a Raspberry Pi","image":"https://soupbowl.io/assets/img/IMG_20210423_110928-c.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi"},"url":"https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi"}</script>
+<!-- End Jekyll SEO tag -->
+<meta name="theme-color" content="#0f0f0f">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/main.css?v=3"><link type="application/atom+xml" rel="alternate" href="https://soupbowl.io/feed.xml" title="Soupbowl" /></head>
+<body><header class="site-header" role="banner">
+
+	<div class="wrapper">
+<a class="site-title" rel="author" href="/">Soupbowl</a>
+	  <span class="site-subtitle">Ramblings of a DevOps Nerd</span><nav class="site-nav">
+		  <input type="checkbox" id="nav-trigger" class="nav-trigger">
+		  <label for="nav-trigger">
+			<span class="menu-icon">
+			  <svg viewbox="0 0 18 15" width="18px" height="15px">
+				<path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+			  </svg>
+			</span>
+		  </label>
+
+		  <div class="trigger">
+<a class="page-link" href="/projects/">Projects</a><a class="page-link" href="/blog/">Blog</a><a class="page-link" href="/guides">Guides</a>
+</div>
+		</nav>
+</div>
+  </header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+	<header class="post-header"><div class="post-featured full-width-banner" style="background-image: url(/assets/img/IMG_20210423_110928-c.webp);">
+			<h1 class="post-title p-name" itemprop="name headline">I made: Cardboard Macintosh with a Raspberry Pi</h1>
+		</div>
+<p class="post-meta"><time class="dt-published" datetime="2021-04-25T00:00:00+00:00" itemprop="datePublished">
+				25 April 2021
+			</time>• 
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+						<span class="p-author h-card" itemprop="name">Casey (Soupbowl)</span></span> • Gadgets,
+				<a href="/guides">Guides</a>,
+				Mac,
+				Raspberry Pi
+				</p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<p><strong>And it also runs DOS too. Yes, it feels <em>really weird</em>.</strong></p>
+
+<p>If you’re a maker of any level of expertise, signing up to the <strong>Instructables Newsletter</strong> is a bad idea for your bank account. A week in and you’re looking at buying a laser cutter, a 3D printer, and an assortment of different power tools.</p>
+
+<p>I’m in the camp of “Oh that’s looks cool… Oh I can’t afford any of this!”. But one thing I do end up with a lot of, is cardboard.</p>
+
+<p>And then I saw the <strong><a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/">Mini Mac on Instructables</a></strong>…</p>
+
+<h2 id="thinking-what-did-i-use">
+<img class="emoji" title=":thinking:" alt=":thinking:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f914.png" height="20" width="20"> What did I use?</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210423_181904-edited-scaled.webp" alt=""></p>
+
+<p>I don’t have a 3D printer, so I was immediately scrubbed at that point. However, armed with my cutting knife (exacto knife I think it’s called across the pond?) and a truckload of cardboard from a household Amazon order, I got to work.</p>
+
+<p>Without beating around the bush, I needed the following to make a cardboard Macintosh:</p>
+
+<ul>
+  <li>
+<a href="https://shop.pimoroni.com/products/raspberry-pi-zero-w">Raspberry Pi Zero wireless, no header</a> (Pimoroni – £9.30)
+    <ul>
+      <li>I soldered a socket header to the Pi instead. The author has an alternative method which should work here too.</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://www.aliexpress.com/item/32908424504.html">Raspberry Pi LCD screen</a> (AliExpress – £12.93).
+    <ul>
+      <li>I used the same one as the author. Search the product code <strong>MZDPI-VGA-ZERO</strong> in <strong>AliExpress</strong> and you’ll likely find it at a reasonable price.</li>
+      <li>Typically comes with a socket. If not, <a href="https://shop.pimoroni.com/products/2x20-pin-gpio-header-for-raspberry-pi-2-b-a?variant=1132812261">here’s one you can buy</a>.</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://www.amazon.co.uk/SanDisk-microSDHC-Memory-Adapter-Performance/dp/B073K14CVB">MicroSD Card</a> (16GB – Amazon – £6).</li>
+  <li>
+<a href="https://www.amazon.co.uk/Anker%C2%AE-Reader-RS-MMC-Support-Warranty/dp/B00LFIXC8I/">MicroSD to USB adapter</a> (Amazon – £8.99).
+    <ul>
+      <li>Pause! Your laptop might have one built-in.</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://shop.pimoroni.com/products/raspberry-pi-universal-power-supply">MicroUSB power supply</a> (Pimoroni – £8.40).</li>
+  <li>
+<a href="https://www.amazon.co.uk/Rii-K01X1-Mini-Wireless-Keyboard/dp/B01G6XGLQQ">Wireless/1 socket mouse and keyboard</a> (Amazon – £15.99).
+    <ul>
+      <li>Bluetooth might be best. if you get 2.4G dongle, you’ll need a <a href="https://www.amazon.co.uk/Rankie-R-1170-Female-Adapter-Convertor-Black/dp/B00YOX4JU6/">MicroUSB to USB converter</a> (£5) most likely.</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://shop.pimoroni.com/products/antex-xs25-soldering-iron-uk-plug">Soldering Iron</a> (Pimoroni – £30).
+    <ul>
+      <li>If you go Pi w/header + extension cable, it’s not needed.</li>
+      <li>
+<a href="https://shop.pimoroni.com/products/gpio-hammer-header?">There’s also this header</a> if you really want to avoid it. I’ve not tried it, so your experience may vary.</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://www.hobbycraft.co.uk/black-hot-melt-11mm-glue-gun/638425-1000">Glue gun</a> (Hobbycraft – £10).
+    <ul>
+      <li>Definitely needed when working with cardboard. If the glue is too expensive, you can <a href="https://www.aliexpress.com/item/33015733185.html?">get it from AliExpress</a>.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Lots</strong> of cardboard.
+    <ul>
+      <li>Just don’t throw order boxes out, and even a family of low online orders will have enough in 3 months.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>My method managed to avoid both a USB Ethernet peripheral (so a <strong>Wireless Router</strong> is required) and requiring a HDMI screen to setup the display drivers, but it might also be good to have a <strong>Mini HDMI to HDMI adapter/cable</strong> too.</p>
+
+<p>I had a lot of the parts already in my workspace, but the rough estimate I’d give to the cardboard Macintosh (excluding cardboard, I’m really clueless how much that’d cost) was <strong>around the £125</strong> mark (including tools). If you get fed up down the line, <strong>all parts are reusable</strong>.</p>
+
+<p>Here’s the software that you will need:</p>
+
+<ul>
+  <li>
+<a href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit"><strong>Raspberry Pi OS</strong></a> (‘with desktop’ recommended).</li>
+  <li>
+<a href="https://www.balena.io/etcher/"><strong>Etcher</strong></a>, a cross platform image writer.</li>
+  <li>We need to edit a few Pi system files, so a good text editor is needed. We recommend the free and cross platform <strong><a href="https://code.visualstudio.com/">Visual Studio Code</a></strong>.</li>
+  <li>Display driver, but this will be done on the Pi.</li>
+  <li>We’ll be dealing with non-standard archives, so I recommend <strong><a href="https://www.7-zip.org/">7zip</a></strong> for <strong>Windows</strong> or <strong><a href="https://www.keka.io/en/">Keka</a></strong> for <strong>macOS</strong> to export them properly.</li>
+</ul>
+
+<p>And finally, the optional extras:</p>
+
+<ul>
+  <li>Beverage (alcohol not recommended).</li>
+</ul>
+
+<h2 id="pie-setting-up-the-pi">:pie: Setting up the Pi</h2>
+
+<h3 id="first-steps">First Steps</h3>
+
+<p>Installing Raspberry Pi OS is incredibly complicated, and requires a lot of books and online courses to learn how to install. Just kidding, it’s a few button presses!</p>
+
+<p>Connect your MicroSD card you’re dedicating to the Pi into your computer, via either an adapter or a laptop SD card reader. Fire up <strong>Balena Etcher</strong>. You’ll be asked to select:</p>
+
+<ul>
+  <li>Your MicroSD (if it’s the only one plugged in, it selects auto).</li>
+  <li>Your Raspberry Pi OS you downloaded earlier (if it doesn’t appear, extract the archive).</li>
+</ul>
+
+<p>Check to make sure you’re not about to wipe your entire PC of all your precious cat GIFs, and click Flash. Pop on a video on YouTube and wait for the flash + verification process to complete.</p>
+
+<p>Done? Eject, but plug the MicroSD back in again. We’ve got some tinkering to do.</p>
+
+<h3 id="preparing-for-headless">Preparing for Headless</h3>
+
+<p>The problem here is if we go and whack it straight into the Raspberry Pi and power it up, Raspberry Pi OS will expect a screen and for us to configure networking. Ideally, we want to get this done beforehand, and it’s super easy to do. For the curious, <a href="https://www.raspberrypi.org/documentation/configuration/wireless/headless.md">we’re setting this up headless</a>.</p>
+
+<p>Depending on your platform, you might now see between 1-3 new mysterious storage locations pop-up. We’re looking for the one called <strong>BOOT</strong>. Go into that one.</p>
+
+<p>Create a blank file <strong>ssh</strong> inside this directory. On Windows, you might need to temporarily turn off hide file extensions, create a new text file and remove the .txt extension. If it moans, your text editor’s save as dialog should be able to achieve it.</p>
+
+<p>Create another file in this directory called <strong>wpa_supplicant.conf</strong>. Open this file in a code editor, and change the contents to this, replacing the <text> with your own information:</text></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=&lt;Insert 2 letter ISO 3166-1 country code here&gt;
+
+network={
+ ssid="&lt;Name of your wireless LAN&gt;"
+ psk="&lt;Password for your wireless LAN&gt;"
+}
+</code></pre></div></div>
+
+<p>So what have we done? The <strong>ssh</strong> file enables SSH from the start. SSH allows you to access a command prompt for the device from anywhere in your network, so long as you have login information. This will let us install the display driver without an existing display.</p>
+
+<p>The <strong>wpa_supplicant.conf</strong> does a similar thing. When the Pi sees this file, it will turn the on-board WiFi on and use the contents of this file to connect to the wireless network.</p>
+
+<p>Once you’ve done all this, eject the MicroSD from your computer, whack the MicroSD card into the Pi Zero, and connect it to power. Here’s another time to whack something on YouTube, as initialisation will take a while. I recommend <strong>leaving it 10 minutes</strong> before thinking something’s wrong.</p>
+
+<h3 id="setting-up-the-display">Setting up the display</h3>
+
+<p>Left it a while? Good, by now it should’ve connected to your network. This is where things may get a bit… Fun.</p>
+
+<p>On Windows, I generally find that I can try <code class="language-plaintext highlighter-rouge">ssh pi@raspberrypi</code> and job done. However, on both macOS and Linux this has been a nightmare, presumably thanks to my network’s router. If you’re in the same boat, try <strong>raspberrypi.local</strong>. Doesn’t work? try loading up your router’s configuration page – it might have a non-login list of devices on your network.</p>
+
+<p>If you get a prompt for a password – try <strong>raspberry</strong>. Congratulations! Now we can setup the display.</p>
+
+<p>The display driver we will use is <a href="https://github.com/tianyoujian/MZDPI">found here on GitHub</a>, if you’re using the display mentioned in the parts list. This is installed by running the following commands on your SSH connection. Run the following (taken from the GitHub page):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/tianyoujian/MZDPI.git
+cd MZDPI/vga
+sudo chmod +x mzdpi-vga-autoinstall-online
+sudo ./mzdpi-vga-autoinstall-online
+sudo reboot
+</code></pre></div></div>
+
+<p>The commands, broken down, do:</p>
+
+<ul>
+  <li>git clone will make a copy of the files you see on the webpage, in a directory named after the repo (MZDPI). Git is very complex and is essential knowledge for code development, see here if you’re interested in learning more.</li>
+  <li>Change into the ‘vga’ directory of the cloned Git repository.</li>
+  <li>Tell the system we want to make the script <strong>mzdpi-vga-autoinstall-online</strong> executable (otherwise the next command will throw an error).</li>
+  <li>Run said script
+    <ul>
+      <li>I’ll revisit this with a breakdown of the script actions, but generally it’s a driver that will read the GPIO pins and let the Pi know it’s a functioning display.</li>
+    </ul>
+  </li>
+  <li>Finally, reboot our Raspberry Pi.
+    <ul>
+      <li>Running ‘reboot’ over an SSH connection will only reboot the machine you’re connected to. On your PC, it’ll just show the message “host terminated the SSH connection” and leave it be.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>If all has gone correctly, your Pi screen drivers will be ready for us to connect the LCD display onto! I’ll move onto the ‘hardware’ setup for now, and come back to the emulation software in a bit.</p>
+
+<p class="article-image"><img src="/assets/img/original_893ddc20-fa1b-4f8f-98e8-b4fa8c095e32_IMG_20210418_022309-1024x792.webp" alt=""></p>
+
+<p>For the security conscious, I don’t recommend switching off SSH yet as we will be using it for SCP (file transfer) a bit later. If you want to strengthen your Pi security, <a href="https://www.raspberrypi.org/documentation/configuration/security.md">here’s some good recommendations</a> on setting up key-based authentication.</p>
+
+<h2 id="hammer_and_wrench-constructing-the-cardboard-macintosh">
+<img class="emoji" title=":hammer_and_wrench:" alt=":hammer_and_wrench:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e0.png" height="20" width="20"> Constructing the Cardboard Macintosh</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210422_182005-edited-scaled.webp" alt=""></p>
+
+<p>You can now solder the socket header to the Pi, if that’s the route you’ve taken. You want the socket aspect of the header to be <strong>underneath</strong> the Pi. We want the Pi to be facing <strong>away</strong> from the screen when it is attached to the screen (away means the big CPU chip is facing you, not the screen).</p>
+
+<p>The <a href="https://magpi.raspberrypi.org/articles/how-to-solder-gpio-pin-headers-to-raspberry-pi-pico">MagPi magazine has a great guide</a> for soldering Pi GPIO headers. My advice for soldering the header is to start with the corners, as once you’re done it’ll keep the header stable within the GPIO sockets for you do to the rest. Solder by briefly touching/tinning the soldering iron onto the solder, then use the iron to heat up each pad &amp; pin. Put the solder into this heated area (without touching the iron directly) and it should flow straight onto the pad. If you’ve got a triangle-like solder pad, you’ve done good.</p>
+
+<p>If you’ve got a multi-meter handy, you can use one to test how strong your connections are in continuity mode. You’ll likely get bored doing so, so long as they’re all visibility soldered and your ground and 5V rails are fine you should be good to go.</p>
+
+<p>Cardboard will require some creative ingenuity from yourself. Personally I found it was handy to get the <a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/">SketchUp model from the original Instructable</a> and follow that as a guide. I have no real good advice here, other than I got to where I am by lots of trial and error. It’s depending on your own level of pefectionism, as I was quite happy to have mine vaguely computer looking.</p>
+
+<p>To get a stable mount of the Pi screen, I opted to essentially make a thin wall of cardboard that would go up the side of the screen and hold it with friction. I ended up losing quite a lot of hot glue at this point, but the wall worked and keeps the screen pressed up to the gap in the enclosure.</p>
+
+<p>My plan is to come back to this project with a way of having ports facing outside the cardboard. For now I would make a hole in the cardboard and pull the power and data cables through there. Or my personal choice to not damage the enclosure for now – slant the roof/lid and pull it in through there.</p>
+
+<p>At this point, you should now have a neat looking little cardboard computer that runs Raspberry Pi OS quite fine. You could stop here if you want, because this is pretty damn cool in itself. Up next I’ll talk about how to emulate the OS the Macintosh would’ve used back in the day.</p>
+
+<h2 id="apple-emulating-system-7">
+<img class="emoji" title=":apple:" alt=":apple:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f34e.png" height="20" width="20"> Emulating System 7</h2>
+
+<h3 id="pre-preperation">Pre-preperation</h3>
+
+<p>You’re <a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/#step5">best following the Instructable here</a>, as their explanation is absolutely perfect. If you follow the guide you can skip this step here entirely, but I’ll explain it for anyone who’d want my chaotic style of explanations.</p>
+
+<p>Since the Pi itself won’t run System 7 (incompatible processor), we will need to <em>emulate</em> a Motorola CPU. This will use the amazing <strong>Gyphel Project</strong> <strong>vMac</strong> emulator. This software will make a virtual sandbox of a Macintosh on your Pi, translating all system resource commands to the Raspberry Pi. This is <strong>intense</strong> work, but the Pi Zero is crazily capable of handling this well.</p>
+
+<p>The Instructable author has pre-compiled the ARM executable you’ll need for both the Raspberry Pi and the screen size. You can <a href="https://www.dropbox.com/s/89g3pumrftrw6ly/Pi_ececutables.zip?dl=0">download it here</a> (or my copy if it’s since taken down). The one we’ll primarily need is <strong>Mini_vMac_ARM</strong> (other one’s good if you’re on a VNC session).</p>
+
+<p>Create a folder on your PC, and call it <strong>Macintosh</strong>. Extract your zip of executables here, and we’ll add the upcoming resources here too. Once we’re done, we’ll move the whole bulk over to the Pi.</p>
+
+<p>First we need a system ROM. <a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/">Visit this archive site</a> and download the file <strong>9779D2C4 – Macintosh II.7z</strong>. Extract it to our <strong>Macintosh</strong> directory and rename the file to <strong>MacII.ROM</strong>. The emulator will use this as the basis (virtualised guts so-to-speak) of the system.</p>
+
+<p>Next, we need to install System 7.5.5 on the emulator. For this we need a virtual disk drive, and install medium to achieve this. <a href="http://www.toughdev.com/content/2008/06/system-7-5-5-on-mini-vmac/">ToughDev has a fantastic write-up on this</a>, but for this guide you can download the resources he provides (where it’s labelled <strong>Download the above files here</strong>).</p>
+
+<p>This package contains System 7 install medium and two upgrade packages up to 7.5.5, and a blank drive we can use to install onto.</p>
+
+<p>Inside the <strong>hfs500M.rar</strong> archive is <strong>hfv500M.dsk</strong>. Extract this file to our <strong>Macintosh</strong> directory and rename it to <strong>disk1.dsk</strong>. This is our virtual hard drive.</p>
+
+<p>Inside the <strong>Mac701.zip</strong> is a folder <strong>Mac701</strong>. This contains a load of floppy installation medium images. Move this <strong>Mac701</strong> folder (not the loose files, or you’ll be doing some awful cleanup later) into your <strong>Macintosh</strong> directory. This is what will setup System 7 initially into your disk drive.</p>
+
+<p>Finally, the <strong>mac753.zip</strong> and <strong>mac755up.zip</strong> archives contain .img files. Move both these .img files into your <strong>Macintosh</strong> directory. This will boost our cardboard Macintosh from 7.0.1 to 7.5.5.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-8.webp" alt=""></p>
+
+<p>This is what your folder structure should look like.</p>
+
+<h3 id="moving-to-the-raspberry-pi">Moving to the Raspberry Pi</h3>
+
+<p>You can now move this <strong>Macintosh</strong> directory over to your Pi. There’s several ways we can do this:</p>
+
+<ul>
+  <li>Over the network via SCP (we’ll cover this).</li>
+  <li>Over the network via FTP (<a href="https://www.instructables.com/Making-a-Tiny-Mac-From-a-Raspberry-Pi-Zero/#step6">Instructable covers this</a>).</li>
+  <li>Via USB stick (if you’ve got a MicroUSB to USB hub).</li>
+  <li>Directly via mounting MicroSD to PC (advanced – needs Linux).</li>
+</ul>
+
+<p>If you didn’t turn off the SSH setup from earlier, we can do this via SCP. If you’re on a PC, you’ll need <strong><a href="https://winscp.net/eng/index.php">WinSCP</a></strong> for this. For all other platforms, your system will handle this like a normal shared directory.</p>
+
+<p>On macOS, in Finder go to <strong>go &gt; Connect to Server</strong> and enter **sftp://<name of="" pi="">** (similar to how you connected for setting up the display). If successful, you should see a load of folders appear. We want to travel to **/home/pi**.</name></p>
+
+<p>In this folder, copy your <strong>Macintosh</strong> folder here. This might take a little while, but once done you can now start running the emulator.</p>
+
+<h3 id="installing-system-7">Installing System 7</h3>
+
+<p>We’re now moving to the Pi to setup System 7. If you find the screen too small to work with, you can <a href="https://www.raspberrypi.org/documentation/remote-access/vnc/">enable VNC to see your Raspberry Pi screen</a> on your PC or a mobile device.</p>
+
+<p>On your Pi, open up file explorer and go to your <strong>Macintosh</strong> folder. Double click on <strong>Mini_vMac_ARM</strong> and select ‘Execute’. Suddenly, you’ll be greeted to a full screen view of a Macintosh screen with a flashing floppy disk icon. Don’t worry, this is expected.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-9.webp" alt=""></p>
+
+<p>Press <strong>ctrl – F</strong> to <strong>exit full screen</strong> mode. Outside the emulator, open the <strong>Mac701</strong> folder, and drag <strong>Install 1.image</strong> onto the emulator screen. This will virtually mount the image file as a Floppy disk in your emulator. Neat! Go back up a folder and drag your <strong>disk1.dsk</strong> into the emulator screen. Your cardboard Macintosh should now ask if you want to install System 7 onto <strong>Mac500M</strong>. Now click install.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-10.webp" alt=""></p>
+
+<p>It will ask you to mount various disks during the installation process. All of the ones it needs are in <strong>Mac701</strong> directory, so drag them onto the screen when prompted. It won’t take too long, and you’ll soon reboot into System 7. Congratulations!</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-11.webp" alt=""></p>
+
+<p>If your drive disk is called <strong>disk1.dsk</strong> and is in the same directory as the executable, you can just double-click the executable and it’ll boot. If you’re faced with a flashing floppy disk any time post-installation, drag <strong>disk1.dsk</strong> onto the screen.</p>
+
+<h3 id="updating-system-7">Updating System 7</h3>
+
+<p>You can stop here if you wish, but we can take it right up to the latest version of System 7 – 7.5.5!</p>
+
+<p>Upgrading is very different to the installation. Boot your cardboard Macintosh, and once you’re in the system, drag <strong>mac753.img</strong> onto the screen. This will then appear underneath your hard drive in the virtual Mac. Double click on this, and click on Installer (for 7.5.5, click the first part, click agree, then it mounts). Follow the instructions, and you’ll soon be on System 7.5.3.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-12.webp" alt=""></p>
+
+<p>Do the same process again for the <strong>mac755up.img</strong> file. Same thing again, and woohoo – we’re on 7.5.5!</p>
+
+<h2 id="shock-bonus--install-windows-311">:shock: Bonus – Install Windows 3.11</h2>
+
+<p>Now you can achieve something that was definitely seen as impossible (and sacrilegious to the Apple fans) – You can install Windows on your cardboard Macintosh.</p>
+
+<p>Whereas Apple was generally a closed-off system, Windows 3.11 was designed to be more portable, so installation is a little bit easier. However, the trade-off is that there’s no specialist software (yet) for it, so we’re misusing a game emulation package to get 3.11 working – <strong>DOSBox</strong>.</p>
+
+<p>Dosbox is actually available on the Pi repository system. You can install it by running:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install dosbox
+</code></pre></div></div>
+
+<p>Make a folder in your home directory on the Pi and call it <strong>DOS</strong> (alongside your <strong>Macintosh</strong> folder). Inside this folder, make a folder called <strong>C</strong>. You may have figured it, this is going to be our C drive.</p>
+
+<p>We want C to mount when you startup dosbox, so run <code class="language-plaintext highlighter-rouge">nano ~/.dosbox/dosbox-0.74-2.conf</code> in Terminal, and add the following line (right at the very end under [autoexec]).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MOUNT C ~/DOS/C -freesize 2048
+</code></pre></div></div>
+
+<p>While you’re here, you can get a more immersive experience by turning <strong>fullscreen</strong> to <strong>true</strong>. Alt-Enter will let you escape like how Ctrl-F works in vMac.</p>
+
+<p>Now when we start-up Dosbox, our C drive will be present.</p>
+
+<p>On <a href="https://www.kirsle.net/msdos">this Kirsle page</a>, they have a copy of Windows for Workgroups that has already been unpacked from floppy disks. Make a folder in your <strong>DOS</strong> directory called <strong>W311</strong>. Download that copy (11 MB) and extract it to the W311 folder. This is your installation medium.</p>
+
+<p>Start up Dosbox, and you should be greeted by a Z:&gt; prompt. Type the following command to mount our installation medium:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MOUNT G ~/DOS/W311
+</code></pre></div></div>
+
+<p>You should be greeted with a message saying the folder has been mounted. Great! Type <strong>G:</strong> and press enter to switch to our G drive.</p>
+
+<p>Now let’s check we have all the correct drives mounted. We should have a blank C drive where we will install Windows to, a G drive for our installation media, and a Z drive used by Dosbox. Run <strong>mount</strong> with no arguments to list all drives, and they should look like this:</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-1.webp" alt=""></p>
+
+<p>All good? Type <strong>SETUP</strong> and press enter. The install window will appear!</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-2.webp" alt=""></p>
+
+<p>Press <strong>Enter</strong>, and again to select the Express Setup mode. If you get a red prompt to say it can’t write to the drive, check to make sure a ‘drive’ is mounted to C in the instructions above.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-3.webp" alt=""></p>
+
+<p>Once this segment finishes (it will take about 1-2 minutes), you’ll then see a more familiar setup screen. Enter a name and company (you don’t need a product number), then continue.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-4.webp" alt=""></p>
+
+<p>After this, get a drink while the install process takes some time (~6-8 minutes).</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-5.webp" alt=""></p>
+
+<p>When it asks for a printer, press enter to select <strong>Install</strong> on <strong>No Printer Attached</strong>.</p>
+
+<p>It will now ask about network settings. Press enter or click continue to skip this segment.</p>
+
+<p>Windows 3.11 will now briefly flash up a visual folder walk where it sets up all the different aspects of the system, and then it will ask if you wish to visit a tutorial. You can go through this if you want an introduction, otherwise I clicked <strong>Skip Tutorial</strong>.</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-6.webp" alt=""></p>
+
+<p>It will now ask if you wish to restart or return to MS-DOS. Click <strong>Restart</strong> and it will close Dosbox. Congratulations, you’ve installed <strong>Windows for Workgroups 3.11</strong>!</p>
+
+<p class="article-image"><img src="/assets/img/cardboardmac-image-7.webp" alt=""></p>
+
+<p>To start Windows, boot up Dosbox. Type <strong>c:</strong> and press Enter to switch to Windows drive, type <strong>AUTOEXEC.BAT</strong> and press Enter to see a bunch of commands appear on the screen. Now type <strong>win</strong> and press Enter, and the Windows GUI will start up.</p>
+
+<h3 id="cursor-doesnt-work">Cursor doesn’t work?</h3>
+
+<p>Unfortunately the cursor does not work so well when Dosbox is run in windowed mode. When you run fullscreen, the cursor runs fine. <a href="https://github.com/dosbox-staging/dosbox-staging/issues/310">This is a known issue</a>, and is currently not officially resolved (likely due to the fact Dosbox is for games). In the next guide level, I’ll be exploring <strong>Dosbox-X</strong> which is supposedly designed for Windows emulation.</p>
+
+<h2 id="question-finished">
+<img class="emoji" title=":question:" alt=":question:" src="https://github.githubassets.com/images/icons/emoji/unicode/2753.png" height="20" width="20"> Finished</h2>
+
+<p class="article-image"><img src="https://media4.giphy.com/media/wYyTHMm50f4Dm/giphy.gif" alt=""></p>
+
+<p>Absolutely not.</p>
+
+<p>In the words of the late Steve Jobs – It just works. That’s great, but not without a cable poking out the top of it! No I ain’t done yet.</p>
+
+<p>The next steps for this cardboard Macintosh is:</p>
+
+<ul>
+  <li>Working rear ports – 2 USB, and a MicroUSB power port.</li>
+  <li>External HDMI port… No idea why.</li>
+  <li>Internal speaker.
+    <ul>
+      <li>I’ve bought a three-port USB hub, and a audio DAC… This will be interesting.</li>
+    </ul>
+  </li>
+  <li>Windows 95.</li>
+</ul>
+
+<h2 id="cardboard-macintosh-3-months-later">Cardboard Macintosh 3 months later…</h2>
+
+<p class="article-image"><img src="/assets/img/IMG_20210623_144042-edited.webp" alt=""></p>
+
+<p>Now with ports and a fake bootloader!</p>
+
+<p>Since the initial cardboard Macintosh build, I was able to add a full-size SD card slot to the front of the unit. I’ve also added two USB ports and a full size HDMI to the right-hand size, a power MicroUSB to the rear, and internal speakers – last bit wasn’t too successful.</p>
+
+<h3 id="hardware">Hardware</h3>
+
+<p>For the side USB ports, I used a <strong><a href="https://www.aliexpress.com/item/4000406755380.html">cheap 3-port USB hub</a></strong> that had a dual 2 USB port facing outwards, and 1 USB port facing upwards. In this scenario, the two USB ports are free for use, and inside I added a <strong><a href="https://www.aliexpress.com/item/1005002011544878.html">USB audio DAC</a></strong> to the remaining port. This hub was connected using a <strong><a href="https://www.aliexpress.com/item/4001289088224.html">female USB-A to male MicroUSB ribbon cable</a></strong>.</p>
+
+<p>For the power port, I used a <strong>female MicroUSB to male MicroUSB</strong> variant of the ribbon cable, however the port wasn’t too strong for the repeated connecting of the power cable, so I eventually replaced it with a <strong><a href="https://www.ebay.co.uk/itm/153878133658">generic extender lead</a></strong>.</p>
+
+<p class="article-image"><img src="/assets/img/IMG_20210616_181249-1024x1021.webp" alt=""></p>
+
+<p>Wub, wub…</p>
+
+<p>For the HDMI port, I used a <strong><a href="https://www.aliexpress.com/item/32833580742.html">female HDMI to male mini HDMI ribbon cable</a></strong>. While this works as a viable HDMI port, the LCD screen I used takes over most of the HDMI operations. This ends up being useful for the initial setup without using WiFi, but not much use after that.</p>
+
+<p>the front-facing SD slot was the most problematic. Since I’d already glued everything together, I used my <a href="https://www.amazon.co.uk/Draper-Redline-67677-Retractable-Segment/dp/B0144NEUY0/ref=sr_1_11?dchild=1&amp;keywords=crafting+knife&amp;qid=1624462614&amp;sr=8-11">knife</a> to effectively carve out the required gap for the card slot. I also discovered the gap between Pi and wall wasn’t big enough for the converter to fit comfortably in. Using a combination of a <strong><a href="https://www.aliexpress.com/item/32982519053.html">very tiny MicroSD extender</a></strong> and a <strong><a href="https://www.aliexpress.com/item/4000275747655.html">MicroSD to regular SD</a></strong> cables, I was able to get the front panel slot working.</p>
+
+<p class="article-image"><img src="/assets/img/IMG_20210623_112020-939x1024.webp" alt=""></p>
+
+<p>Lastly, but non-successful was the speakers. The jack port is solved by the DAC mentioned earlier. However, I wanted in-built speakers instead of relying on plugging them in. I had a parted-out laptop lying around, so I converted the speaker module from the laptop to use 3.5mm jack. Simple right?</p>
+
+<p>The speaker was <strong>incredibly quiet</strong>. So it does work, but you have to be point blank to the device to hear it. I believe the module I extracted from the laptop was using a powered chip to boost the audio. With an already high number of peripherals (USB hub and screen) I think I reached the limit of what juice I could squeeze out of the Pi without getting a higher voltage power supply. I decided to cut my losses at this point.</p>
+
+<h3 id="software">Software</h3>
+
+<p class="article-image"><img src="https://user-images.githubusercontent.com/11209477/117720836-0e3e9700-b1d7-11eb-8f55-941694225e3a.webp" alt=""></p>
+
+<p>Glorious, glorious retro beige…</p>
+
+<p>To show off the device, I had two shell scripts on the desktop that would start-up their relevant OS 9 or DOS operating system. This works well, but I wanted something prettier.</p>
+
+<p>Using <strong>Python</strong> and with some assistance from the lovely engineers over at the <strong><a href="https://discord.gg/V6Ahbvmz2Y">Technical Family Discord</a></strong>, the desktop scripts were replaced with a <strong><a href="https://github.com/soup-bowl/cardboardmac-bootselection">visual bootloader application</a></strong>. Just makes the whole thing a bit prettier to look at when it started up.</p>
+
+<p>If you decide to use this same application, the clickable buttons are configurable, so if you wish to dedicate the device to just System 7 (like it really should be), you can just show that script instead.</p>
+
+	</div>
+<hr>
+
+	<div id="load_disqus" class="aligncentre">
+		<button class="button" onclick="load_comments()">Load Discussion (Disqus)</button><p>By clicking on this button you are agreeing to the <a href="https://help.disqus.com/en/articles/1717103-disqus-privacy-policy">Disqus privacy policy</a>.</p>
+</div>
+
+	<div id="disqus_thread"></div>
+
+	<script>
+		var disqus_config = function () {
+			this.page.url = 'https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi';
+			this.page.identifier = 'https://soupbowl.io/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi';
+		};
+
+		function load_comments() {
+			document.getElementById("load_disqus").remove();
+
+			(function() {
+				var d = document, s = d.createElement('script');
+
+				s.src = 'https://soup-bowl.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		}
+	</script><a class="u-url" href="/2021/04/i-made-cardboard-macintosh-with-a-raspberry-pi" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+	<data class="u-url" href="/"></data>
+
+	<div class="wrapper">
+		<div class="footer-col-wrapper-solo">
+<!-- Branded icons provided by FontAwesome - https://fontawesome.com/ -->
+<ul class="social-media-list">
+<li><a class="s-github" href="https://github.com/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" class="svg-inline--fa fa-github fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></li>
+<li><a class="s-gitlab" href="https://gitlab.com/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitlab" class="svg-inline--fa fa-gitlab fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M105.2 24.9c-3.1-8.9-15.7-8.9-18.9 0L29.8 199.7h132c-.1 0-56.6-174.8-56.6-174.8zM.9 287.7c-2.6 8 .3 16.9 7.1 22l247.9 184-226.2-294zm160.8-88l94.3 294 94.3-294zm349.4 88l-28.8-88-226.3 294 247.9-184c6.9-5.1 9.7-14 7.2-22zM425.7 24.9c-3.1-8.9-15.7-8.9-18.9 0l-56.6 174.8h132z"></path></svg></a></li>
+<li><a class="s-wordpress" href="https://profiles.wordpress.org/soupbowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="wordpress-simple" class="svg-inline--fa fa-wordpress-simple fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2l68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"></path></svg></a></li>
+<li><a class="s-google" href="https://g.dev/soupbowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" class="svg-inline--fa fa-google fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg></a></li>
+<li><a class="s-lastfm" href="https://www.last.fm/user/soup-bowl"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="lastfm" class="svg-inline--fa fa-lastfm fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M225.8 367.1l-18.8-51s-30.5 34-76.2 34c-40.5 0-69.2-35.2-69.2-91.5 0-72.1 36.4-97.9 72.1-97.9 66.5 0 74.8 53.3 100.9 134.9 18.8 56.9 54 102.6 155.4 102.6 72.7 0 122-22.3 122-80.9 0-72.9-62.7-80.6-115-92.1-25.8-5.9-33.4-16.4-33.4-34 0-19.9 15.8-31.7 41.6-31.7 28.2 0 43.4 10.6 45.7 35.8l58.6-7c-4.7-52.8-41.1-74.5-100.9-74.5-52.8 0-104.4 19.9-104.4 83.9 0 39.9 19.4 65.1 68 76.8 44.9 10.6 79.8 13.8 79.8 45.7 0 21.7-21.1 30.5-61 30.5-59.2 0-83.9-31.1-97.9-73.9-32-96.8-43.6-163-161.3-163C45.7 113.8 0 168.3 0 261c0 89.1 45.7 137.2 127.9 137.2 66.2 0 97.9-31.1 97.9-31.1z"></path></svg></a></li>
+<li><a class="s-twitter" href="https://twitter.com/TheAlmightyWord"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" class="svg-inline--fa fa-twitter fa-w-16" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg></a></li>
+<li><a class="s-insta" href="https://www.instagram.com/thealmightyword/"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram" class="svg-inline--fa fa-instagram fa-w-14" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></a></li>
+<li><a class="s-osgrid" href="hop://hg.osgrid.org/Soupbowl/150/125/26"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="osgrid" class="svg-inline--fa fa-osgrid" width="24" height="24" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" d="m 211.03302,495.50159 -28.64472,2.60404 -80.72625,-61.19568 -1.30198,-18.22855 61.19568,-44.26921 -148.432112,-95.04862 -10.4162758,-22.1346 24.7387098,-92.44454 18.228445,-6.51018 178.378953,109.37101 -19.53057,76.8201 62.49773,-44.2692 71.61205,49.47736 -33.85301,-84.63234 63.79978,-48.17533 -80.72625,2.60407 -24.73866,-70.30994 -22.1346,72.91401 -95.04861,-1.30198 -32.55095,-20.83258 57.28959,-179.680948 24.73871,-13.0203587 93.74658,3.9061137 15.62441,18.228512 -23.43658,62.497714 h 171.86869 l 16.92647,9.114247 37.75901,96.35065 -9.11422,15.62443 -79.42419,1.30198 65.10176,171.86873 -6.51012,23.43667 -85.93438,58.59161 -16.92647,-6.51012 -23.43666,-69.00795 z"></path></svg></a></li>
+</ul>
+</div>
+
+		<div class="footer-col-wrapper">
+			<div class="footer-col footer-col-1">
+				<p>
+					<a href="https://github.com/soup-bowl/soupbowl.io" class="copyright">
+						CC BY-SA soup-bowl</a>
+					<a href="https://jekyllrb.com/">Powered by Jekyll</a>
+				</p>
+			</div>
+
+			<div class="footer-col footer-col-2">
+				<p>Hello from London.</p>
+			</div>
+		</div>
+
+	</div>
+
+</footer>
+</body>
+
+</html>
